@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+		classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'gs-actuator-service'
+    version =  '0.1.0'
+}
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+	}
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+springBoot {
+	mainClass = "com.example.App"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
+	compile "org.projectlombok:lombok:1.16.2"
+	compile 'com.h2database:h2'
+	compile 'org.lazyluke:log4jdbc-remix:0.2.7'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//compile 'org.springframework.boot:spring-boot-maven-plugin:1.2.3.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.webjars:bootstrap:3.2.0'
+	compile 'org.flywaydb:flyway-core'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
+	compile 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.15'
+	compile 'javax.servlet:jstl:1.2'
+	compile 'org.spockframework:spock-core'
+
+   // compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
