@@ -25,4 +25,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('speak', function() {
 		console.log("im speaking");
 	});
+	grunt.registerTask('hello', function() {
+		console.log("Hello, everyone.");
+	});
 };

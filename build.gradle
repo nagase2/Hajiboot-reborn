@@ -1,10 +1,14 @@
 buildscript {
     repositories {
         mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		  }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
 		classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+		classpath "com.moowork.gradle:gradle-grunt-plugin:0.9"
 	}
 }
 
@@ -12,6 +16,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: "com.moowork.grunt"
+
 
 jar {
     baseName = 'gs-actuator-service'
@@ -29,12 +35,18 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+
 }
 springBoot {
 	mainClass = "com.example.App"
 }
 
+
+  
+ 
+  
 dependencies {
+	
     compile("org.springframework.boot:spring-boot-starter-web")
 	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
 	compile "org.projectlombok:lombok:1.16.2"
@@ -50,6 +62,7 @@ dependencies {
 	compile 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.15'
 	compile 'javax.servlet:jstl:1.2'
 	compile 'org.spockframework:spock-core'
+	
 
    // compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
