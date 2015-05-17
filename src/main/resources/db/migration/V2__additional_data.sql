@@ -12,4 +12,4 @@ Insert into customers(first_name,last_name) values('54nobita','nobi');
 Insert into customers(first_name,last_name) values('34xx','nobi');
 Insert into customers(first_name,last_name) values('31rrtt','nobi');
 Insert into customers(first_name,last_name) values('24dd','nobi');
-Insert into customers(first_name,last_name) values('12gg','nobi');
+//Insert into customers(first_name,last_name) values('last','nobi');
