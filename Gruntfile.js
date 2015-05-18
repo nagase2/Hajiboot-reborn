@@ -14,18 +14,35 @@
 
 module.exports = function(grunt) {
 	// Gruntの設定
+	
+	// Project configuration.
 	grunt.initConfig({
-		pkg : grunt.file.readJSON('package.json')
+	  concat: {
+	    options: {
+	      separator: ';',
+	    },
+	    dist: {
+	      src: ['scripts/add.js', 'scripts/add2.js'],
+	      dest: 'js/concated.js',
+	    },
+	  },
 	});
+	
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	// defaultタスクの定義
-	grunt.registerTask('default', 'Log some stuff.', function() {
+	/*grunt.registerTask('default', 'Log some stuff.', function() {
 		// ログメッセージの出力
 		grunt.log.write('Logging some stuff...').ok();
-	});
+	});*/
 	grunt.registerTask('speak', function() {
 		console.log("im speaking");
 	});
 	grunt.registerTask('hello', function() {
 		console.log("Hello, everyone.");
 	});
+	
+	grunt.registerTask('default',['speak','hello']);
+	
+	
+	
 };

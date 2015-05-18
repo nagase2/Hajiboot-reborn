@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nagase2/hajiboot6#readme",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1"
   }
 }
