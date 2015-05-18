@@ -21,14 +21,32 @@ module.exports = function(grunt) {
 	    options: {
 	      separator: ';',
 	    },
-	    dist: {
+	    js: {
 	      src: ['scripts/add.js', 'scripts/add2.js'],
-	      dest: 'js/concated.js',
-	    },
+	      dest: 'js/concated1.js',
+	    }, 
+	    css: {
+		      src: ['scripts/add.js', 'scripts/add2.js'],
+		      dest: 'js/concated2.js',
+		    }
 	  },
+	  watch: {
+		  js: {
+		    files: ['scripts/**/*.js'],
+		    tasks: ['concat'],
+		  },
+		  css: {
+			    files: ['css/**/*.css'],
+			    tasks: ['concat'],
+			  },
+		},
 	});
 	
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	//npm install grunt-contrib-watch --save-dev
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	
+	
 	// defaultタスクの定義
 	/*grunt.registerTask('default', 'Log some stuff.', function() {
 		// ログメッセージの出力

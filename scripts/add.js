@@ -6,4 +6,6 @@ function strFade(str) {
   if(cnt < str.length) setTimeout("strFade('" + str + "')",itv);
   if(cnt == str.length) cnt = 0;
 }
-//-->
+function aaa(){
+	var c='aaa';
+}
