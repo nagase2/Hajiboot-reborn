@@ -1,12 +1,7 @@
-
-
-import javax.enterprise.inject.Instance;
-
-
-import spock.lang.*;
+import spock.lang.*
 
 import com.example.log.demo.Calc
-import com.hoge.spocktest.*;
+import com.hoge.spocktest.*
 
 
 class CalcSpec2 extends Specification{

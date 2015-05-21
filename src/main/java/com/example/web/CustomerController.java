@@ -47,9 +47,9 @@ public class CustomerController {
 	
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
-	String create(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model,
-			@AuthenticationPrincipal LoginUserDetails userDetails /* これをつけることで
-			ログイン中のLoginUserDetailを取得できる */){
+	String create(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model
+			,@AuthenticationPrincipal LoginUserDetails userDetails
+			/* これをつけることで	ログイン中のLoginUserDetailを取得できる */){
 		if(result.hasErrors()){//入力チェックを行い、エラーがある場合は、List画面に戻る
 			return list(model);
 		}

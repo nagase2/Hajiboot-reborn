@@ -13,7 +13,7 @@
 <div layout:fragment="content" class="col-sm-12">
     <form th:action="@{/customers/create}" th:object="${customerForm}" class="form-horizontal" method="post">
         <fieldset>
-            <legend>顧客情報作成</legend>
+            <legend>顧客情報作成</legend>   Testはこちら→<a href="jsptest1">こちら</a><br/>
             <span sec:authentication="principal.user.username">duke</span>さんログイン中<br/>
             <a th:href="@{logout}" class="btn btn-default btn-xs">ログアウト</a>
             
