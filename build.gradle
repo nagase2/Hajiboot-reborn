@@ -36,6 +36,7 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+	jcenter() //sonar用
 
 }
 springBoot {
@@ -62,17 +63,31 @@ dependencies {
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 	compile 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.15'
 	compile 'javax.servlet:jstl:1.2'
-	
 	compile "org.codehaus.groovy:groovy-all"
-	testCompile "org.spockframework:spock-core"
 	
-	
-
    // compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("junit:junit")
+    testCompile "org.spockframework:spock-core"
+	
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+
+sonarRunner {
+	sonarProperties {
+		property "sonar.host.url", "http://localhost:9000"
+		property "sonar.host.username", "admin"
+		property "sonar.host.password", "admin"
+		
+		 property "sonar.sourceEncoding", "UTF-8"
+		/*
+		property "sonar.jdbc.url", "jdbc:mysql://my.server.com/sonar"
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", "Fred Flintstone"
+		property "sonar.jdbc.password", "very clever"
+		*/
+	}
 }
