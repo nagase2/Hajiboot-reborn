@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
-		classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+		//classpath 'org.springframework:springloaded:1.2.0.RELEASE'
 		classpath "com.moowork.gradle:gradle-grunt-plugin:0.9"
 	}
 }
