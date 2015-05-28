@@ -21,6 +21,7 @@ apply plugin: 'spring-boot'
 apply plugin: "com.moowork.grunt"
 apply plugin: 'groovy'
 apply plugin: "sonar-runner"
+apply plugin: 'war'
 
 
 jar {

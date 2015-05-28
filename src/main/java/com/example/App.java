@@ -1,24 +1,11 @@
 package com.example;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-
-import com.example.domain.Customer;
-import com.example.repository.CustomerRepository;
-import com.example.service.CustomerService;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * CommandLineRunnerはコマンドラインで値を取得する場合に使う。
@@ -26,11 +13,18 @@ import com.example.service.CustomerService;
  * @author nagase
  *
  */
+@Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class App   {
+public class App  extends SpringBootServletInitializer  {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
 
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(applicationClass);
+    }
+
+    private static Class<App> applicationClass = App.class;
 }
