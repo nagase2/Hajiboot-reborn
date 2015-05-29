@@ -66,7 +66,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 	providedCompile 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.15'
-	compile 'javax.servlet:jstl:1.2'
+	providedCompile 'javax.servlet:jstl:1.2'
 	compile "org.codehaus.groovy:groovy-all"
 	
    // compile("org.springframework.boot:spring-boot-starter-actuator")
