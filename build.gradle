@@ -22,6 +22,7 @@ apply plugin: "com.moowork.grunt"
 apply plugin: 'groovy'
 apply plugin: "sonar-runner"
 apply plugin: 'war'
+apply plugin: 'jacoco'
 
 
 jar {
@@ -84,6 +85,21 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
+}
+
+// JaCoCo coverage reports
+jacoco {
+  applyTo(tasks.withType(JavaExec))
+}
+test {
+  jacoco {
+	enabled = true
+	destinationFile = file('build/reports/jacoco/jacoco.exec')
+  }
+}
+task jacocoReport(type: JacocoReport) {
+  executionData test
+  sourceSets project.sourceSets.main
 }
 
 sonarRunner {
