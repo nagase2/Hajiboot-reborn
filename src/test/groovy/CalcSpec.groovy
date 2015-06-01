@@ -2,7 +2,6 @@
 
 import spock.lang.*;
 import com.example.log.demo.Calc
-import com.hoge.spocktest.*;
 
 
 class CalcSpec extends Specification{
