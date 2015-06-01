@@ -69,8 +69,11 @@ dependencies {
 	compile 'javax.servlet:jstl:1.2'
 	compile "org.codehaus.groovy:groovy-all"
 	
-	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.15'
-	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	// Embedded Tomcat
+	providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	providedRuntime "org.apache.tomcat:tomcat-jdbc"
+	providedRuntime "org.apache.tomcat:tomcat-juli"
 	
    // compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
