@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Checkstyle-Configuration: based on Terasoluna
+  Description: none
+-->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+  "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+  <property name="severity" value="ignore"/>
+  <property name="charset" value="UTF-8"/>
+
+  <module name="StrictDuplicateCode"/>
+
+<!--
+  <module name="FileLength">
+    <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="クラス・インタフェースの行数が2000行を超えています。長すぎるコードは可読性が損なわれるので避けるようにしてください。"/>
+    <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="クラス・インタフェースの行数が2000行を超えています。長すぎるコードは可読性が損なわれるので避けるようにしてください。"/>
+    <property name="severity" value="info"/>
+  </module>
+-->
+
+  <module name="FileTabCharacter">
+    <property name="severity" value="info"/>
+  </module>
+
+  <module name="TreeWalker">
+    <property name="severity" value="warning"/>
+
+    <module name="MutableException"/>
+    <module name="InnerTypeLast"/>
+    <module name="ThrowsCount">
+      <property name="max" value="2"/>
+    </module>
+    <module name="CyclomaticComplexity"/>
+    <module name="NPathComplexity"/>
+    <module name="JavaNCSS"/>
+
+    <module name="EqualsHashCode">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="equals()メソッドを単独でオーバーライドしています。equals()メソッドをオーバーライドする場合はhashCode()メソッドもオーバーライドしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="equals()メソッドを単独でオーバーライドしています。equals()メソッドをオーバーライドする場合はhashCode()メソッドもオーバーライドしてください。"/>
+      <property name="severity" value="error"/>
+    </module>
+    <module name="SuperFinalize">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="finalize()メソッドからsuper.finalize()が呼ばれていません。finalize()メソッドからは常にsuper.finalize()を呼んでください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="finalize()メソッドからsuper.finalize()が呼ばれていません。finalize()メソッドからは常にsuper.finalize()を呼んでください。"/>
+      <property name="severity" value="error"/>
+    </module>
+    <module name="NeedBraces">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="条件文に「{}」が記述されていません。可読性が損なわれるため「{}」を記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="条件文に「{}」が記述されていません。可読性が損なわれるため「{}」を記述してください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="LITERAL_DO,LITERAL_ELSE,LITERAL_FOR,LITERAL_IF,LITERAL_WHILE"/>
+    </module>
+    <module name="InnerAssignment">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="()内で代入演算子を使用しています。If()内での使用はプログラマのミスである可能性があるため避けるようにしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="()内で代入演算子を使用しています。If()内での使用はプログラマのミスである可能性があるため避けるようにしてください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="DIV_ASSIGN,BXOR_ASSIGN,STAR_ASSIGN,BAND_ASSIGN,MOD_ASSIGN,PLUS_ASSIGN,SL_ASSIGN,ASSIGN,MINUS_ASSIGN,SR_ASSIGN,BSR_ASSIGN,BOR_ASSIGN"/>
+    </module>
+    <module name="DefaultComesLast">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="defaultステートメントがcaseステートメントの途中にあります。defaultステートメントは、caseステートメントの最後にしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="defaultステートメントがcaseステートメントの途中にあります。defaultステートメントは、caseステートメントの最後にしてください。"/>
+      <property name="severity" value="error"/>
+    </module>
+    <module name="MissingSwitchDefault">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="switch文にdefaultステートメントが定義されていません。switch文にはdefaultステートメントを定義してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="switch文にdefaultステートメントが定義されていません。switch文にはdefaultステートメントを定義してください。"/>
+      <property name="severity" value="error"/>
+    </module>
+    <module name="IllegalCatch">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Exception、RuntimeException、Throwableをキャッチしています。例外の特定が困難になるため、より詳細な例外をキャッチしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="Exception、RuntimeException、Throwableをキャッチしています。例外の特定が困難になるため、より詳細な例外をキャッチしてください。"/>
+      <property name="id" value="catchexception"/>
+    </module>
+    <module name="EmptyBlock">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="空ブロックのままです。処理もしくはコメントを記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="空ブロックのままです。処理もしくはコメントを記述してください。"/>
+    </module>
+    <module name="ModifiedControlVariable">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="ループ制御変数をループ内で操作しています。故意に操作している場合を除いてロジックが複雑になるのでやめてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="ループ制御変数をループ内で操作しています。故意に操作している場合を除いてロジックが複雑になるのでやめてください。"/>
+    </module>
+    <module name="UpperEll">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="long値のリテラルの最後に小文字の'l'を利用しています。小文字の'l'ではなく大文字の'L'で記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="long値のリテラルの最後に小文字の'l'を利用しています。小文字の'l'ではなく大文字の'L'で記述してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="RedundantImport">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="宣言する必要が無いインポート宣言です。可読性が損なわれるため削除してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="宣言する必要が無いインポート宣言です。可読性が損なわれるため削除してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="UnusedImports">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="使用されていないインポートがあります。可読性が損なわれるため削除してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="使用されていないインポートがあります。可読性が損なわれるため削除してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="PackageName">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="パッケージ名に小文字以外の文字が含まれています。Javaの一般的なルールによりすべて小文字で統一してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="パッケージ名に小文字以外の文字が含まれています。Javaの一般的なルールによりすべて小文字で統一してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
+      <property name="severity" value="info"/>
+      <property name="format" value="^[a-z]+(\.[a-z_][a-z0-9_]*)*$"/>
+    </module>
+    <module name="TypeName">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="クラス・インタフェース名の先頭が大文字ではありません。Javaの一般的なルールにより大文字にしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="クラス・インタフェース名の先頭が大文字ではありません。Javaの一般的なルールにより大文字にしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="ConstantName">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="定数名に大文字以外の文字が含まれています。Javaの一般的的なルールにより定数名は単語を大文字にし、単語をアンダースコアで区切ってください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="定数名に大文字以外の文字が含まれています。Javaの一般的的なルールにより定数名は単語を大文字にし、単語をアンダースコアで区切ってください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    <!--  ルール変更 Indentation -> TabCharacter -->
+    <!--
+    <module name="Indentation">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="インデントにタブを利用しています。エディタによってタブ文字の長さが変わるため、半角スペース4文字を使用してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="インデントにタブを利用しています。エディタによってタブ文字の長さが変わるため、半角スペース4文字を使用してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    -->
+    <module name="WhitespaceAfter">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="半角スペースが適切に挿入されていません。カンマ、セミコロン、キャストの後は半角スペースを挿入してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="半角スペースが適切に挿入されていません。カンマ、セミコロン、キャストの後は半角スペースを挿入してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="WhitespaceAround">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="半角スペースが適切に挿入されていません。演算子や条件文の前後に半角スペースを挿入してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="半角スペースが適切に挿入されていません。演算子や条件文の前後に半角スペースを挿入してください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_DO,LITERAL_FOR,LITERAL_IF,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
+    </module>
+    <module name="NoWhitespaceAfter">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="半角スペースが挿入されています。ドットの後は半角スペースを挿入しないでください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="半角スペースが挿入されています。ドットの後は半角スペースを挿入しないでください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="DOT"/>
+    </module>
+    <module name="NoWhitespaceBefore">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="半角スペースが挿入されています。ドットの前は半角スペースを挿入しないでください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="半角スペースが挿入されています。ドットの前は半角スペースを挿入しないでください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="DOT"/>
+    </module>
+    <module name="LineLength">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="1行が120文字を超えています。適切な位置で折り返してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="1行が120文字を超えています。適切な位置で折り返してください。"/>
+      <property name="max" value="120"/>
+      <property name="severity" value="info"/>
+    </module>
+    <module name="MultipleVariableDeclarations">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="1つの行に複数の文があります。1つの行には1つの文のみを記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="1つの行に複数の文があります。1つの行には1つの文のみを記述してください。"/>
+      <property name="severity" value="info"/>
+    </module>
+<!--
+    <module name="IllegalToken">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="不等号の向きが統一されていません。可読性が損なわれるため「&lt;」と「&lt;=｣に統一してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="不等号の向きが統一されていません。可読性が損なわれるため「&lt;」と「&lt;=｣に統一してください。"/>
+      <property name="severity" value="info"/>
+      <property name="id" value="&gt;"/>
+      <property name="tokens" value="GT,GE"/>
+    </module>
+-->
+    <module name="IllegalToken">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="ラベルを使用しています。制御構造のbreak文やcontinue文でラベルを使用すると、処理の流れが追いづらくなるため、ラベルを使用しないでください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="ラベルを使用しています。制御構造のbreak文やcontinue文でラベルを使用すると、処理の流れが追いづらくなるため、ラベルを使用しないでください。"/>
+      <property name="id" value="label"/>
+      <property name="tokens" value="LABELED_STAT"/>
+    </module>
+    <module name="JavadocType">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="クラス・インタフェースに対してJavadocが記述されていません。クラス・インタフェースには必ずJavadocを記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="クラス・インタフェースに対してJavadocが記述されていません。クラス・インタフェースには必ずJavadocを記述してください。"/>
+      <property name="severity" value="info"/>
+      <property name="scope" value="anoninner"/>
+      <property name="excludeScope" value="private"/>
+    </module>
+    <module name="JavadocVariable">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="フィールドに対してJavadocが記述されていません。フィールドには必ずJavadocを記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="フィールドに対してJavadocが記述されていません。フィールドには必ずJavadocを記述してください。"/>
+      <property name="severity" value="info"/>
+      <property name="scope" value="anoninner"/>
+      <property name="excludeScope" value="private"/>
+    </module>
+    <module name="JavadocMethod">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="メソッドに対してJavadocが記述されていません。メソッドには必ずJavadocを記述してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="メソッドに対してJavadocが記述されていません。メソッドには必ずJavadocを記述してください。"/>
+      <property name="severity" value="info"/>
+      <property name="scope" value="anoninner"/>
+      <property name="excludeScope" value="private"/>
+      <property name="logLoadErrors" value="true"/>
+      <property name="suppressLoadErrors" value="true"/>
+      <property name="tokens" value="CTOR_DEF,METHOD_DEF"/>
+    </module>
+    <module name="JavadocStyle">
+      <property name="scope" value="anoninner"/>
+      <property name="excludeScope" value="private"/>
+      <property name="checkFirstSentence" value="true"/>
+      <property name="endOfSentenceFormat" value="([。.?!][ \t\n\r\f])|([。.?!]$)"/>
+    </module>
+<!--
+    <module name="AvoidStarImport">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="インポート宣言でアスタリスク「*」を利用しています。どのパッケージのクラス・インタフェースを利用しているのかわからなくなるので、利用している特定のクラス・インタフェースをインポートしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="インポート宣言でアスタリスク「*」を利用しています。どのパッケージのクラス・インタフェースを利用しているのかわからなくなるので、利用している特定のクラス・インタフェースをインポートしてください。"/>
+      <property name="severity" value="info"/>
+    </module>
+-->
+    <module name="MethodLength">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="メソッドの行数が150行を超えています。長すぎるメソッドは可読性が損なわれるので避けるようにしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="メソッドの行数が150行を超えています。長すぎるメソッドは可読性が損なわれるので避けるようにしてください。"/>
+      <property name="severity" value="info"/>
+      <property name="tokens" value="CTOR_DEF,METHOD_DEF"/>
+    </module>
+    <module name="NestedIfDepth">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="if句のネスト（入れ子）の深さが4を超えています。複雑なコードになるので、これ以上ネストしないように実装してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="if句のネスト（入れ子）の深さが4を超えています。複雑なコードになるので、これ以上ネストしないように実装してください。"/>
+      <property name="severity" value="info"/>
+      <property name="max" value="3"/>
+    </module>
+    <module name="NestedTryDepth">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="try句のネスト（入れ子）の深さが4を超えています。複雑なコードになるので、これ以上ネストしないように実装してください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="try句のネスト（入れ子）の深さが4を超えています。複雑なコードになるので、これ以上ネストしないように実装してください。"/>
+      <property name="severity" value="info"/>
+      <property name="max" value="3"/>
+    </module>
+    <module name="IllegalThrows">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="throws句にThrowable、Error、RuntimeExceptionが含まれています。より詳細な例外型を投げるようにしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="throws句にThrowable、Error、RuntimeExceptionが含まれています。より詳細な例外型を投げるようにしてください。"/>
+      <property name="id" value="exception"/>
+      <property name="illegalClassNames" value="java.lang.Throwable, java.lang.Error, java.lang.RuntimeException"/>
+    </module>
+    <module name="IllegalCatch">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="NullPointerExceptionをキャッチしています。実行時例外なので別の例外をキャッチしてください。"/>
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.customMessage" value="NullPointerExceptionをキャッチしています。実行時例外なので別の例外をキャッチしてください。"/>
+      <property name="id" value="nullpointerexception"/>
+      <property name="illegalClassNames" value="java.lang.NullPointerException"/>
+    </module>
+  </module>
+</module>

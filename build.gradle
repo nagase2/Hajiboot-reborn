@@ -20,9 +20,14 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: "com.moowork.grunt"
 apply plugin: 'groovy'
-apply plugin: "sonar-runner"
 apply plugin: 'war'
+
+//static source code check tools
+apply plugin: 'findbugs'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: "sonar-runner"
 
 
 jar {
@@ -119,3 +124,20 @@ sonarRunner {
 		*/
 	}
 }
+
+checkstyle {
+	configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle-rules.xml")
+	ignoreFailures = true
+  }
+  findbugs {
+	excludeFilter = file("$rootProject.projectDir/config/findbugs/findbugs-filter.xml")
+	ignoreFailures = true
+  }
+  findbugsTest {
+	ignoreFailures = true
+  }
+  pmd {
+	ignoreFailures = true
+	// TODO: ルールセットの記述方法が変わった?
+	// ruleSetFiles  = files( "$rootProject.projectDir/config/pmd/codesize.xml" )
+  }
