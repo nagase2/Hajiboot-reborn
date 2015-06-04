@@ -1,6 +1,9 @@
 package com.example.log.demo;
 
 public class Demo3 {
+	Demo3(){
+		
+	}
 
 	public String startProcess(){
 		

@@ -2,29 +2,27 @@ import spock.lang.Specification;
 
 import com.example.domain.Supplier;
 import com.example.log.demo.Calc;
+import com.example.log.demo.Demo3;
 
 
 class TestDemo3  extends Specification{
-	private Calc instance;
-	private Supplier supplier;
+	private Demo3 demo3
+	
 	
 		def setup() {
-			instance = new Calc()
-			supplier=new Supplier()
-			
+			demo3 = new Demo3()
 			
 		}
 	
-		def "２つの値の合計チェック"() {
+		def "Demo3の確認"() {
+			given:
+				def str = "result"
+				
+			when:
+				def result = demo3.startProcess();
 			
-			expect:
-			
-	
-			where:
-			a | b | c
-			1 | 3 | 4
-			7 | 4 | 11
-			0 | 0 | 0
+			then:
+				result == "result"
 			
 		}
 		
