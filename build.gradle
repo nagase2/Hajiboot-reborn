@@ -74,6 +74,7 @@ dependencies {
 
 	compile 'javax.servlet:jstl:1.2'
 	compile "org.codehaus.groovy:groovy-all"
+	compile 'org.hudsonci.plugins:dry:2.28'
 	
 	// Embedded Tomcat
 	providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
