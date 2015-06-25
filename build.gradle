@@ -120,6 +120,7 @@ sonarRunner {
 	sonarProperties {
 		//property "sonar.host.url", "http://localhost:9000"
 		property "sonar.host.url", "http://172.19.6.90:9000"
+		property "sonar.projectName","Hajiboot"
 		property "sonar.host.username", "admin"
 		property "sonar.host.password", "admin"
 		
