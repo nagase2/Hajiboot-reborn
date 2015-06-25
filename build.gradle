@@ -21,6 +21,7 @@ apply plugin: 'spring-boot'
 apply plugin: "com.moowork.grunt"
 apply plugin: 'groovy'
 apply plugin: 'war'
+apply plugin: "sonar-runner"
 
 //static source code check tools
 apply plugin: 'findbugs'
@@ -46,7 +47,10 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-	jcenter() //sonar用
+	jcenter() //sonar
+	maven { 
+		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
+	 }
 
 }
 springBoot {
@@ -58,7 +62,7 @@ springBoot {
  
   
 dependencies {
-		
+	
     compile("org.springframework.boot:spring-boot-starter-web")
 	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
 	compile "org.projectlombok:lombok:1.16.2"
@@ -75,6 +79,8 @@ dependencies {
 	compile 'javax.servlet:jstl:1.2'
 	compile "org.codehaus.groovy:groovy-all"
 	compile 'org.hudsonci.plugins:dry:2.28'
+	///////////////////
+    //compile "com.nagase.lib:baseline-aar:1.1"
 	
 	// Embedded Tomcat
 	providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
@@ -112,7 +118,8 @@ task jacocoReport(type: JacocoReport) {
 
 sonarRunner {
 	sonarProperties {
-		property "sonar.host.url", "http://localhost:9000"
+		//property "sonar.host.url", "http://localhost:9000"
+		property "sonar.host.url", "http://172.19.6.90:9000"
 		property "sonar.host.username", "admin"
 		property "sonar.host.password", "admin"
 		
@@ -142,3 +149,5 @@ checkstyle {
 	// TODO: ルールセットの記述方法が変わった?
 	// ruleSetFiles  = files( "$rootProject.projectDir/config/pmd/codesize.xml" )
   }
+  
+  
