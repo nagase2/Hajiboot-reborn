@@ -123,7 +123,6 @@ sonarRunner {
 		property "sonar.projectName","Hajiboot"
 		property "sonar.host.username", "admin"
 		property "sonar.host.password", "admin"
-		
 		property "sonar.sourceEncoding", "UTF-8"
 		/*
 		property "sonar.jdbc.url", "jdbc:mysql://my.server.com/sonar"
