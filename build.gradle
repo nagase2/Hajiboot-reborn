@@ -67,6 +67,7 @@ dependencies {
 	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
 	compile "org.projectlombok:lombok:1.16.2"
 	compile 'com.h2database:h2'
+	compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
 	compile 'org.lazyluke:log4jdbc-remix:0.2.7'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//compile 'org.springframework.boot:spring-boot-maven-plugin:1.2.3.RELEASE'
