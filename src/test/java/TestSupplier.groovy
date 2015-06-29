@@ -1,7 +1,7 @@
-import spock.lang.Specification;
+import spock.lang.Specification
 
-import com.example.domain.Supplier;
-import com.example.log.demo.Calc;
+import com.example.domain.Supplier
+import com.example.log.demo.Calc
 
 
 class TestSupplier  extends Specification{

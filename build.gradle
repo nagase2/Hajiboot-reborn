@@ -77,7 +77,7 @@ dependencies {
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 
 	compile 'javax.servlet:jstl:1.2'
-	compile "org.codehaus.groovy:groovy-all"
+	compile "org.codehaus.groovy:groovy-all:2.3.11"
 	compile 'org.hudsonci.plugins:dry:2.28'
 	///////////////////
     //compile "com.nagase.lib:baseline-aar:1.1"
@@ -135,6 +135,7 @@ sonarRunner {
 
 checkstyle {
 	configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle-rules.xml")
+    //configFile = file("$rootProject.projectDir/config/checkstyle/google-checks.xml")
 	ignoreFailures = true
   }
   findbugs {

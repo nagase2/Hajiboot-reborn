@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Customer {
 	@Id
-	@GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
+	 @GeneratedValue(strategy=GenerationType.AUTO) //主キーがDBで自動裁判されることをこのアノテーションで示す
 	private Integer id;
 	@Column(nullable = false) //このカラムの制約事項を指定
 	private String firstName;
