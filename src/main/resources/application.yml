@@ -1,5 +1,11 @@
-
 spring:
+    profiles:
+      #active: dev
+      active: test
+
+---
+spring:
+  profiles: dev
   datasource:
     driverClassName: org.h2.Driver
     #メモリDB
@@ -9,7 +15,24 @@ spring:
     username: sa
     password:
   jpa:
-    hibernate.ddl-auto: validate
+    hibernate.ddl-auto: validate #変更を保管
+    #hibernate.ddl-auto: create-drop #毎回リフレッシュ
+---
+spring:
+    profiles: test
+spring.jpa.datadatabase: PostgreSQL
+spring.datasource:
+    url: jdbc:postgresql://localhost:5432/shopping
+    driverClassName: org.postgresql.Driver
+    username: johndoe
+    password: johndoe
+    xa:
+        dataSourceClassName: org.postgresql.xa.PGXADataSource
+        
+    hibernate.ddl-auto: create-drop #毎回リフレッシュ
+    
+---
+
 spring.thymeleaf.cache: false
 spring.view.prefix: /WEB-INF/jsp/
 spring.view.suffix: .jsp
