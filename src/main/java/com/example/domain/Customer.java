@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY ) //主キーがDBで自動裁判されることをこのアノテーションで示す
+	@GeneratedValue(strategy = GenerationType.AUTO ) //主キーがDBで自動裁判されることをこのアノテーションで示す
 	private Integer id;
 	@Column(nullable = false) //このカラムの制約事項を指定
 	private String firstName;
