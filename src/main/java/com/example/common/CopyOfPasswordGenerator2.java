@@ -1,8 +1,9 @@
 package com.example.common;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.thymeleaf.standard.expression.Each;
 
-public class PasswordGenerator {
+public class CopyOfPasswordGenerator2 {
 	public static void main(String[] args){
 		String pass ="demo";
 		

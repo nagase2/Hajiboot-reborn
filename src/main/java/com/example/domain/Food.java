@@ -19,9 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor //JPAの仕様で、EntityClassには引数のないデフォルトコンストラクタを作る必要がある。
 @AllArgsConstructor
 public class Food {
-//	@Id
+	@Id
 //	@GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
-//	private Integer id;
+	private Integer id;
 
 	@NotNull //Annotation for Input check
 	private String name;

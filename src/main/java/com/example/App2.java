@@ -16,9 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class App  extends SpringBootServletInitializer  {
+public class App2  extends SpringBootServletInitializer  {
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		SpringApplication.run(App2.class, args);
 	}
 
 	@Override
@@ -26,5 +26,5 @@ public class App  extends SpringBootServletInitializer  {
         return application.sources(applicationClass);
     }
 
-    private static Class<App> applicationClass = App.class;
+    private static Class<App2> applicationClass = App2.class;
 }

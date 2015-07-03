@@ -1,16 +1,19 @@
 
 
 import spock.lang.*;
+
 import com.example.log.demo.Calc
-import com.hoge.spocktest.*;
+import com.example.log.demo.MySampleLayout;
 
 
 class CalcSpec extends Specification{
 
     private Calc instance;
+    private MySampleLayout layout;
 
     def setup() {
         instance = new Calc()
+        layout = new MySampleLayout();
     }
 
     def "adding two numbers｜２つの値の合計チェック"() {
@@ -24,4 +27,5 @@ class CalcSpec extends Specification{
         0 | 0 | 0
 		
     }
+    
 }

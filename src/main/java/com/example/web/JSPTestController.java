@@ -49,7 +49,7 @@ public class JSPTestController {
 		log.info("JSP test が呼ばれました。!!x!!! Food=" + food.toString());
 
 		// 値渡しA（一つのクラスを渡すパターン）
-		model.addAttribute("food", new Food("aaa", "bbb"));
+		model.addAttribute("food", new Food(5,"aaa", "bbb"));
 		model.addAttribute("result", result.hasErrors());
 		
 		return "jsptest";
@@ -58,10 +58,10 @@ public class JSPTestController {
 	@RequestMapping("/jsptest2")
 	String JSPTest2(Model model, @Valid FoodForm food,BindingResult result) {
 		ArrayList<Food> foods = new ArrayList<Food>();
-		foods.add(new Food("111", "bbb"));
-		foods.add(new Food("222", "bbb"));
-		foods.add(new Food("333", "bbb"));
-		foods.add(new Food("444", "bbb"));
+		foods.add(new Food(1,"111", "bbb"));
+		foods.add(new Food(2,"222", "bbb"));
+		foods.add(new Food(3,"333", "bbb"));
+		foods.add(new Food(4,"444", "bbb"));
 		
 		Map map = new HashMap();
 		map.put("football","Honda");
