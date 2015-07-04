@@ -3,13 +3,14 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
 		maven {
 			url "https://plugins.gradle.org/m2/"
 		  }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
-		//classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+		classpath 'org.springframework:springloaded:1.2.3.RELEASE'
 		classpath "com.moowork.gradle:gradle-grunt-plugin:0.9"
 	}
 }
@@ -30,6 +31,12 @@ apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: "sonar-runner"
 
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+	}
+}
 
 jar {
     baseName = 'gs-actuator-service'
@@ -37,8 +44,8 @@ jar {
 }
 idea {
 	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main/")
+		//inheritOutputDirs = false
+		//outputDir = file("$buildDir/classes/main/")
 	}
 }
 
@@ -48,17 +55,21 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
 	jcenter() //sonar
-	maven { 
-		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
-	 }
+//	maven { 
+//		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
+//	 }
 
 }
 springBoot {
-	mainClass = "com.example.App"
+	mainClass = "com.example.App2"
+}
+bootRepackage {
+	mainClass = 'com.example.App2'
 }
 
-
-  
+bootRun {
+  addResources = false
+}
  
   
 dependencies {

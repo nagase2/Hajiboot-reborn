@@ -19,8 +19,8 @@ public class SupplierApplication implements CommandLineRunner {
         // save a couple of customers
         repository.save(new Supplier(1,"Jack", "Bauer"));
         repository.save(new Supplier(2,"Chloe", "O'Brian"));
-//        repository.save(new Supplier("Kim", "Bauer"));
-//        repository.save(new Supplier("David", "Palmer"));
+        repository.save(new Supplier(3,"Kim", "Bauer"));
+        repository.save(new Supplier(4,"Nagase", "Yoshimasa"));
 //        repository.save(new Supplier("Michelle", "Dessler"));
 
         // fetch all customers
@@ -29,7 +29,7 @@ public class SupplierApplication implements CommandLineRunner {
         for (Supplier supplier : repository.findAll()) {
             System.out.println(supplier);
         }
-        System.out.println();
+        System.out.println("¥n¥n");
 
         // fetch an individual customer by ID
         Supplier supplier = repository.findOne(1L);
@@ -43,6 +43,15 @@ public class SupplierApplication implements CommandLineRunner {
         System.out.println("--------------------------------------------");
         for (Supplier bauer : repository.findByLastName("Bauer")) {
             System.out.println(bauer);
+        }
+        System.out.println();
+        System.out.println();
+        
+        // fetch customers by last name
+        System.out.println("Customer found with findByLastName('Nagase'):");
+        System.out.println("--------------------------------------------");
+        for (Supplier nagase : repository.findByFirstName("Nagase")) {
+            System.out.println(nagase);
         }
     }
 

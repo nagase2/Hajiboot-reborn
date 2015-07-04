@@ -10,18 +10,18 @@ import lombok.Data;
 
 @Entity
 @Data
-@AllArgsConstructor
 public class Supplier {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    //@GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
     private String firstName;
     private String lastName;
 
     protected Supplier() {}
 
-    public Supplier(String firstName, String lastName) {
+    public Supplier(int id,String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
