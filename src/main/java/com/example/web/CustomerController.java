@@ -59,7 +59,7 @@ public class CustomerController {
 		if(result.hasErrors()){//入力チェックを行い、エラーがある場合は、List画面に戻る
 			return list(model);
 		}
-		System.out.println("Create method has been calledddd");
+		System.out.println("Create method has been calledddd...22dd2.sss3");
 		
 		Customer customer =new Customer();
 		//CusomerFormをCustomerにコピーする。画面ではCustomerをそのまま使うこともできるが、
@@ -68,12 +68,30 @@ public class CustomerController {
 		BeanUtils.copyProperties(form, customer);
 		/* ログインスキップ時のロジック　*/
 		if(userDetails==null){
+		  log.info("★IDが無いです。★");
 		  userDetails = new LoginUserDetails(new User("user2", "",null));
 		}
 		customerService.create(customer,userDetails.getUser());
 		return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
 		
 	}
+	
+	@RequestMapping(value="/bbb")
+    String aaa(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model
+            ,@AuthenticationPrincipal LoginUserDetails userDetails
+            /* これをつけることで    ログイン中のLoginUserDetailを取得できる */){
+        log.info("aaa");
+        return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
+        
+    }
+	   @RequestMapping(value="/ccc")
+	    String dcc(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model
+	            ,@AuthenticationPrincipal LoginUserDetails userDetails
+	            /* これをつけることで    ログイン中のLoginUserDetailを取得できる */){
+	        log.info("ccc");
+	        return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
+	        
+	    }
 	
 	/**
 	 * 編集画面を表示する

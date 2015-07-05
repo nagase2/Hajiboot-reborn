@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
              .logoutSuccessUrl("/loginForm");
  }
 
-// @Configuration
+//@Configuration
  static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
      @Autowired
      UserDetailsService userDetailsService;
