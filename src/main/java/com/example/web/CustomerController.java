@@ -2,6 +2,9 @@ package com.example.web;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.jfree.util.Log;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
@@ -16,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.Customer;
 import com.example.domain.Nagase;
+import com.example.domain.User;
 import com.example.service.CustomerService;
 import com.example.service.LoginUserDetails;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 
 @Controller
 @RequestMapping("customers")
+@Slf4j
 public class CustomerController {
 	@Autowired
 	CustomerService customerService;
@@ -38,7 +43,8 @@ public class CustomerController {
 	String list(Model model /* 画面に値を渡すために、Modelオブジェクトを使用する */){
 		List<Customer> customers = customerService.findAll();
 		model.addAttribute("customers",customers); //検索結果をModelに設定。画面からはcustomersを用いてアクセスできる
-	
+		
+		log.info("list画面2211133");
 		//classpath:templates/+ビュー名＋.htmlが画面のPathとなる。この場合、classpath:templates/customers/list.html
 		return "customers/list.html"; //なんでここだけRedirectではないのか
 		/* 仮説：Redirectではない時は、直接このURLにアクセスすることになる。そこには、ファイルが存在している必要がある。
@@ -53,17 +59,39 @@ public class CustomerController {
 		if(result.hasErrors()){//入力チェックを行い、エラーがある場合は、List画面に戻る
 			return list(model);
 		}
-		System.out.println("Create method has been called.");
+		System.out.println("Create method has been calledddd...22dd2.sss3");
 		
 		Customer customer =new Customer();
 		//CusomerFormをCustomerにコピーする。画面ではCustomerをそのまま使うこともできるが、
 		//すべての情報を利用するとは限らないため、分けたほうが良い。
 		//beanUtilsの場合は、フィールドの名前と型が同じ場合にしか使えない。柔軟な変換が必要な場合は、DozerやModelMapperの利用を検討する。
 		BeanUtils.copyProperties(form, customer);
+		/* ログインスキップ時のロジック　*/
+		if(userDetails==null){
+		  log.info("★IDが無いです。★");
+		  userDetails = new LoginUserDetails(new User("user2", "",null));
+		}
 		customerService.create(customer,userDetails.getUser());
 		return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
 		
 	}
+	
+	@RequestMapping(value="/bbb")
+    String aaa(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model
+            ,@AuthenticationPrincipal LoginUserDetails userDetails
+            /* これをつけることで    ログイン中のLoginUserDetailを取得できる */){
+        log.info("aaa");
+        return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
+        
+    }
+	   @RequestMapping(value="/ccc")
+	    String dcc(@Validated /* 入力チェックを行うため */ CustomerForm form, BindingResult result, Model model
+	            ,@AuthenticationPrincipal LoginUserDetails userDetails
+	            /* これをつけることで    ログイン中のLoginUserDetailを取得できる */){
+	        log.info("ccc");
+	        return "redirect:/customers"; //この処理（新規作成）が正常に終了した場合は一覧画面表示にリダイレクト
+	        
+	    }
 	
 	/**
 	 * 編集画面を表示する
@@ -94,7 +122,10 @@ public class CustomerController {
 		Customer customer = new Customer();
 		BeanUtils.copyProperties(form, customer);
 		customer.setId(id);
-		System.out.println(customer.getId()+" XXXX");
+		 /* ログインスキップ時のロジック　*/
+        if(userDetails==null){
+          userDetails = new LoginUserDetails(new User("user2", "",null));
+        }
 		customerService.update(customer,userDetails.getUser());
 		return "redirect:/customers"; //? redirectを入れた場合と入れない場合、なにが違うのか？
 	}

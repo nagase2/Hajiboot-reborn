@@ -17,7 +17,7 @@ public class AppConfig2 {
 	
 	DataSource dataSource;
 	
-	@Bean(name="a")
+	//@Bean(name="a")
 	DataSource realDataSource(){
 		DataSourceBuilder factory = DataSourceBuilder
 				.create(this.dataSourceProperties.getClassLoader())
