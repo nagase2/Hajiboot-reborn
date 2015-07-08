@@ -2,8 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-	<table-filter match-name="basket" match-schema="public"></table-filter>
-	<table-filter match-name="content" match-schema="public"></table-filter>
-	<table-filter match-name="item_mst" match-schema="public"></table-filter>
-	<table-filter match-name="item_type" match-schema="public"></table-filter>
+  <table-filter match-schema="public" match-name="basket"/>
+  <table-filter match-schema="public" match-name="item_mst"/>
+  <table-filter match-schema="public" match-name="item_type"/>
 </hibernate-reverse-engineering>

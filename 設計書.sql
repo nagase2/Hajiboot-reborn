@@ -1,5 +1,3 @@
-
-
 CREATE TABLE mst_item_category (
  item_type_id INT NOT NULL PRIMARY KEY,
  delete_flag BIT(1),
