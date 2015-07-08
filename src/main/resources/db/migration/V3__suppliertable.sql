@@ -23,6 +23,11 @@ CREATE TABLE mst_item (
  delete_flag BIT(1)
 );
 
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'item_name1',123,'2015-08-21', 22.22,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'item_name2',123,'2015-08-21', 22.22,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (3,'item_name3',123,'2015-08-21', 22.22,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'item_name4',123,'2015-08-21', 22.22,1,false);
+
 
 CREATE TABLE content (
  content_id INT NOT NULL PRIMARY KEY,

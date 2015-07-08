@@ -19,9 +19,9 @@ public class SupplierApplication implements CommandLineRunner {
         // save a couple of customers
         repository.save(new Supplier(1,"Jack", "Bauer"));
         repository.save(new Supplier(2,"Chloe", "O'Brian"));
-        repository.save(new Supplier(3,"Kim", "Bauer"));
-        repository.save(new Supplier(4,"Nagase", "Yoshimasa"));
-//        repository.save(new Supplier("Michelle", "Dessler"));
+        repository.save(new Supplier("Kim", "Bauer"));
+        repository.save(new Supplier("Nagase", "Yoshimasa"));
+        repository.save(new Supplier("Michelle", "Dessler"));
 
         // fetch all customers
         System.out.println("Customers found with findAll():");

@@ -13,7 +13,7 @@ import lombok.Data;
 public class Supplier {
 
     @Id
-    //@GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String firstName;
     private String lastName;
@@ -25,6 +25,10 @@ public class Supplier {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    public Supplier(String firstName, String lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+  }
 
     @Override
     public String toString() {

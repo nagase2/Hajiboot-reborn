@@ -12,7 +12,7 @@
 sssss
 <c:forEach var="item" items="${items}">
 <li>
-	${item.key}-${item.value}<br>
+	${item.itemId}-${item.itemName}<br>
 	</li>
 </c:forEach>
  
