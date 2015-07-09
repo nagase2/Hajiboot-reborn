@@ -31,5 +31,5 @@ public class AppConfig2 {
 //	@Bean(name="b")
 //	DataSource dataSource(){
 //		return new Log4jdbcProxyDataSource(this.dataSource);
-//	}
+  // }
 }

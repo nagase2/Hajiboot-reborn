@@ -16,51 +16,44 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//@Configuration
-//@EnableWebMvcSecurity
+// @Configuration
+// @EnableWebMvcSecurity
 @Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
- @Override
- public void configure(WebSecurity web) throws Exception{
-	 //静的リソースは無視するように設定。
-	 web.ignoring().antMatchers("/webjars/**", "/css/**","/jsptest*");
- }
- 
- @Override
- protected void configure(HttpSecurity http) throws Exception {
-   log.info("★★★Security!★★");
-     http.authorizeRequests()
-             .antMatchers("/loginForm").permitAll()
-             .anyRequest().authenticated();
-//     http.authorizeRequests()
-//     .antMatchers("/**").permitAll().anyRequest().authenticated();
-     //ログインページ関連の情報を指定
-     http.formLogin().loginProcessingUrl("/login")
-             .loginPage("/loginForm")
-             .failureUrl("/loginForm?error")
-             .defaultSuccessUrl("/customers", true)
-             .usernameParameter("username").passwordParameter("password")
-             .and();
-     
-     http.logout()
-             .logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
-             .logoutSuccessUrl("/loginForm");
- }
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    // 静的リソースは無視するように設定。
+    web.ignoring().antMatchers("/webjars/**", "/css/**", "/jsptest*");
+  }
 
-//@Configuration
- static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
-     @Autowired
-     UserDetailsService userDetailsService;
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    log.info("★★★Security!★★");
+    http.authorizeRequests().antMatchers("/loginForm").permitAll().anyRequest().authenticated();
+    // http.authorizeRequests()
+    // .antMatchers("/**").permitAll().anyRequest().authenticated();
+    // ログインページ関連の情報を指定
+    http.formLogin().loginProcessingUrl("/login").loginPage("/loginForm")
+        .failureUrl("/loginForm?error").defaultSuccessUrl("/customers", true)
+        .usernameParameter("username").passwordParameter("password").and();
 
-     @Bean
-     org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
-         return new BCryptPasswordEncoder();
-     }
+    http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
+        .logoutSuccessUrl("/loginForm");
+  }
 
-     @Override
-     public void init(AuthenticationManagerBuilder auth) throws Exception {
-         auth.userDetailsService(userDetailsService)
-                 .passwordEncoder(passwordEncoder());
-     }
- }
+  // @Configuration
+  static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Bean
+    org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void init(AuthenticationManagerBuilder auth) throws Exception {
+      auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+  }
 }
