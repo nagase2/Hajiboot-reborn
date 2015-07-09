@@ -1,11 +1,13 @@
 
 
-CREATE TABLE mst_item_category (
+CREATE TABLE mst_item_type(
  item_type_id INT NOT NULL PRIMARY KEY,
- delete_flag BIT(1),
- material_type_name VARCHAR(110)
+ item_type_name VARCHAR(110),
+ delete_flag BIT(1)
 );
-
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (1,'本',false);
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (2,'衣類',false);
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (3,'靴',false);
 
 CREATE TABLE purchase_history (
  purchase_history_id INT NOT NULL PRIMARY KEY,
@@ -23,10 +25,10 @@ CREATE TABLE mst_item (
  delete_flag BIT(1)
 );
 
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'item_name1',123,'2015-08-21', 22.22,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'item_name2',123,'2015-08-21', 22.22,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (3,'item_name3',123,'2015-08-21', 22.22,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'item_name4',123,'2015-08-21', 22.22,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'日本の歴史１',1,'2015-08-21', 300,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'日本の歴史２',1,'2015-08-21', 980,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (3,'日本の歴史３',1,'2015-08-21', 980,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'レザージャケット',2,'2015-08-21', 20000,1,false);
 
 
 CREATE TABLE content (

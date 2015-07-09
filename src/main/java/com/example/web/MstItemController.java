@@ -23,7 +23,7 @@ public class MstItemController {
 	
   @RequestMapping("/itemlist")
   String startpage(Model model) {
-      log.info("ここでMstItemLlistを取得");
+      log.info("ここでMstItemLlistを取得!");
       
       List<MstItem> items = mstItemService.findAll();
       
