@@ -25,15 +25,19 @@ public class ContentController {
 
 
   @RequestMapping("/list")
-  String showContentList(Model model,Integer page) {
+  String showContentList(Model model, Integer page, Integer size) {
     log.info("ここでContent Llistを取得!");
 
     // List<Content> contents = contentService.findByContentName("aaa");// これはOK
     // List<Content> contents = contentService.findAll();// これは... OK
-    if(page==null){
-      page=0;
+    if (page == null) {
+      page = 0;
     }
-    Pageable pageable = new PageRequest(page, 5);
+    if (size == null) {
+      size = 5;
+    }
+
+    Pageable pageable = new PageRequest(page, size);
     log.info("データ取得前");
     Page<Content> contents = contentService.findAllOrderByContentId(pageable);
     log.info("データ取得しました。");
