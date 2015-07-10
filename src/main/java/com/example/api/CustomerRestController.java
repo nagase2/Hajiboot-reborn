@@ -27,58 +27,69 @@ import com.example.service.LoginUserDetails;
 @RestController
 @RequestMapping("api/customers")
 public class CustomerRestController {
-	@Autowired
-	CustomerService customerService;
+  @Autowired
+  CustomerService customerService;
 
-	@RequestMapping(method = RequestMethod.GET) //getCustomersメソッドに対して、Getを割り当て（POSTではなく）
-	Page<Customer> getCustomers(@PageableDefault(page=0,size=5) Pageable pageable 
-	/*引数にPageableオブジェクトを追加することで、ページネーションの情報を取得できる
-	 * リクエストパラメータに設定したpage sizeがこのPageableオブジェクトにマッピングされる
-	 * PageableDefaultアノテーションは、パラメータが指定されたかった場合のため*/)
-	{
-		
-		Page<Customer> customers=customerService.findAll(pageable);
-		return customers;
-	}
-	//顧客一件取得
-	@RequestMapping(value="{id}",method= RequestMethod.GET) //GET割り当て
-	Customer getCustomer(@PathVariable Integer id){
-		Customer customer = customerService.findOne(id);
-		//customer.setFirstName("XXXXX");
-		System.out.println("★"+customer.getFirstName());
-		return customer;
-	}
-	
-	//顧客作成
-	@RequestMapping(method=RequestMethod.POST) //POSTでアクセスすると、このメソッドが呼ばれる
-	//@ResponseStatus(HttpStatus.CREATED) //正常時のHTTPレスポンスを指定する
-	ResponseEntity<Customer> postCustomers(@RequestBody Customer customer/*HTTPのリクエストをCustomerにMapping*/
-			,UriComponentsBuilder uriBuilder /*コンテキストパス相対のURIを取得*/,@AuthenticationPrincipal LoginUserDetails userDetails){
-		Customer createdCustomer = customerService.create(customer,userDetails.getUser());
-		//URIを作成する。{id}は後に呼ばれている　BuildAndExpandの引数に置換される。
-		URI location = uriBuilder.path("api/customers/{id}").buildAndExpand(createdCustomer.getId()).toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(location);
-		System.out.println("CREATED has been called.");
-		
-		//レスポンスヘッダを返却したい場合は、Response Entityオブジェクトを返却する
-		return new ResponseEntity<>(createdCustomer,headers,HttpStatus.CREATED);
-	}
-	
-	//顧客更新
-	@RequestMapping(value="{id}", method=RequestMethod.PUT) //
-	Customer putCustomer(@PathVariable Integer id, @RequestBody Customer customer,@AuthenticationPrincipal LoginUserDetails userDetails ){
-		customer.setId(id);
-		return customerService.update(customer,userDetails.getUser());
-	}
-	
-	//顧客一件削除
-	@RequestMapping(value="{id}", method=RequestMethod.DELETE) //
-	@ResponseStatus(HttpStatus.NO_CONTENT) //
-	void deleteCustomer(@PathVariable Integer id){
-		customerService.delete(id);
-	}
-	
-	
+  @RequestMapping(method = RequestMethod.GET)
+  // getCustomersメソッドに対して、Getを割り当て（POSTではなく）
+  Page<Customer> getCustomers(@PageableDefault(page = 0, size = 5) Pageable pageable
+      /*
+       * 引数にPageableオブジェクトを追加することで、ページネーションの情報を取得できる リクエストパラメータに設定したpage
+       * sizeがこのPageableオブジェクトにマッピングされる PageableDefaultアノテーションは、パラメータが指定されたかった場合のため
+       */)
+  {
+
+    Page<Customer> customers = customerService.findAll(pageable);
+    return customers;
+  }
+
+  // 顧客一件取得
+  @RequestMapping(value = "{id}", method = RequestMethod.GET)
+  // GET割り当て
+  Customer getCustomer(@PathVariable Integer id) {
+    Customer customer = customerService.findOne(id);
+    // customer.setFirstName("XXXXX");
+    System.out.println("★" + customer.getFirstName());
+    return customer;
+  }
+
+  // 顧客作成
+  @RequestMapping(method = RequestMethod.POST)
+  // POSTでアクセスすると、このメソッドが呼ばれる
+  // @ResponseStatus(HttpStatus.CREATED) //正常時のHTTPレスポンスを指定する
+  ResponseEntity<Customer> postCustomers(@RequestBody Customer customer/* HTTPのリクエストをCustomerにMapping */
+      , UriComponentsBuilder uriBuilder /* コンテキストパス相対のURIを取得 */,
+      @AuthenticationPrincipal LoginUserDetails userDetails) {
+    Customer createdCustomer = customerService.create(customer, userDetails.getUser());
+    // URIを作成する。{id}は後に呼ばれている　BuildAndExpandの引数に置換される。
+    URI location =
+        uriBuilder.path("api/customers/{id}").buildAndExpand(createdCustomer.getId()).toUri();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setLocation(location);
+    System.out.println("CREATED has been called.");
+
+    // レスポンスヘッダを返却したい場合は、Response Entityオブジェクトを返却する
+    return new ResponseEntity<>(createdCustomer, headers, HttpStatus.CREATED);
+  }
+
+  // 顧客更新
+  @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+  //
+  Customer putCustomer(@PathVariable Integer id, @RequestBody Customer customer,
+      @AuthenticationPrincipal LoginUserDetails userDetails) {
+    customer.setId(id);
+    return customerService.update(customer, userDetails.getUser());
+  }
+
+  // 顧客一件削除
+  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+  //
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  //
+  void deleteCustomer(@PathVariable Integer id) {
+    customerService.delete(id);
+  }
+
+
 
 }

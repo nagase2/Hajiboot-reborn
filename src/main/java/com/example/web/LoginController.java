@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
   @RequestMapping("/")
   String startpage() {
-      log.info("start");
-      return "loginForm.html";
+    log.info("start");
+    return "loginForm.html";
   }
-	@RequestMapping("loginForm")
-	String loginForm() {
-		log.info("LoginFormが呼ばれました。!!!!!!llllooooo");
-		return "loginForm.html";
-	}
+
+  @RequestMapping("loginForm")
+  String loginForm() {
+    log.info("LoginFormが呼ばれました。!!!!!!llllooooo");
+    return "loginForm.html";
+  }
 }
-
-

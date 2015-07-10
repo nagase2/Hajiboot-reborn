@@ -20,18 +20,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
-@ToString(exclude="customers")
+@Table(name = "users")
+@ToString(exclude = "customers")
 public class User {
-	 @Id //usernameを主キーにする
-	 private String username;
-	 @JsonIgnore //クラスをJSON出力した時にこのフィr−るど除外されるようにする。
-	 private String encodedPassword;
-	 @JsonIgnore
-	 //fetch =FetchType.LAZYで関連エンティティを遅延ロードさせることができる（←他には？）この場合,customerフィールドにアクセスした時点で、データが読み込まれる。
-	 //cascade=CascadeType.ALLでUserの永続化操作や削除操作を関連先のCustomerにも伝搬させることができる。
-	 //双方向の関係にする場合は、mappedByで関連先でのプロパティ名を指定する。
-	 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
-	 private List<Customer> customers;
+  @Id
+  // usernameを主キーにする
+  private String username;
+  @JsonIgnore
+  // クラスをJSON出力した時にこのフィr−るど除外されるようにする。
+  private String encodedPassword;
+  @JsonIgnore
+  // fetch =FetchType.LAZYで関連エンティティを遅延ロードさせることができる（←他には？）この場合,customerフィールドにアクセスした時点で、データが読み込まれる。
+  // cascade=CascadeType.ALLでUserの永続化操作や削除操作を関連先のCustomerにも伝搬させることができる。
+  // 双方向の関係にする場合は、mappedByで関連先でのプロパティ名を指定する。
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+  private List<Customer> customers;
 
 }

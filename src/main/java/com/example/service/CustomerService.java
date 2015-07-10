@@ -11,63 +11,73 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Customer;
 import com.example.domain.User;
 import com.example.repository.CustomerRepository;
+
 /**
  * カスタマのサービスクラス
+ * 
  * @author nagase
  *
  */
-@Service //サービスクラスであることを示す。Componentと意味は変わらない
+@Service
+// サービスクラスであることを示す。Componentと意味は変わらない
 @Transactional
 public class CustomerService {
-	@Autowired
-	CustomerRepository customerRepository;
-	
-	/*
-	 * すべてを返す
-	 */
-	public List<Customer> findAll(){
-		return customerRepository.findAll();
-	}
-	public Page<Customer> findAll(Pageable pageable){
-		return customerRepository.findAllOrderByName2(pageable);
-	}
-	
-	public Customer findOne(Integer id){
-		return customerRepository.findOne(id);
-	}
-	/**
-	 * ログインありの場合
-	 * @param customer
-	 * @param user
-	 * @return
-	 */
-	public Customer create(Customer customer, User user){
-	    System.out.println("ccc5555cc");
-		customer.setUser(user);
-		return customerRepository.save(customer);
-	}
-	/**
-	 * ログイン無しの場合
-	 * @param customer
-	 * @param user
-	 * @return
-	 */
-	public Customer create(Customer customer){
-      System.out.println("ログインなし");
-      return customerRepository.save(customer);
+  @Autowired
+  CustomerRepository customerRepository;
+
+  /*
+   * すべてを返す
+   */
+  public List<Customer> findAll() {
+    return customerRepository.findAll();
   }
-	public Customer save(Customer customer){
-		return customerRepository.save(customer);
-	}
-	public void delete(Integer id){
-		 customerRepository.delete(id);
-	}
 
-	public Customer update(Customer customer,User user) {
-		customer.setUser(user);
-		return customerRepository.save(customer);
-	}
+  public Page<Customer> findAll(Pageable pageable) {
+    return customerRepository.findAllOrderByName2(pageable);
+  }
 
-	
+  public Customer findOne(Integer id) {
+    return customerRepository.findOne(id);
+  }
+
+  /**
+   * ログインありの場合
+   * 
+   * @param customer
+   * @param user
+   * @return
+   */
+  public Customer create(Customer customer, User user) {
+    System.out.println("ccc5555cc");
+    customer.setUser(user);
+    return customerRepository.save(customer);
+  }
+
+  /**
+   * ログイン無しの場合
+   * 
+   * @param customer
+   * @param user
+   * @return
+   */
+  public Customer create(Customer customer) {
+    System.out.println("ログインなし");
+    return customerRepository.save(customer);
+  }
+
+  public Customer save(Customer customer) {
+    return customerRepository.save(customer);
+  }
+
+  public void delete(Integer id) {
+    customerRepository.delete(id);
+  }
+
+  public Customer update(Customer customer, User user) {
+    customer.setUser(user);
+    return customerRepository.save(customer);
+  }
+
+
 
 }

@@ -12,10 +12,9 @@ import com.example.domain.Customer;
 @Repository
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-	
-	//@Query(value="select id,first_name,last_name,address from customers order by first_name desc",nativeQuery=true)
-	@Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName") //JPQLで指定
-	Page<Customer> findAllOrderByName2(Pageable pageable);
+
+  // @Query(value="select id,first_name,last_name,address from customers order by first_name desc",nativeQuery=true)
+  @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")
+  // JPQLで指定
+  Page<Customer> findAllOrderByName2(Pageable pageable);
 }
-
-

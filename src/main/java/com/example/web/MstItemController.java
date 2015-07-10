@@ -17,22 +17,20 @@ import com.example.service.MstItemService;
 @Controller
 @Slf4j
 public class MstItemController {
-	
-	@Autowired
-	MstItemService mstItemService;
-	
+
+  @Autowired
+  MstItemService mstItemService;
+
   @RequestMapping("/itemlist")
   String startpage(Model model) {
-      log.info("ここでMstItemLlistを取得!");
-      
-      List<MstItem> items = mstItemService.findAll();
-      
-      model.addAttribute("items", items );
-      
-      
-      return "MstItemList";
+    log.info("ここでMstItemLlistを取得!");
+
+    List<MstItem> items = mstItemService.findAll();
+
+    model.addAttribute("items", items);
+
+
+    return "MstItemList";
   }
-	
+
 }
-
-

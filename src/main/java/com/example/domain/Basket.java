@@ -7,85 +7,84 @@ package com.example.domain;
  */
 public class Basket implements java.io.Serializable {
 
-	private int basketId;
-	private Integer version;
-	private String basketName;
-	private String comment;
-	private Integer basketSize;
-	private Float basketPrice;
-	private Boolean deleteFlag;
+  private int basketId;
+  private Integer version;
+  private String basketName;
+  private String comment;
+  private Integer basketSize;
+  private Float basketPrice;
+  private Boolean deleteFlag;
 
-	public Basket() {
-	}
+  public Basket() {}
 
-	public Basket(int basketId) {
-		this.basketId = basketId;
-	}
+  public Basket(int basketId) {
+    this.basketId = basketId;
+  }
 
-	public Basket(int basketId, String basketName, String comment,
-			Integer basketSize, Float basketPrice, Boolean deleteFlag) {
-		this.basketId = basketId;
-		this.basketName = basketName;
-		this.comment = comment;
-		this.basketSize = basketSize;
-		this.basketPrice = basketPrice;
-		this.deleteFlag = deleteFlag;
-	}
+  public Basket(int basketId, String basketName, String comment,
+      Integer basketSize, Float basketPrice, Boolean deleteFlag) {
+    this.basketId = basketId;
+    this.basketName = basketName;
+    this.comment = comment;
+    this.basketSize = basketSize;
+    this.basketPrice = basketPrice;
+    this.deleteFlag = deleteFlag;
+  }
 
-	public int getBasketId() {
-		return this.basketId;
-	}
+  public int getBasketId() {
+    return this.basketId;
+  }
 
-	public void setBasketId(int basketId) {
-		this.basketId = basketId;
-	}
+  public void setBasketId(int basketId) {
+    this.basketId = basketId;
+  }
 
-	public Integer getVersion() {
-		return this.version;
-	}
+  public Integer getVersion() {
+    return this.version;
+  }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
 
-	public String getBasketName() {
-		return this.basketName;
-	}
+  public String getBasketName() {
+    return this.basketName;
+  }
 
-	public void setBasketName(String basketName) {
-		this.basketName = basketName;
-	}
+  public void setBasketName(String basketName) {
+    this.basketName = basketName;
+  }
 
-	public String getComment() {
-		return this.comment;
-	}
+  public String getComment() {
+    return this.comment;
+  }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 
-	public Integer getBasketSize() {
-		return this.basketSize;
-	}
+  public Integer getBasketSize() {
+    return this.basketSize;
+  }
 
-	public void setBasketSize(Integer basketSize) {
-		this.basketSize = basketSize;
-	}
+  public void setBasketSize(Integer basketSize) {
+    this.basketSize = basketSize;
+  }
 
-	public Float getBasketPrice() {
-		return this.basketPrice;
-	}
+  public Float getBasketPrice() {
+    return this.basketPrice;
+  }
 
-	public void setBasketPrice(Float basketPrice) {
-		this.basketPrice = basketPrice;
-	}
+  public void setBasketPrice(Float basketPrice) {
+    this.basketPrice = basketPrice;
+  }
 
-	public Boolean getDeleteFlag() {
-		return this.deleteFlag;
-	}
+  public Boolean getDeleteFlag() {
+    return this.deleteFlag;
+  }
 
-	public void setDeleteFlag(Boolean deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
+  public void setDeleteFlag(Boolean deleteFlag) {
+    this.deleteFlag = deleteFlag;
+  }
 
 }

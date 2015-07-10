@@ -7,96 +7,95 @@ package com.example.domain;
  */
 public class Content implements java.io.Serializable {
 
-	private int contentId;
-	private Integer version;
-	private Integer basketId;
-	private Integer itemTypeId;
-	private Integer itemId;
-	private String comment;
-	private Float contentCount;
-	private Boolean deleteFlag;
+  private int contentId;
+  private Integer version;
+  private Integer basketId;
+  private Integer itemTypeId;
+  private Integer itemId;
+  private String comment;
+  private Float contentCount;
+  private Boolean deleteFlag;
 
-	public Content() {
-	}
+  public Content() {}
 
-	public Content(int contentId) {
-		this.contentId = contentId;
-	}
+  public Content(int contentId) {
+    this.contentId = contentId;
+  }
 
-	public Content(int contentId, Integer basketId, Integer itemTypeId,
-			Integer itemId, String comment, Float contentCount,
-			Boolean deleteFlag) {
-		this.contentId = contentId;
-		this.basketId = basketId;
-		this.itemTypeId = itemTypeId;
-		this.itemId = itemId;
-		this.comment = comment;
-		this.contentCount = contentCount;
-		this.deleteFlag = deleteFlag;
-	}
+  public Content(int contentId, Integer basketId, Integer itemTypeId,
+      Integer itemId, String comment, Float contentCount,
+      Boolean deleteFlag) {
+    this.contentId = contentId;
+    this.basketId = basketId;
+    this.itemTypeId = itemTypeId;
+    this.itemId = itemId;
+    this.comment = comment;
+    this.contentCount = contentCount;
+    this.deleteFlag = deleteFlag;
+  }
 
-	public int getContentId() {
-		return this.contentId;
-	}
+  public int getContentId() {
+    return this.contentId;
+  }
 
-	public void setContentId(int contentId) {
-		this.contentId = contentId;
-	}
+  public void setContentId(int contentId) {
+    this.contentId = contentId;
+  }
 
-	public Integer getVersion() {
-		return this.version;
-	}
+  public Integer getVersion() {
+    return this.version;
+  }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
 
-	public Integer getBasketId() {
-		return this.basketId;
-	}
+  public Integer getBasketId() {
+    return this.basketId;
+  }
 
-	public void setBasketId(Integer basketId) {
-		this.basketId = basketId;
-	}
+  public void setBasketId(Integer basketId) {
+    this.basketId = basketId;
+  }
 
-	public Integer getItemTypeId() {
-		return this.itemTypeId;
-	}
+  public Integer getItemTypeId() {
+    return this.itemTypeId;
+  }
 
-	public void setItemTypeId(Integer itemTypeId) {
-		this.itemTypeId = itemTypeId;
-	}
+  public void setItemTypeId(Integer itemTypeId) {
+    this.itemTypeId = itemTypeId;
+  }
 
-	public Integer getItemId() {
-		return this.itemId;
-	}
+  public Integer getItemId() {
+    return this.itemId;
+  }
 
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
+  public void setItemId(Integer itemId) {
+    this.itemId = itemId;
+  }
 
-	public String getComment() {
-		return this.comment;
-	}
+  public String getComment() {
+    return this.comment;
+  }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 
-	public Float getContentCount() {
-		return this.contentCount;
-	}
+  public Float getContentCount() {
+    return this.contentCount;
+  }
 
-	public void setContentCount(Float contentCount) {
-		this.contentCount = contentCount;
-	}
+  public void setContentCount(Float contentCount) {
+    this.contentCount = contentCount;
+  }
 
-	public Boolean getDeleteFlag() {
-		return this.deleteFlag;
-	}
+  public Boolean getDeleteFlag() {
+    return this.deleteFlag;
+  }
 
-	public void setDeleteFlag(Boolean deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
+  public void setDeleteFlag(Boolean deleteFlag) {
+    this.deleteFlag = deleteFlag;
+  }
 
 }

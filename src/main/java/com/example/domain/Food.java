@@ -12,21 +12,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name="customers")//テーブル名（＝クラス名）
+// @Entity
+// @Table(name="customers")//テーブル名（＝クラス名）
 
 @Data
-@NoArgsConstructor //JPAの仕様で、EntityClassには引数のないデフォルトコンストラクタを作る必要がある。
+@NoArgsConstructor
+// JPAの仕様で、EntityClassには引数のないデフォルトコンストラクタを作る必要がある。
 @AllArgsConstructor
 public class Food {
-	@Id
-//	@GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
-	private Integer id;
+  @Id
+  // @GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
+  private Integer id;
 
-	@NotNull //Annotation for Input check
-	private String name;
-	
-	@NotNull //Annotation for Input check
-	private String color;
-	
+  @NotNull
+  // Annotation for Input check
+  private String name;
+
+  @NotNull
+  // Annotation for Input check
+  private String color;
+
 }

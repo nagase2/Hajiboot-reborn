@@ -14,23 +14,22 @@ import lombok.Data;
 @Data
 @Entity
 public class MstItemType implements java.io.Serializable {
-    @Id
-	private int itemTypeId;
-    private String itemTypeName;
-	private Boolean deleteFlag;
+  @Id
+  private int itemTypeId;
+  private String itemTypeName;
+  private Boolean deleteFlag;
 
-	public MstItemType() {
-	}
+  public MstItemType() {}
 
-	public MstItemType(int itemTypeId) {
-		this.itemTypeId = itemTypeId;
-	}
+  public MstItemType(int itemTypeId) {
+    this.itemTypeId = itemTypeId;
+  }
 
-	public MstItemType(int itemTypeId, Boolean deleteFlag, String itemTypeName) {
-		this.itemTypeId = itemTypeId;
-		this.deleteFlag = deleteFlag;
-		this.itemTypeName = itemTypeName;
-	}
+  public MstItemType(int itemTypeId, Boolean deleteFlag, String itemTypeName) {
+    this.itemTypeId = itemTypeId;
+    this.deleteFlag = deleteFlag;
+    this.itemTypeName = itemTypeName;
+  }
 
 
 }

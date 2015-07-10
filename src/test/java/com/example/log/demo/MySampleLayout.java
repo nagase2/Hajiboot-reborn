@@ -9,7 +9,7 @@ public class MySampleLayout extends LayoutBase<ILoggingEvent> {
 
   public String doLayout(ILoggingEvent event) {
     StringBuffer sbuf = new StringBuffer(128);
-    //sbuf.append(event.getTimeStamp() - event.getLoggingContextVO.getBirthTime());
+    // sbuf.append(event.getTimeStamp() - event.getLoggingContextVO.getBirthTime());
     sbuf.append(" ");
     sbuf.append(event.getLevel());
     sbuf.append(" [");

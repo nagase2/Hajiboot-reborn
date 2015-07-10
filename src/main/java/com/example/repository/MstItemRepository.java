@@ -14,9 +14,9 @@ import com.example.domain.MstItem;
 @Repository
 @Transactional
 public interface MstItemRepository extends JpaRepository<MstItem, Long> {
-   List<MstItem> findByItemName(String itemName);
-   
-   List<MstItem> findAllOrderByItemName(Pageable pageable);
-   
-   Page<Customer> findAllOrderByItemId(Pageable pageable);
+  List<MstItem> findByItemName(String itemName);
+
+  List<MstItem> findAllOrderByItemName(Pageable pageable);
+
+  Page<Customer> findAllOrderByItemId(Pageable pageable);
 }

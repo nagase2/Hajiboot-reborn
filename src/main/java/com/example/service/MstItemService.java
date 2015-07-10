@@ -13,29 +13,31 @@ import com.example.domain.MstItem;
 import com.example.domain.User;
 import com.example.repository.CustomerRepository;
 import com.example.repository.MstItemRepository;
+
 /**
  * カスタマのサービスクラス
+ * 
  * @author nagase
  *
  */
-@Service //サービスクラスであることを示す。Componentと意味は変わらない
+@Service
+// サービスクラスであることを示す。Componentと意味は変わらない
 @Transactional
 public class MstItemService {
-	@Autowired
-	MstItemRepository mstItemRepository;
-	
-	/*
-	 * すべてを返す
-	 */
-	public List<MstItem> findAll(){
-		return mstItemRepository.findAll();
-	}
-	
-	public  List<MstItem> findByItemName(String itemName){
-		return mstItemRepository.findByItemName(itemName);
-	}
+  @Autowired
+  MstItemRepository mstItemRepository;
+
+  /*
+   * すべてを返す
+   */
+  public List<MstItem> findAll() {
+    return mstItemRepository.findAll();
+  }
+
+  public List<MstItem> findByItemName(String itemName) {
+    return mstItemRepository.findByItemName(itemName);
+  }
 
 
-	
 
 }
