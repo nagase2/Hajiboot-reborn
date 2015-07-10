@@ -18,5 +18,5 @@ public interface MstItemRepository extends JpaRepository<MstItem, Long> {
 
   List<MstItem> findAllOrderByItemName(Pageable pageable);
 
-  Page<Customer> findAllOrderByItemId(Pageable pageable);
+  Page<MstItem> findAllOrderByItemId(Pageable pageable);
 }

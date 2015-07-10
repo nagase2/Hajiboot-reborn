@@ -34,12 +34,29 @@ INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,ver
 CREATE TABLE content (
  content_id INT NOT NULL PRIMARY KEY,
  item_id INT,
+ content_name VARCHAR(100),
+ count INT,
  comment VARCHAR(500),
- purchased_price FLOAT(20),
  version INT,
+ updated_function VARCHAR(100),
+ created_function VARCHAR(100),
  delete_flag BIT(1)
 );
 
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (1,1,999,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (2,1,777,'this is name','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (3,1,888,'this is name','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (4,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (5,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (6,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (7,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
 
 CREATE TABLE shopping_basket (
  basket_id INT NOT NULL PRIMARY KEY,

@@ -1,13 +1,7 @@
-CREATE TABLE mst_item_category (
+CREATE TABLE mst_item_type (
  item_type_id INT NOT NULL PRIMARY KEY,
- delete_flag BIT(1),
- material_type_name VARCHAR(110)
-);
-
-
-CREATE TABLE purchase_history (
- purchase_history_id INT NOT NULL PRIMARY KEY,
- purchase_date DATE
+ material_type_name VARCHAR(110),
+ delete_flag BIT(1)
 );
 
 
@@ -25,20 +19,12 @@ CREATE TABLE mst_item (
 CREATE TABLE content (
  content_id INT NOT NULL PRIMARY KEY,
  item_id INT,
+ count INT,
  comment VARCHAR(500),
- purchased_price FLOAT(20),
  version INT,
+ updated_function VARCHAR(100),
+ created_function VARCHAR(100),
  delete_flag BIT(1)
-);
-
-
-CREATE TABLE shopping_basket (
- basket_id INT NOT NULL PRIMARY KEY,
- content_id INT,
- comment VARCHAR(500),
- version INT,
- delete_flag BIT(1),
- purchased_date DATE
 );
 
 

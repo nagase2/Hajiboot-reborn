@@ -1,3 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,22 +81,9 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">更新</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
-  
+
+<h2>xxxxxx</h2>
   <hr>
-  
 <form class="form-inline">
   <div class="form-group">
     <label for="exampleInputName2">Name</label>
@@ -103,24 +95,49 @@
   </div>       　
   <button type="submit" class="btn btn-default">検索</button>
 </form>
+  <hr>
+  
+  
+  	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>#</th>
+				<th>#</th>
+				<th>#</th>
+				<th>#</th>
+			</tr>
+			</thead>
+			<c:forEach var="item" items="${contents.content}">
+				<tr>
+					<th>${item.contentId}</th>
+					<th>${item.contentName}</th>
+					<th>xxx</th>
+					<th>${item.mstItem.itemName}</th>					
+					<th>${item.mstItem.mstItemType.itemTypeName}</th>
+									</tr>
+			</c:forEach>
+	</table>
+  
+  
   
   
   
   <nav>
   <ul class="pagination">
     <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
+  <!--    <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span> -->
       </a>
     </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+    <li><a href="?page=0">1</a></li>
+    <li><a href="?page=1">2</a></li>
+    <li><a href="?page=2">3</a></li>
+    <li><a href="?page=3">4</a></li>
+    <li><a href="?page=4">5</a></li>
     <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
+      <!-- <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span> -->
       </a>
     </li>
   </ul>
