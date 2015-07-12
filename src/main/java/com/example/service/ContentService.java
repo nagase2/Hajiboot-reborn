@@ -50,13 +50,12 @@ public class ContentService {
   public Page<Content> findAllOrderByContentId(Pageable pageable){
      return contentRepository.findAllOrderByContentId(pageable);
   }
+  
 
-//  /**
-//   * 並べ替えしてすべて返す
-//   * @return
-//   */
-//  public List<Content> findAllOrderByContentName() {
-//    return contentRepository.findAllOrderByContentId();
-//  }
+  public Page<Content> findByContentNameOrderByContentId(String contentName,Pageable pageable){
+    return contentRepository.findByContentNameOrderByContentIdAsc(contentName,pageable);
+  }
+
+
 
 }

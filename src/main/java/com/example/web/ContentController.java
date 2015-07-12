@@ -24,25 +24,59 @@ public class ContentController {
   ContentService contentService;
 
 
+  /**
+   * 一行表示
+   * @param model
+   * @param contentForm
+   * @return
+   */
   @RequestMapping("/list")
-  String showContentList(Model model, Integer page, Integer size) {
+  String showContentList(Model model, ContentForm contentForm) {
     log.info("ここでContent Llistを取得!");
 
-    // List<Content> contents = contentService.findByContentName("aaa");// これはOK
-    // List<Content> contents = contentService.findAll();// これは... OK
-    if (page == null) {
-      page = 0;
-    }
-    if (size == null) {
-      size = 5;
-    }
-
-    Pageable pageable = new PageRequest(page, size);
+    Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
     log.info("データ取得前");
     Page<Content> contents = contentService.findAllOrderByContentId(pageable);
     log.info("データ取得しました。");
 
     model.addAttribute("contents", contents);
+    return "content/contentList";
+  }
+  
+  /**
+   * ContentsNameで検索
+   * @param model
+   * @param contentForm
+   * @return
+   */
+  @RequestMapping("/search")
+  String searchContentsByContentsName(Model model, ContentForm contentForm) {
+ 
+    Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
+    // List<Content> contents = contentService.findByContentName("aaa");// これはOK
+    // List<Content> contents = contentService.findAll();// これは... OK
+  
+    log.info("データ取得前");
+    Page<Content> contentList =   contentService.findByContentNameOrderByContentId(contentForm.getContentName(),pageable);
+    log.info("データ取得しました。");
+
+    model.addAttribute("contents", contentList);
+    model.addAttribute("form", contentForm);
+    return "content/contentList";
+  }
+  @RequestMapping("/search2")
+  String searchContentsByContentsName2(Model model, ContentForm contentForm) {
+ 
+    Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
+    // List<Content> contents = contentService.findByContentName("aaa");// これはOK
+    // List<Content> contents = contentService.findAll();// これは... OK
+  
+    log.info("データ取得前");
+    Page<Content> contentList =   contentService.findByContentNameOrderByContentId(contentForm.getContentName(),pageable);
+    log.info("データ取得しました。");
+
+    model.addAttribute("contents", contentList);
+    model.addAttribute("form", contentForm);
     return "content/contentList";
   }
 

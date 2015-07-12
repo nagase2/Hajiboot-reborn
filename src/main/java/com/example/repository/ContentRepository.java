@@ -26,6 +26,16 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
   List<Content> findAll();
 
   Page<Content> findAll(Pageable pageable);
+  
+  /**
+   * ContentNameで検索してContentIdの昇順で並べ替え
+   * @param contentName
+   * @param pageable
+   * @return
+   */
+  Page<Content> findByContentNameOrderByContentIdAsc(String contentName,Pageable pageable);
+  
+  //Page<Content> findByItemName_Mstitem(MstItem mstItem,Pageable pageable);
 
-  // List<Content> findAllOrderByContentId();
+ // List<Content> findAllOrderByContentId();
 }

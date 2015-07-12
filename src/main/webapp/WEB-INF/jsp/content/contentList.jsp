@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">JPA Test</a>
+      <a class="navbar-brand" href="list">JPA Test</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,8 +33,8 @@
            <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">一覧表示処理 <span class="caret"></span></a>
           <ul class="dropdown-menu">
-
-            <li><a href="#">一覧表示（検索＆ページ）</a></li>
+			<li><a href="list">全件表示</a></li>
+            <li><a href="search">一覧表示（検索＆ページ）</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">（できれば…）順番に読み込み</a></li>
              <li><a href="#">一覧表示</a></li>
@@ -82,15 +82,15 @@
 </nav>
 
 
-<h2>xxxxxx</h2>
+<h2>コンテンツ一覧</h2>
   <hr>
-<form class="form-inline">
+<form action="search" method="GET" class="form-inline">
   <div class="form-group">
-    <label for="exampleInputName2">Name</label>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+    <label for="exampleInputName2">Content Name</label>
+    <input type="text" name="contentName" value="${form.contentName}" class="form-control" id="exampleInputName2" placeholder="検索条件入力してね">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail2">Email</label>
+    <label for="exampleInputEmail2">品名</label>
     <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
   </div>       　
   <button type="submit" class="btn btn-default">検索</button>
@@ -101,18 +101,20 @@
   	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>#</th>
-				<th>#</th>
-				<th>#</th>
-				<th>#</th>
+				<th>ID</th>
+				<th>Content Name</th>
+				<th>コメント</th>
+				<th>価格</th>
+				<th>アイテム名称</th>
+				<th>カテゴリ</th>
 			</tr>
 			</thead>
 			<c:forEach var="item" items="${contents.content}">
 				<tr>
 					<th>${item.contentId}</th>
 					<th>${item.contentName}</th>
-					<th>xxx</th>
+					<th>${item.comment}</th>
+					<th>${item.mstItem.price}</th>
 					<th>${item.mstItem.itemName}</th>					
 					<th>${item.mstItem.mstItemType.itemTypeName}</th>
 									</tr>
@@ -123,7 +125,7 @@
   
   
   
-  <nav>
+  <nav align="center">
   <ul class="pagination">
     <li>
   <!--    <a href="#" aria-label="Previous">
