@@ -79,6 +79,23 @@ public class ContentController {
     model.addAttribute("form", contentForm);
     return "content/contentList";
   }
+  
+  @RequestMapping("/update")
+  String updateAndCreateContent(Model model, ContentForm contentForm) {
+ 
+    Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
+    // List<Content> contents = contentService.findByContentName("aaa");// これはOK
+    // List<Content> contents = contentService.findAll();// これは... OK
+  
+    log.info("データ取得前");
+    Page<Content> contentList =   contentService.findByContentNameOrderByContentId(contentForm.getContentName(),pageable);
+    log.info("データ取得しました。");
+
+    model.addAttribute("contents", contentList);
+    model.addAttribute("form", contentForm);
+    return "content/updateForm";
+  }
+
 
   // @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")
   // // JPQLで指定

@@ -82,72 +82,39 @@
 </nav>
 
 
-<h2>コンテンツ一覧</h2>
-  <hr>
-<form action="search" method="GET" class="form-inline">
-  <div class="form-group">
-    <label for="exampleInputName2">Content Name</label>
-    <input type="text" name="contentName" value="${form.contentName}" class="form-control" id="exampleInputName2" placeholder="検索条件入力してね">
+<div class="form-group">
+  <div class="col-xs-4">xxx
+    <input type="text" class="form-control" placeholder=".col-xs-3">
+  </div>
+  <div class="col-xs-4">xxx
+    <input type="text" class="form-control" placeholder=".col-xs-3">
+  </div>
+  <div class="col-xs-4">xxx3333
+    <input type="text" class="form-control" placeholder=".col-xs-4">
+  </div>
+</div>
+  
+  
+   <div class="form-group">
+    <label for="inputEmail3" class="col-sm-5 control-label">Email</label>
+    <div class="col-sm-12">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    </div>
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail2">品名</label>
-    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-  </div>       　
-  <button type="submit" class="btn btn-default">検索</button>
-</form>
-  <hr>
+    <label for="inputPassword3" class="col-sm-5 control-label">Password</label>
+    <div class="col-sm-12">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+    </div>
+    
+    
+  </div>
   
-  
-  	<table class="table table-hover table-condensed">
-		<thead>
-			<tr >
-				<th>ID</th>
-				<th>Content Name</th>
-				<th>コメント</th>
-				<th>価格</th>
-				<th>アイテム名称</th>
-				<th>カテゴリ</th>
-				<th>xx</th>
-			</tr>
-			</thead>
-			<c:forEach var="item" items="${contents.content}">
-				<tr>
-					<td>${item.contentId}</td>
-					<td>${item.contentName}</td>
-					<td>${item.comment}</td>
-					<td>${item.mstItem.price}</td>
-					<td>${item.mstItem.itemName}</td>					
-					<td>${item.mstItem.mstItemType.itemTypeName}</td>
-					<td><!--  <button type="button" class="btn btn-info">更新</button>-->
-					<a href="update?id=${item.contentId}" class="btn btn-info" role="button">更新</a>
-					</td>
-					
-									</tr>
-			</c:forEach>
-	</table>
-  
-  
-  
-  
-  
-  <nav align="center">
-  <ul class="pagination">
-    <li>
-  <!--    <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span> -->
-      </a>
-    </li>
-    <li><a href="?page=0">1</a></li>
-    <li><a href="?page=1">2</a></li>
-    <li><a href="?page=2">3</a></li>
-    <li><a href="?page=3">4</a></li>
-    <li><a href="?page=4">5</a></li>
-    <li>
-      <!-- <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span> -->
-      </a>
-    </li>
-  </ul>
-</nav>
-</body>
-</html>
+    <div class="col-sm-12"> 　 </div>
+    
+<div class="col-sm-12">
+
+<button type="button" class="btn btn-primary">データ更新</button>
+
+<!-- Indicates a dangerous or potentially negative action -->
+<button type="button" class="btn btn-danger">キャンセル</button>
