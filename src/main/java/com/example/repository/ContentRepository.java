@@ -20,7 +20,7 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 
   Page<Content> findAllOrderByContentName(Pageable pageable);
 
-  @Query("SELECT a FROM Content a ORDER BY  a.contentName, a.contentId")
+  @Query("SELECT a FROM Content a ORDER BY  a.contentId, a.contentName")
   Page<Content> findAllOrderByContentId(Pageable pageable);
 
   List<Content> findAll();
@@ -29,6 +29,7 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
   
   /**
    * ContentNameで検索してContentIdの昇順で並べ替え
+   * Query methd利用
    * @param contentName
    * @param pageable
    * @return

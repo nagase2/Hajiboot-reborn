@@ -9,9 +9,12 @@ buildscript {
 		  }
     }
     dependencies {
+      
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
 		classpath 'org.springframework:springloaded:1.2.3.RELEASE'
 		classpath "com.moowork.gradle:gradle-grunt-plugin:0.9"
+    
+        classpath "com.bmuschko:gradle-cargo-plugin:2.1.1"
 	}
 }
 
@@ -31,6 +34,7 @@ apply plugin: 'checkstyle'
 checkstyle.toolVersion = '6.7'
 apply plugin: 'pmd'
 apply plugin: "sonar-runner"
+apply plugin: "com.bmuschko.cargo"
 
 idea {
 	module {
@@ -74,7 +78,11 @@ bootRun {
  
   
 dependencies {
-	
+  def cargoVersion = '1.4.10'
+  cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+        "org.codehaus.cargo:cargo-ant:$cargoVersion"
+  cargo "org.wildfly:wildfly-controller-client:8.2.0.Final"
+  
     compile("org.springframework.boot:spring-boot-starter-web")
 	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
 	compile "org.projectlombok:lombok:1.16.2"
@@ -164,6 +172,18 @@ checkstyle {
 	ignoreFailures = true
 	// TODO: ルールセットの記述方法が変わった?
 	// ruleSetFiles  = files( "$rootProject.projectDir/config/pmd/codesize.xml" )
+  }
+  
+  
+  cargo {
+    containerId = 'wildfly8x'
+  
+    remote {
+     // hostname = '172.19.6.88'
+      hostname = 'localhost'
+      username = 'wildfly'
+      password = 'wildfly'
+    }
   }
   
   
