@@ -34,9 +34,7 @@ INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,ver
 CREATE TABLE content (
  content_id INT NOT NULL PRIMARY KEY,
  item_id INT,
- content_name VARCHAR(100),
- count INT,
- comment VARCHAR(500),
+ content_name VARCHAR(100),count INT,comment VARCHAR(500),
  version INT,
  updated_function VARCHAR(100),
  created_function VARCHAR(100),
