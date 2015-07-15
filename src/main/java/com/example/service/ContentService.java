@@ -53,7 +53,8 @@ public class ContentService {
   
 
   public Page<Content> findByContentNameOrderByContentId(String contentName,Pageable pageable){
-    return contentRepository.findByContentNameOrderByContentIdAsc(contentName,pageable);
+  //  return contentRepository.findByContentNameOrderByContentIdAsc(contentName,pageable);
+    return contentRepository.findContents(contentName,pageable);
   }
 
 

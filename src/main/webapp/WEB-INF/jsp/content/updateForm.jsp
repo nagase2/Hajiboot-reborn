@@ -81,6 +81,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<form action="update" method="POST">
 
 <div class="form-group">
   <div class="col-xs-4">xxx
@@ -98,7 +99,7 @@
    <div class="form-group">
     <label for="inputEmail3" class="col-sm-5 control-label">Email</label>
     <div class="col-sm-12">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      <input type="text" class="form-control" id="inputEmail3" >
     </div>
   </div>
   <div class="form-group">
@@ -114,7 +115,9 @@
     
 <div class="col-sm-12">
 
-<button type="button" class="btn btn-primary">データ更新</button>
+<button type="submit" class="btn btn-primary">データ更新</button>
 
 <!-- Indicates a dangerous or potentially negative action -->
 <button type="button" class="btn btn-danger">キャンセル</button>
+</div>
+</form>

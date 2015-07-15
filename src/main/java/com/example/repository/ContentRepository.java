@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,15 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
    * @return
    */
   Page<Content> findByContentNameOrderByContentIdAsc(String contentName,Pageable pageable);
+  
+  /**
+   * Like検索
+   * @param contentName
+   * @param pageable
+   * @return
+   */
+  @Query("select c from Content c where c.contentName like CONCAT('%',CONCAT(:contentName, '%'))")
+  Page<Content> findContents(@Param("contentName")String contentName,Pageable pageable);
   
   //Page<Content> findByItemName_Mstitem(MstItem mstItem,Pageable pageable);
 
