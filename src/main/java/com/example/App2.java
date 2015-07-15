@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * CommandLineRunnerはコマンドラインで値を取得する場合に使う。
- * 
+ * aaa
  * @author nagase
  *
  */
