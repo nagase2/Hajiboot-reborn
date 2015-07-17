@@ -119,7 +119,7 @@
 					<td>${item.mstItem.itemName}</td>					
 					<td>${item.mstItem.mstItemType.itemTypeName}</td>
 					<td><!--  <button type="button" class="btn btn-info">更新</button>-->
-					<a href="update?id=${item.contentId}" class="btn btn-info" role="button">更新</a>
+					<a href="update?contentId=${item.contentId}" class="btn btn-info" role="button">更新</a>
 					</td>
 					
 									</tr>

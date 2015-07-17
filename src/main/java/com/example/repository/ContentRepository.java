@@ -18,6 +18,8 @@ import com.example.domain.MstItem;
 @Transactional
 public interface ContentRepository extends JpaRepository<Content, Long> {
   List<Content> findByContentName(String contentName);
+  
+  Content findByContentId(int contentId);
 
   Page<Content> findAllOrderByContentName(Pageable pageable);
 

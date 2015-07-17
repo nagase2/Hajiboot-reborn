@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 import com.example.domain.Content;
@@ -93,20 +95,36 @@ public class ContentController {
     // List<Content> contents = contentService.findByContentName("aaa");// これはOK
     // List<Content> contents = contentService.findAll();// これは... OK
 
-    log.info("データ取得前");
-    Page<Content> contentList =
-        contentService.findByContentNameOrderByContentId(contentForm.getContentName(), pageable);
-    log.info("データ取得しました。ID= "+contentForm.getContentId());
+//    log.info("データ取得前");
+//    Page<Content> contentList =
+//        contentService.findByContentNameOrderByContentId(contentForm.getContentName(), pageable);
+//    log.info("データ取得しました。ID= "+contentForm.getContentId());
 
-    model.addAttribute("contents", contentList);
-    model.addAttribute("form", contentForm);
+    //Idからオブジェクト取得
+   Content content = contentService.findByContentId(contentForm.getContentId());
+    
+//    //MEMO:取得したオブジェクトを渡す
+//   BeanUtils.copyProperties(contentForm, content);
+//   
+//   log.info("データをコピー= "+content.getContentName());
+   
+//    model.addAttribute("contents", contentList);
+    model.addAttribute("contentForm", content);
     return "content/updateForm";
   }
 
+  
   @RequestMapping(value = "/update", method = RequestMethod.POST)
   String updateAndCreateContent2(Model model, ContentForm contentForm) {
 
-    log.info("データ更新処理をここで行います。"+contentForm.getContentId());
+    
+    log.info("データ更新処理をここで行います。"+contentForm.getContentId()+contentForm.getContentName());
+    
+    Content content = new Content();
+    BeanUtils.copyProperties(contentForm, content);
+    log.info("xxxxxxxxxxxxxx"+content.getContentId()+content.getContentName());
+    contentService.save(content);
+    
     // @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")
     // // JPQLで指定
     // Page<Customer> findAllOrderByName2(Pageable pageable);

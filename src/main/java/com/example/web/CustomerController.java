@@ -110,7 +110,7 @@ public class CustomerController {
   Integer id, CustomerForm form) {
     // 編集対象の顧客情報を取得
     Customer customer = customerService.findOne(id);
-    // 現在の値を画面に表示するため、顧客情報をCustomerFormにコピーする
+    // 現在の値を画面に表示するため、顧客情報をCustomerFormにコピーする/////
     BeanUtils.copyProperties(customer, form);
     System.out.println("show edit screen");
     return "customers/edit.html";

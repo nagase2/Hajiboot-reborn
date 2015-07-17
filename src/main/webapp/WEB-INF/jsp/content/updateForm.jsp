@@ -84,29 +84,28 @@
 <form action="update" method="POST">
 
 <div class="form-group">
-  <div class="col-xs-4">xxx
-    <input type="text" class="form-control" placeholder=".col-xs-3">
+  <div class="col-xs-4">ID
+    <input type="text" class="form-control" placeholder=".col-xs-3"  name="contentId" value="${contentForm.contentId}">
   </div>
-  <div class="col-xs-4">xxx
-    <input type="text" class="form-control" placeholder=".col-xs-3">
+  <div class="col-xs-4">Content 名
+    <input type="text" class="form-control" placeholder=".col-xs-3" name="contentName" value="${contentForm.contentName}">
   </div>
-  <div class="col-xs-4">xxx3333
-    <input type="text" class="form-control" placeholder=".col-xs-4">
+  <div class="col-xs-4">Comment
+    <input type="text" class="form-control" placeholder=".col-xs-4" name="comment"  value="${contentForm.comment}">
   </div>
 </div>
   
-  
    <div class="form-group">
-    <label for="inputEmail3" class="col-sm-5 control-label">Email</label>
-    <div class="col-sm-12">
-      <input type="text" class="form-control" id="inputEmail3" >
-    </div>
+  <div class="col-xs-4">価格
+    <input type="text" class="form-control" placeholder=".col-xs-3" name="price"  value="${contentForm.mstItem.price}">
   </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-5 control-label">Password</label>
-    <div class="col-sm-12">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-    </div>
+  <div class="col-xs-4">アイテム名称
+    <input type="text" class="form-control" placeholder=".col-xs-3" value="${contentForm.mstItem.itemName}">
+  </div>
+  <div class="col-xs-4">カテゴリ
+    <input type="text" class="form-control" placeholder=".col-xs-4" value="${contentForm.mstItem.mstItemType.itemTypeName}">
+  </div>
+</div>
     
     
   </div>

@@ -2,12 +2,12 @@
 <configuration debug="false">
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<logger name="jdbc" level="OFF" />
+	<logger name="jdbc" level="INFO" /> 
 	<logger name="jdbc.sqltiming" level="WARN" />
 	<logger name="jdbc.sqlonly" level="INFO" />
 
-	<!-- <property name="ACCESS_LOG_PATTERN" value="%d{yyyy-MM-dd HH.mm.ss},%p,,%C,%M,%caller{1}" 
-		/> -->
+	<property name="ACCESS_LOG_PATTERN" value="%d{yyyy-MM-dd HH.mm.ss},%p,,%C,%M,%caller{1}" 
+		/>
 
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>

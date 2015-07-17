@@ -3,6 +3,8 @@ package com.example.web;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.example.domain.MstItem;
+
 import lombok.Data;
 
 /**
@@ -27,5 +29,6 @@ public class ContentForm {
   private Integer version;
   private String createdFunction;
   private String updatedFunction;
+  private MstItem mstItem;
 
 }

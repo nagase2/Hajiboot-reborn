@@ -15,6 +15,7 @@ import com.example.domain.User;
 import com.example.repository.ContentRepository;
 import com.example.repository.CustomerRepository;
 import com.example.repository.MstItemRepository;
+import com.sun.mail.handlers.message_rfc822;
 
 /**
  * カスタマのサービスクラス
@@ -51,12 +52,17 @@ public class ContentService {
      return contentRepository.findAllOrderByContentId(pageable);
   }
   
+  public Content findByContentId(int contentId){
+    return contentRepository.findByContentId(contentId);
+  }
 
   public Page<Content> findByContentNameOrderByContentId(String contentName,Pageable pageable){
   //  return contentRepository.findByContentNameOrderByContentIdAsc(contentName,pageable);
     return contentRepository.findContents(contentName,pageable);
   }
-
+ public Content save(Content content){
+    return contentRepository.save(entity)(content);
+ }
 
 
 }
