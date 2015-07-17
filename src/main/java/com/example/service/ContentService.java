@@ -9,13 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Content;
-import com.example.domain.Customer;
-import com.example.domain.MstItem;
-import com.example.domain.User;
 import com.example.repository.ContentRepository;
-import com.example.repository.CustomerRepository;
-import com.example.repository.MstItemRepository;
-import com.sun.mail.handlers.message_rfc822;
 
 /**
  * カスタマのサービスクラス
@@ -61,7 +55,7 @@ public class ContentService {
     return contentRepository.findContents(contentName,pageable);
   }
  public Content save(Content content){
-    return contentRepository.save(entity)(content);
+    return contentRepository.save(content);
  }
 
 
