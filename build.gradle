@@ -176,7 +176,7 @@ checkstyle {
   
   
   cargo {
-    containerId = 'wildfly8x'
+    containerId = 'wildfly82'
   
     remote {
      // hostname = '172.19.6.88'
