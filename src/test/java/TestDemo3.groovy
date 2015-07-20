@@ -1,8 +1,8 @@
+import hello.world.jpa.Calc;
+import hello.world.jpa.Demo3;
 import spock.lang.Specification;
 
 import com.example.domain.Supplier;
-import com.example.log.demo.Calc;
-import com.example.log.demo.Demo3;
 
 
 class TestDemo3  extends Specification{

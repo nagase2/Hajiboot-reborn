@@ -1,7 +1,7 @@
+import hello.world.jpa.Calc;
 import spock.lang.Specification
 
 import com.example.domain.Supplier
-import com.example.log.demo.Calc
 
 
 class TestSupplier  extends Specification{

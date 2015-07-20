@@ -1,4 +1,4 @@
-package com.example.echo;
+package hello.world.jpa;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

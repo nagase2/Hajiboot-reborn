@@ -1,4 +1,4 @@
-package com.example.log.demo;
+package hello.world.jpa;
 
 import lombok.extern.slf4j.Slf4j;
 

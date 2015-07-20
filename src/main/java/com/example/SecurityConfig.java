@@ -34,14 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // .antMatchers("/**").permitAll().anyRequest().authenticated();
     // ログインページ関連の情報を指定
     http.formLogin().loginProcessingUrl("/login").loginPage("/loginForm")
-        .failureUrl("/loginForm?error").defaultSuccessUrl("/customers", true)
+        .failureUrl("/loginForm?error")/*.defaultSuccessUrl("/customers", true)*/
         .usernameParameter("username").passwordParameter("password").and();
 
     http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
         .logoutSuccessUrl("/loginForm");
   }
 
-  // @Configuration
+ //  @Configuration
   static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;

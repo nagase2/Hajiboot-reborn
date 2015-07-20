@@ -31,7 +31,8 @@ public class Customer {
   private String firstName;
   @Column(nullable = false)
   private String lastName;
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
+  //@ManyToOne(fetch = FetchType.LAZY) //これをOnにするとRESTでコケる
   // UserとCustomerを多対一の関係にする。
   @JoinColumn(nullable = true, name = "username")
   // Joincolumnで外部キーのカラム名を指定

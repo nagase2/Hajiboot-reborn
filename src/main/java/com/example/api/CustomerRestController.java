@@ -1,7 +1,10 @@
 package com.example.api;
 
+
 import java.net.URI;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,21 +28,22 @@ import com.example.service.CustomerService;
 import com.example.service.LoginUserDetails;
 
 @RestController
+@Slf4j
 @RequestMapping("api/customers")
 public class CustomerRestController {
   @Autowired
   CustomerService customerService;
 
   @RequestMapping(method = RequestMethod.GET)
-  // getCustomersメソッドに対して、Getを割り当て（POSTではなく）
-  Page<Customer> getCustomers(@PageableDefault(page = 0, size = 5) Pageable pageable
+  Page<Customer> getCustomers(@PageableDefault(page = 0, size = 100) Pageable pageable
       /*
        * 引数にPageableオブジェクトを追加することで、ページネーションの情報を取得できる リクエストパラメータに設定したpage
        * sizeがこのPageableオブジェクトにマッピングされる PageableDefaultアノテーションは、パラメータが指定されたかった場合のため
        */)
   {
-
+    log.info("customer has been called");
     Page<Customer> customers = customerService.findAll(pageable);
+    log.info("見つかった件数＝"+customers.getTotalElements());
     return customers;
   }
 

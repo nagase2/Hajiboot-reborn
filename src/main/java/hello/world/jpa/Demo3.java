@@ -1,4 +1,4 @@
-package com.example.log.demo;
+package hello.world.jpa;
 
 public class Demo3 {
   Demo3() {

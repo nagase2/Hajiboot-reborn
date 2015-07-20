@@ -1,4 +1,4 @@
-package com.jpasample.entity;
+package hello.world.jpa;
 
 
 import javax.persistence.Entity;

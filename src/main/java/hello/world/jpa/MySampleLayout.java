@@ -1,4 +1,4 @@
-package com.example.log.demo;
+package hello.world.jpa;
 
 
 import ch.qos.logback.classic.spi.ILoggingEvent;

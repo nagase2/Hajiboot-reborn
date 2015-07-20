@@ -1,4 +1,4 @@
-package com.example.echo;
+package hello.world.jpa;
 
 import java.io.Serializable;
 
