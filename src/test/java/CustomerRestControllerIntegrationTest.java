@@ -1,9 +1,21 @@
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.hasXPath;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+
+import javax.enterprise.inject.Model;
 
 import lombok.Data;
 
@@ -19,14 +31,24 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.WebApplicationContext;
+import org.thymeleaf.standard.expression.AndExpression;
+
+import sun.print.resources.serviceui;
 
 import com.example.App2;
 import com.example.domain.Customer;
@@ -40,8 +62,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @WebAppConfiguration
 @IntegrationTest({"server.port:0","spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL"})
 //jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
-@WithMockUser("user2")
+@WithMockUser
 public class CustomerRestControllerIntegrationTest {
+  @Autowired
+  private WebApplicationContext context;
+  private MockMvc mvc;
+  
   @Autowired
   CustomerRepository customerRepository;
   @Value("${local.server.port}")
@@ -60,6 +86,9 @@ public class CustomerRestControllerIntegrationTest {
  
   @Before
   public void setUp(){
+    mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
+          .apply(SecurityMockMvcConfigurers.springSecurity()).build();
+    
     // add principal object to SecurityContextHolder
  
     //customerRepository.deleteAll();
@@ -78,10 +107,12 @@ public class CustomerRestControllerIntegrationTest {
     apiEndpoint ="http://localhost:"+port;
   }
   
- 
+ /**
+  * Spring SecuritをOnにするとうまくいかない。。。（Offだとうまくいく）
+  * @throws Exception
+  */
   @Test
- // @with("user2")
-  @WithUserDetails("user2")
+  @WithUserDetails("user")
   public void testGetCustomers() throws Exception {
     String url = apiEndpoint + "/api/customers";
     ResponseEntity<Page<Customer>> response = restTemplate.exchange(url,  HttpMethod.GET, null /*body, header */
@@ -91,8 +122,8 @@ public class CustomerRestControllerIntegrationTest {
     System.out.println("Test Completed"+response.getBody().toString());
   }
   
-  @Test
-  @WithUserDetails("user2")
+  //@Test
+  @WithUserDetails("user")
   public void testGetCustomers2() throws Exception {
     String url = apiEndpoint + "/content/list";
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
@@ -102,5 +133,75 @@ public class CustomerRestControllerIntegrationTest {
     System.out.println("HEADER:::"+response.getHeaders());
     System.out.println("Test Completed"+response.getBody().toString());
   }
+  
+  //@Test
+  public void testGetCustomers3() throws Exception {
+    String url = apiEndpoint + "/xxxx";
+    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
+    
+    assertThat(response.getStatusCode(),is(HttpStatus.OK));
+    //assertThat(response.getHeaders())
+    System.out.println("HEADER:::"+response.getHeaders());
+    System.out.println("Test Completed"+response.getBody().toString());
+  }
+  
+  @Test
+  public void testGetCustomers4() throws Exception {
+    String url = apiEndpoint + "/api/customers";
+   /*これはOK。ちゃんとStringに返り値が入っている。 */
+   ResultActions ra = mvc
+    .perform(get(url).with(user("admin").password("pass").roles("USER","ADMIN")))
+    .andExpect(status().isOk())
+    .andExpect(content().string(containsString("firstName")));
+   
+ }
+  /**
+   * 認証を指定しない
+   * @throws Exception
+   */
+  @Test
+  @WithUserDetails("user")
+  @WithMockUser
+  public void testGetCustomers4_1() throws Exception {
+    String url = apiEndpoint + "/api/customers";
+   /*これはOK。ちゃんとStringに返り値が入っている。 */
+   ResultActions ra = mvc
+    .perform(get(url))
+    .andExpect(status().isOk())
+    .andExpect(content().string(containsString("firstName")));
+   
+ }
+  @Test
+  public void testGetCustomers5() throws Exception {
+    String url = apiEndpoint + "/content/list";
+   /* TODO:何故かContentの中に値が入ってこない。 */
+   ResultActions ra = mvc
+    .perform(get(url).with(user("user2").password("pass").roles("USER","ADMIN")))
+    .andExpect(status().isOk())
+    .andExpect(model().attributeExists("contents"))
+    .andExpect(model().size(2))
+    .andExpect(view().name("content/contentList"))
+    .andExpect(view().name(containsString("content")));
+   
+   System.out.println("●"+status().toString());
+   
+   // .andExpect(content().);
+    //.perform(get(url)); 
+   
+   System.out.println("★"+ra.andReturn().getResponse().toString());
+   
+//    url = apiEndpoint + "/content/list";
+//   ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
+//   
+//   assertThat(response.getStatusCode(),is(HttpStatus.OK));
+//   //assertThat(response.getHeaders())
+//   System.out.println("HEADER:::"+response.getHeaders());
+//   System.out.println("★Test Completed"+response.getBody().toString());
+
+ }
 
 }
+/**
+ * Test sample
+ * https://github.com/spring-projects/spring-test-mvc/blob/master/src/test/java/org/springframework/test/web/server/samples/standalone/resultmatchers/ContentAssertionTests.java
+*/
