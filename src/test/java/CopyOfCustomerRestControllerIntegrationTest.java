@@ -55,6 +55,7 @@ import com.example.domain.Customer;
 import com.example.domain.User;
 import com.example.repository.CustomerRepository;
 import com.example.service.CustomerService;
+import com.example.web.CustomerController;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -64,7 +65,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @IntegrationTest({"server.port:0","spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL"})
 //jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
 //@WithMockUser
-public class CustomerRestControllerIntegrationTest {
+public class CopyOfCustomerRestControllerIntegrationTest {
   @Autowired
   private WebApplicationContext context;
   private MockMvc mvc;
@@ -74,6 +75,8 @@ public class CustomerRestControllerIntegrationTest {
   
   @Autowired
   CustomerRepository customerRepository;
+  @Autowired
+  CustomerController customerController;
   @Value("${local.server.port}")
   int port;
   String apiEndpoint;
@@ -88,120 +91,18 @@ public class CustomerRestControllerIntegrationTest {
     private int numberOfElements;
   }
  
-  @Before
   public void setUp(){
-    mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
-          .apply(SecurityMockMvcConfigurers.springSecurity()).build();
+  //  mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
+  //        .apply(SecurityMockMvcConfigurers.springSecurity()).build();
     
-    // add principal object to SecurityContextHolder
- 
-    //customerRepository.deleteAll();
-    customer1= new Customer();
-    customer1.setFirstName("Taro");
-    customer1.setLastName("Yamada");
-    customer1.setUser(new User("user2", "", null));
-    customer1.setId(888);
-    customer2 = new Customer();
-    customer2.setId(999);
-    customer2.setFirstName("Ichiro");
-    customer2.setLastName("Suxzuki");
-    customer2.setUser(new User("user2", "", null));
-    
-    //customerRepository.save(Arrays.asList(customer1,customer2));
-    apiEndpoint ="http://localhost:"+port;
   }
-  
- /**
-  * Spring SecuritをOnにするとうまくいかない。。。（Offだとうまくいく）
-  * @throws Exception
-  */
   @Test
-  @WithUserDetails("user")
-  public void testGetCustomers() throws Exception {
-    String url = apiEndpoint + "/api/customers";
-    ResponseEntity<Page<Customer>> response = restTemplate.exchange(url,  HttpMethod.GET, null /*body, header */
-        ,new ParameterizedTypeReference<Page<Customer>>(){}); // 
-    
-    assertThat(response.getStatusCode(),is(HttpStatus.OK));
-    System.out.println("Test Completed"+response.getBody().toString());
-  }
-  
-  //@Test
-  @WithUserDetails("user")
-  public void testGetCustomers2() throws Exception {
-    String url = apiEndpoint + "/content/list";
-    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
-    
-    assertThat(response.getStatusCode(),is(HttpStatus.OK));
-    //assertThat(response.getHeaders())
-    System.out.println("HEADER:::"+response.getHeaders());
-    System.out.println("Test Completed"+response.getBody().toString());
-  }
-  
-  //@Test
-  public void testGetCustomers3() throws Exception {
-    String url = apiEndpoint + "/xxxx";
-    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
-    
-    assertThat(response.getStatusCode(),is(HttpStatus.OK));
-    //assertThat(response.getHeaders())
-    System.out.println("HEADER:::"+response.getHeaders());
-    System.out.println("Test Completed"+response.getBody().toString());
-  }
-  
-  @Test
-  public void testGetCustomers4() throws Exception {
-    String url = apiEndpoint + "/api/customers";
-   /*これはOK。ちゃんとStringに返り値が入っている。 */
-   ResultActions ra = mvc
-    .perform(get(url).with(user("admin").password("pass").roles("USER","ADMIN")))
-    .andExpect(status().isOk())
-    .andExpect(content().string(containsString("firstName")));
-   
- }
-  /**
-   * 認証を指定しない（NG）
-   * @throws Exception
-   */
-  @Test
-  @WithUserDetails("user")
-  @WithMockUser
-  public void testGetCustomers4_1() throws Exception {
-    String url = apiEndpoint + "/api/customers";
-   ResultActions ra = mvc
-    .perform(get(url))
-    .andExpect(status().isOk())
-    .andExpect(content().string(containsString("firstName")));
-   
- }
-  @Test
-  public void testGetCustomers5() throws Exception {
-    String url = apiEndpoint + "/content/list";
-   /* TODO:何故かContentの中に値が入ってこない。 */
-   ResultActions ra = mvc
-    .perform(get(url).with(user("user2").password("pass").roles("USER","ADMIN")))
-    .andExpect(status().isOk())
-    .andExpect(model().attributeExists("contents"))
-    .andExpect(model().size(2))
-    .andExpect(view().name("content/contentList"))
-    .andExpect(view().name(containsString("content")));
-   
-   System.out.println("●"+status().toString());
-   
-   // .andExpect(content().);
-    //.perform(get(url)); 
-   
-   System.out.println("★"+ra.andReturn().getResponse().toString());
-   
-//    url = apiEndpoint + "/content/list";
-//   ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
-//   
-//   assertThat(response.getStatusCode(),is(HttpStatus.OK));
-//   //assertThat(response.getHeaders())
-//   System.out.println("HEADER:::"+response.getHeaders());
-//   System.out.println("★Test Completed"+response.getBody().toString());
+  public void testGetCustomers8() throws Exception {
+
+   // customerController.
 
  }
+
   @Test
   public void testGetCustomers6() throws Exception {
 

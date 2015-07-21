@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,14 @@ public class CustomerService {
    * すべてを返す
    */
   public List<Customer> findAll() {
+    return customerRepository.findAll();
+  }
+  
+  /*
+   * すべてを返す(限定版）
+   */
+  @PreAuthorize("authenticated")
+  public List<Customer> findAllSecured() {
     return customerRepository.findAll();
   }
 
