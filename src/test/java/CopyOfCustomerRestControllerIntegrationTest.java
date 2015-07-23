@@ -104,12 +104,17 @@ public class CopyOfCustomerRestControllerIntegrationTest {
  }
 
   @Test
-  public void testGetCustomers6() throws Exception {
-
+  @WithMockUser
+  public void testGetCustomer5() throws Exception {
     
     List<Customer> list = customerService.findAllSecured();
     System.out.println("見つかった件数："+list.size());
-
+ }
+  @Test
+  public void testGetCustomers6() throws Exception {
+    
+    List<Customer> list = customerService.findAllSecured();
+    System.out.println("見つかった件数："+list.size());
  }
 
 }

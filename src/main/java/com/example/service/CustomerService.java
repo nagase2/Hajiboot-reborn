@@ -1,11 +1,17 @@
 package com.example.service;
 
+import groovy.util.logging.Slf4j;
+
 import java.util.List;
 
+import org.jfree.util.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +27,7 @@ import com.example.repository.CustomerRepository;
  */
 @Service
 // サービスクラスであることを示す。Componentと意味は変わらない
+@lombok.extern.slf4j.Slf4j
 @Transactional
 public class CustomerService {
   @Autowired
@@ -36,8 +43,11 @@ public class CustomerService {
   /*
    * すべてを返す(限定版）
    */
-  @PreAuthorize("authenticated")
+  @Secured("authenticated")
   public List<Customer> findAllSecured() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    log.info("★"+authentication);
+    
     return customerRepository.findAll();
   }
 
