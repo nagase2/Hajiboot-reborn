@@ -68,7 +68,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CopyOfCustomerRestControllerIntegrationTest {
   @Autowired
   private WebApplicationContext context;
-  private MockMvc mvc;
+  //private MockMvc mvc;
   
   @Autowired
   CustomerService customerService;
@@ -104,7 +104,7 @@ public class CopyOfCustomerRestControllerIntegrationTest {
  }
 
   @Test
-  @WithMockUser
+ // @WithMockUser
   public void testGetCustomer5() throws Exception {
     
     List<Customer> list = customerService.findAllSecured();

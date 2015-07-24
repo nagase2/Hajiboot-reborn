@@ -43,6 +43,8 @@ public class ContentController {
     log.info("データ取得前");
     Page<Content> contents = contentService.findAllOrderByContentId(pageable);
     log.info("データ取得しました。");
+    
+    model.addAttribute("testvalue","xxxxxxxxxSuccess!xxxxxxxxxx");
 
     model.addAttribute("contents", contents);
     return "content/contentList";
