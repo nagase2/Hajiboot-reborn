@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,7 +47,7 @@ public class ContentService {
      return contentRepository.findAllOrderByContentId(pageable);
   }
   
-  public Content findByContentId(int contentId){
+  public Content findByContentId(Long contentId){
     return contentRepository.findByContentId(contentId);
   }
 
@@ -57,6 +58,21 @@ public class ContentService {
  public Content save(Content content){
     return contentRepository.save(content);
  }
+ public Content update(Content content){
+   //更新をするために一度登録されているデータを取得する。
+   Content updatedContent = contentRepository.getOne(content.getContentId());
+   
+   //まとめてコピー
+   //BeanUtils.copyProperties(content, updatedContent);
+
+   updatedContent.setContentName(content.getContentName());
+   updatedContent.setCount(content.getCount());
+   updatedContent.setComment(content.getComment());
+   //TODO:まとめてコピーしたら動かないか？
+   //TODO:楽観的ロックのチェックは自分でやるのか？今のままだと、楽観的ロックが意図したとおりに動かない。
+   
+   return contentRepository.save(updatedContent);
+}
 
 
 }

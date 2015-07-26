@@ -125,7 +125,7 @@ public class ContentController {
     Content content = new Content();
     BeanUtils.copyProperties(contentForm, content);
     log.info("xxxxxxxxxxxxxx"+content.getContentId()+content.getContentName());
-    contentService.save(content);
+    contentService.update(content);
     
     // @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")
     // // JPQLで指定

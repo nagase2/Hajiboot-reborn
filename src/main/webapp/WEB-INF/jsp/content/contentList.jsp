@@ -84,7 +84,7 @@
 
 <h2>コンテンツ一覧</h2>
   <hr>
-<form action="search" method="GET" class="form-inline">
+<form:form action="search" method="GET" class="form-inline">
   <div class="form-group">
     <label for="exampleInputName2">Content Name</label>
     <input type="text" name="contentName" value="${form.contentName}" class="form-control" id="exampleInputName2" placeholder="検索条件入力してね">
@@ -94,19 +94,20 @@
     <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
   </div>       　
   <button type="submit" class="btn btn-default">検索</button>
-</form>
+</form:form>
   <hr>
-  
   
   	<table class="table table-hover table-condensed">
 		<thead>
 			<tr >
 				<th>ID</th>
 				<th>Content Name</th>
+				<th>数量</th>
 				<th>コメント</th>
-				<th>価格</th>
 				<th>アイテム名称</th>
 				<th>カテゴリ</th>
+				<th>価格</th>
+				<th>version</th>
 				<th>xx</th>
 			</tr>
 			</thead>
@@ -114,20 +115,20 @@
 				<tr>
 					<td>${item.contentId}</td>
 					<td>${item.contentName}</td>
+					<td>${item.count }</td>
 					<td>${item.comment}</td>
 					<td>${item.mstItem.price}</td>
 					<td>${item.mstItem.itemName}</td>					
 					<td>${item.mstItem.mstItemType.itemTypeName}</td>
+					<td>${item.version}</td>
 					<td><!--  <button type="button" class="btn btn-info">更新</button>-->
+
 					<a href="update?contentId=${item.contentId}" class="btn btn-info" role="button">更新</a>
 					</td>
 					
 									</tr>
 			</c:forEach>
 	</table>
-  
-  
-  
   
   
   <nav align="center">

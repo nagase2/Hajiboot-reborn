@@ -19,7 +19,7 @@ import com.example.domain.MstItem;
 public interface ContentRepository extends JpaRepository<Content, Long> {
   List<Content> findByContentName(String contentName);
   
-  Content findByContentId(int contentId);
+  Content findByContentId(Long contentId);
 
   Page<Content> findAllOrderByContentName(Pageable pageable);
 
