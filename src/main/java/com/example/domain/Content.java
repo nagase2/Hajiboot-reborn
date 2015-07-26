@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import de.zeigermann.xml.simpleImporter.Item;
 import lombok.AllArgsConstructor;
@@ -27,12 +28,13 @@ public class Content implements java.io.Serializable {
    */
   private static final long serialVersionUID = 1L;
   @Id
-  private int contentId;
+  private Long contentId;
   private String contentName;
  // private Integer itemId;
   private Integer count;
   private String comment;
-  private Integer version;
+  @Version
+  private Long version;
   private String createdFunction;
   private String updatedFunction;
 
@@ -43,9 +45,9 @@ public class Content implements java.io.Serializable {
   // Joincolumnで外部キーのカラム名を指定
   private MstItem mstItem;
 
-  public Content(int contentId) {
-    this.contentId = contentId;
-  }
+//  public Content(int contentId) {
+//    this.contentId = contentId;
+//  }
 
 //  public Content(int contentId, Integer basketId, Integer itemTypeId,
 //      Integer itemId, String comment, Float contentCount,

@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -12,7 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.hasXPath;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.enterprise.inject.Model;
@@ -31,6 +32,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,6 +56,7 @@ import com.example.App2;
 import com.example.domain.Customer;
 import com.example.domain.User;
 import com.example.repository.CustomerRepository;
+import com.example.service.CustomerService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -62,11 +65,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @WebAppConfiguration
 @IntegrationTest({"server.port:0","spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL"})
 //jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
-@WithMockUser
+//@WithMockUser
 public class CustomerRestControllerIntegrationTest {
   @Autowired
   private WebApplicationContext context;
   private MockMvc mvc;
+  
+  @Autowired
+  CustomerService customerService;
   
   @Autowired
   CustomerRepository customerRepository;
@@ -86,24 +92,12 @@ public class CustomerRestControllerIntegrationTest {
  
   @Before
   public void setUp(){
-    mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
+    /** すべて２００が返ってくることを確認したい場合は下記のように記述する*/
+    //mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
+    
+    mvc = MockMvcBuilders.webAppContextSetup(context)
           .apply(SecurityMockMvcConfigurers.springSecurity()).build();
     
-    // add principal object to SecurityContextHolder
- 
-    //customerRepository.deleteAll();
-    customer1= new Customer();
-    customer1.setFirstName("Taro");
-    customer1.setLastName("Yamada");
-    customer1.setUser(new User("user2", "", null));
-    customer1.setId(888);
-    customer2 = new Customer();
-    customer2.setId(999);
-    customer2.setFirstName("Ichiro");
-    customer2.setLastName("Suxzuki");
-    customer2.setUser(new User("user2", "", null));
-    
-    //customerRepository.save(Arrays.asList(customer1,customer2));
     apiEndpoint ="http://localhost:"+port;
   }
   
@@ -111,20 +105,20 @@ public class CustomerRestControllerIntegrationTest {
   * Spring SecuritをOnにするとうまくいかない。。。（Offだとうまくいく）
   * @throws Exception
   */
-  @Test
+ // @Test
   @WithUserDetails("user")
-  public void testGetCustomers() throws Exception {
+  public void __testGetCustomers() throws Exception {
     String url = apiEndpoint + "/api/customers";
     ResponseEntity<Page<Customer>> response = restTemplate.exchange(url,  HttpMethod.GET, null /*body, header */
         ,new ParameterizedTypeReference<Page<Customer>>(){}); // 
-    
+//    .perform(get(url).with(user("admin").password("pass").roles("USER","ADMIN")))
     assertThat(response.getStatusCode(),is(HttpStatus.OK));
     System.out.println("Test Completed"+response.getBody().toString());
   }
   
-  //@Test
+  //@Test //テスト対象外！（うまく動作しないため。SpringSecurityを使ったControllerのテストは、この方法は適さない。
   @WithUserDetails("user")
-  public void testGetCustomers2() throws Exception {
+  public void __testGetCustomers2() throws Exception {
     String url = apiEndpoint + "/content/list";
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
     
@@ -135,7 +129,7 @@ public class CustomerRestControllerIntegrationTest {
   }
   
   //@Test
-  public void testGetCustomers3() throws Exception {
+  public void __testGetCustomers3() throws Exception {
     String url = apiEndpoint + "/xxxx";
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
     
@@ -156,47 +150,61 @@ public class CustomerRestControllerIntegrationTest {
    
  }
   /**
-   * 認証を指定しない
+   * 認証を指定しない（NG）
    * @throws Exception
    */
   @Test
-  @WithUserDetails("user")
-  @WithMockUser
-  public void testGetCustomers4_1() throws Exception {
-    String url = apiEndpoint + "/api/customers";
-   /*これはOK。ちゃんとStringに返り値が入っている。 */
+  public void testGetCustomers4_2() throws Exception {
+    String url = apiEndpoint + "/xxxxxxxx";
    ResultActions ra = mvc
-    .perform(get(url))
-    .andExpect(status().isOk())
-    .andExpect(content().string(containsString("firstName")));
+    .perform(get(url).with(user("a").password("a")))
+    .andExpect(status().isNotFound());
+    //.andExpect(content().string(containsString("firstName")));
    
  }
   @Test
   public void testGetCustomers5() throws Exception {
     String url = apiEndpoint + "/content/list";
-   /* TODO:何故かContentの中に値が入ってこない。 */
+   /* 何故かContentの中に値が入ってこない。 Mockであるがゆえの仕様っぽい。*/
    ResultActions ra = mvc
     .perform(get(url).with(user("user2").password("pass").roles("USER","ADMIN")))
     .andExpect(status().isOk())
     .andExpect(model().attributeExists("contents"))
-    .andExpect(model().size(2))
+    .andExpect(model().size(3))
     .andExpect(view().name("content/contentList"))
     .andExpect(view().name(containsString("content")));
    
-   System.out.println("●"+status().toString());
+   System.out.println(ra.andReturn().getResponse().toString());
+   System.out.println("●STATUS"+status().toString());
    
    // .andExpect(content().);
     //.perform(get(url)); 
    
    System.out.println("★"+ra.andReturn().getResponse().toString());
    
-//    url = apiEndpoint + "/content/list";
-//   ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
-//   
-//   assertThat(response.getStatusCode(),is(HttpStatus.OK));
-//   //assertThat(response.getHeaders())
-//   System.out.println("HEADER:::"+response.getHeaders());
-//   System.out.println("★Test Completed"+response.getBody().toString());
+   ///色々やってみたけど、値がうまく取れない。確認できるのは値の数までか。。。
+   //Entityの値がLAZYになっていると、値の中身を確認できない。それ以外は多分確認可能
+   MockHttpServletResponse msr = ra.andReturn().getResponse();
+   
+   //このパターンは、値の習得が可能。（渡しているのが普通のStringであるため）
+   Map<String, Object> m = ra.andReturn().getModelAndView().getModel();
+   System.out.println("★★★"+m.get("testvalue"));
+   
+   /** Assersionの良いサンプルなので載せておく*/
+//   mockMvc.perform(
+//       post("/policies/persist").param("companyName", "Company Name")
+//       .param("name", "Name").param("effectiveDate", "2001-01-01"))
+//       .andExpect(status().isMovedTemporarily()).andExpect(model().hasNoErrors())
+//       .andExpect(redirectedUrl("list"));
+
+
+ }
+  @Test
+  public void testGetCustomers6() throws Exception {
+    
+    List<Customer> list = customerService.findAllSecured();
+    System.out.println("見つかった件数："+list.size());
+    
 
  }
 

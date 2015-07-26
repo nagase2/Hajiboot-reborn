@@ -88,7 +88,7 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<form action="update" method="POST">
+	<form:form action="update" method="POST">
 
 		<div class="form-group">
 			<div class="col-xs-4">
@@ -101,10 +101,16 @@
 					value="${contentForm.contentName}">
 			</div>
 			<div class="col-xs-4">
+			　数量 <input type="text" class="form-control"
+					placeholder="comment" name="count" value="${contentForm.count}">
+			</div>
+			<div class="col-xs-4">
 				Comment <input type="text" class="form-control"
 					placeholder="comment" name="comment" value="${contentForm.comment}">
 			</div>
+			
 		</div>
+		<hr/>
 		<div class="form-group">
 			<div class="col-xs-4">
 				価格 <input type="text" class="form-control" placeholder=".col-xs-3"
@@ -123,11 +129,11 @@
 
 
 
-		<div class="col-sm-12">　</div>
+		<div class="col-sm-12">version:${contentForm.version}</div>
 
 		<div class="col-sm-12">
 			<button type="submit" class="btn btn-primary">データ更新</button>
 			<!-- Indicates a dangerous or potentially negative action -->
 			<button type="button" class="btn btn-danger">キャンセル</button>
 		</div>
-	</form>
+	</form:form>

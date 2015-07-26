@@ -25,7 +25,7 @@ import com.example.service.ContentService;
 public class ContentController {
 
   @Autowired
-  ContentService contentService;
+  private ContentService contentService;
 
 
   /**
@@ -43,6 +43,8 @@ public class ContentController {
     log.info("データ取得前");
     Page<Content> contents = contentService.findAllOrderByContentId(pageable);
     log.info("データ取得しました。");
+    
+    model.addAttribute("testvalue","xxxxxxxxxSuccess!xxxxxxxxxx");
 
     model.addAttribute("contents", contents);
     return "content/contentList";
@@ -123,7 +125,7 @@ public class ContentController {
     Content content = new Content();
     BeanUtils.copyProperties(contentForm, content);
     log.info("xxxxxxxxxxxxxx"+content.getContentId()+content.getContentName());
-    contentService.save(content);
+    contentService.update(content);
     
     // @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")
     // // JPQLで指定
