@@ -98,42 +98,27 @@ public class CustomerRestControllerIntegrationTest {
     mvc = MockMvcBuilders.webAppContextSetup(context)
           .apply(SecurityMockMvcConfigurers.springSecurity()).build();
     
-    // add principal object to SecurityContextHolder
- 
-    //customerRepository.deleteAll();
-    customer1= new Customer();
-    customer1.setFirstName("Taro");
-    customer1.setLastName("Yamada");
-    customer1.setUser(new User("user2", "", null));
-    customer1.setId(888);
-    customer2 = new Customer();
-    customer2.setId(999);
-    customer2.setFirstName("Ichiro");
-    customer2.setLastName("Suxzuki");
-    customer2.setUser(new User("user2", "", null));
-    
-    //customerRepository.save(Arrays.asList(customer1,customer2));
     apiEndpoint ="http://localhost:"+port;
   }
   
-// /**
-//  * Spring SecuritをOnにするとうまくいかない。。。（Offだとうまくいく）
-//  * @throws Exception
-//  */
-//  @Test
-//  @WithUserDetails("user")
-//  public void testGetCustomers() throws Exception {
-//    String url = apiEndpoint + "/api/customers";
-//    ResponseEntity<Page<Customer>> response = restTemplate.exchange(url,  HttpMethod.GET, null /*body, header */
-//        ,new ParameterizedTypeReference<Page<Customer>>(){}); // 
-////    .perform(get(url).with(user("admin").password("pass").roles("USER","ADMIN")))
-//    assertThat(response.getStatusCode(),is(HttpStatus.OK));
-//    System.out.println("Test Completed"+response.getBody().toString());
-//  }
-  
-  //@Test
+ /**
+  * Spring SecuritをOnにするとうまくいかない。。。（Offだとうまくいく）
+  * @throws Exception
+  */
+ // @Test
   @WithUserDetails("user")
-  public void testGetCustomers2() throws Exception {
+  public void __testGetCustomers() throws Exception {
+    String url = apiEndpoint + "/api/customers";
+    ResponseEntity<Page<Customer>> response = restTemplate.exchange(url,  HttpMethod.GET, null /*body, header */
+        ,new ParameterizedTypeReference<Page<Customer>>(){}); // 
+//    .perform(get(url).with(user("admin").password("pass").roles("USER","ADMIN")))
+    assertThat(response.getStatusCode(),is(HttpStatus.OK));
+    System.out.println("Test Completed"+response.getBody().toString());
+  }
+  
+  //@Test //テスト対象外！（うまく動作しないため。SpringSecurityを使ったControllerのテストは、この方法は適さない。
+  @WithUserDetails("user")
+  public void __testGetCustomers2() throws Exception {
     String url = apiEndpoint + "/content/list";
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
     
@@ -144,7 +129,7 @@ public class CustomerRestControllerIntegrationTest {
   }
   
   //@Test
-  public void testGetCustomers3() throws Exception {
+  public void __testGetCustomers3() throws Exception {
     String url = apiEndpoint + "/xxxx";
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class); // 
     
@@ -200,10 +185,18 @@ public class CustomerRestControllerIntegrationTest {
    ///色々やってみたけど、値がうまく取れない。確認できるのは値の数までか。。。
    //Entityの値がLAZYになっていると、値の中身を確認できない。それ以外は多分確認可能
    MockHttpServletResponse msr = ra.andReturn().getResponse();
+   
+   //このパターンは、値の習得が可能。（渡しているのが普通のStringであるため）
    Map<String, Object> m = ra.andReturn().getModelAndView().getModel();
-   System.out.println(m.get("contents").toString());
-//   List list = (List) m.get("contents");
    System.out.println("★★★"+m.get("testvalue"));
+   
+   /** Assersionの良いサンプルなので載せておく*/
+//   mockMvc.perform(
+//       post("/policies/persist").param("companyName", "Company Name")
+//       .param("name", "Name").param("effectiveDate", "2001-01-01"))
+//       .andExpect(status().isMovedTemporarily()).andExpect(model().hasNoErrors())
+//       .andExpect(redirectedUrl("list"));
+
 
  }
   @Test

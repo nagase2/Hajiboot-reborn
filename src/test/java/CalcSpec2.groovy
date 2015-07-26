@@ -4,6 +4,7 @@ import spock.lang.*
 import com.hoge.spocktest.*
 
 
+
 class CalcSpec2 extends Specification{
 
     private Calc instance;

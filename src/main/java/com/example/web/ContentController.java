@@ -25,7 +25,7 @@ import com.example.service.ContentService;
 public class ContentController {
 
   @Autowired
-  ContentService contentService;
+  private ContentService contentService;
 
 
   /**
