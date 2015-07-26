@@ -2,9 +2,10 @@
 <jboss-deployment-structure>
   <deployment>
     <dependencies>
-      <module name="org.dom4j" />
+    <!--   <module name="org.dom4j" />
       <module name="org.hibernate" />
       <module name="org.javassist" />
+      --> 
     </dependencies>
     <exclusions/>
   </deployment>
