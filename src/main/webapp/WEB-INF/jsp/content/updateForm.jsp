@@ -93,7 +93,7 @@
 		<div class="form-group">
 			<div class="col-xs-4">
 				ID <input type="text" class="form-control" placeholder="Content ID"
-					name="contentId" value="${contentForm.contentId}">
+					name="contentId" value="${contentForm.contentId}" readonly >
 			</div>
 			<div class="col-xs-4">
 				Content 名 <input type="text" class="form-control"
@@ -125,15 +125,23 @@
 					name="category"
 					value="${contentForm.mstItem.mstItemType.itemTypeName}">
 			</div>
+			<div class="col-xs-4">
+				Item ID <input type="text" class="form-control" placeholder=".col-xs-3"
+					name="mstItem.itemId"
+					value="${contentForm.mstItem.itemId}">
+			</div>
 		</div>
 
 
 
-		<div class="col-sm-12">version:${contentForm.version}</div>
+		<div class="col-sm-12">version:${contentForm.version}
+		<input type="hidden" name ="version" value="${contentForm.version}">
+		</div>
 
 		<div class="col-sm-12">
 			<button type="submit" class="btn btn-primary">データ更新</button>
 			<!-- Indicates a dangerous or potentially negative action -->
 			<button type="button" class="btn btn-danger">キャンセル</button>
 		</div>
+		
 	</form:form>

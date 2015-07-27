@@ -117,9 +117,9 @@
 					<td>${item.contentName}</td>
 					<td>${item.count }</td>
 					<td>${item.comment}</td>
-					<td>${item.mstItem.price}</td>
 					<td>${item.mstItem.itemName}</td>					
 					<td>${item.mstItem.mstItemType.itemTypeName}</td>
+					<td>${item.mstItem.price}</td>
 					<td>${item.version}</td>
 					<td><!--  <button type="button" class="btn btn-info">更新</button>-->
 

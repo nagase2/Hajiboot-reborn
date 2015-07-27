@@ -16,8 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//@Configuration
-//@EnableWebMvcSecurity
+@Configuration
+@EnableWebMvcSecurity
 @Slf4j
 public class SecurityConfig_old extends WebSecurityConfigurerAdapter {
   @Override
@@ -41,7 +41,7 @@ public class SecurityConfig_old extends WebSecurityConfigurerAdapter {
         .logoutSuccessUrl("/loginForm");
   }
 
- // @Configuration
+  @Configuration
   static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
