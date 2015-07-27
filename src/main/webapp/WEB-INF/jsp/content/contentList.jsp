@@ -93,7 +93,8 @@
     <label for="exampleInputEmail2">品名</label>
     <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
   </div>       　
-  <button type="submit" class="btn btn-default">検索</button>
+  <button type="submit" class="btn btn-default">検索</button>  
+  <a href="#" class="btn btn-warn" role="button">新規</a>
 </form:form>
   <hr>
   
