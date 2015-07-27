@@ -149,7 +149,8 @@ task jacocoReport(type: JacocoReport) {
 
 sonarRunner {
 	sonarProperties {
-		property "sonar.host.url", "http://localhost:9000"
+		property "sonar.host.url", "http://172.19.6.90:9000"
+        property "sonar.jdbc.url","jdbc:h2:tcp://172.19.6.90:9090/sonar"
 		//property "sonar.host.url", "http://172.19.6.90:9000"
 		property "sonar.projectName","Hajiboot"
 		property "sonar.host.username", "admin"
