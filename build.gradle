@@ -149,9 +149,15 @@ task jacocoReport(type: JacocoReport) {
 
 sonarRunner {
 	sonarProperties {
-		property "sonar.host.url", "http://localhost:9000"
-        property "sonar.jdbc.url","jdbc:h2:tcp://localhost:9090/sonar"
-		//property "sonar.host.url", "http://172.19.6.90:9000"
+		//property "sonar.host.url", "http://localhost:9000"
+	    property "sonar.host.url", "http://172.19.6.90:9000"
+        //property "sonar.jdbc.url","jdbc:h2:tcp://localhost:9090/sonar"
+        
+        
+        property "sonar.jdbc.url","jdbc:postgresql://172.19.6.89:5432/sonar"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+        
 		property "sonar.projectName","Hajiboot"
         property "sonar.projectKey","Hajiboot"
         property "sonar.projectVersion","0.0.3"
