@@ -42,7 +42,10 @@ public class ContentController {
     Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
     log.info("データ取得前");
     Page<Content> contents = contentService.findAllOrderByContentId(pageable);
-    log.info("データ取得しました。");
+    log.info("データ取得しました。■");
+    if(contents!=null){
+       log.info("★サイズは="+contents.getSize());
+    }
     
     model.addAttribute("testvalue","xxxxxxxxxSuccess!xxxxxxxxxx");
 

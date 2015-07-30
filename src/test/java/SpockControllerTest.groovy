@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringApplicationConfiguration(classes = App2.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:9999")
+@IntegrationTest
 class SpockControllerTest extends Specification {
   def contentController = new ContentController()
   @Autowired
