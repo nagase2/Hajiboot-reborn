@@ -1,7 +1,12 @@
 spring:
     profiles:
+<<<<<<< HEAD
       active: dev
      # active: test
+=======
+     # active: dev
+      active: test
+>>>>>>> master
 
 ---
 spring:
