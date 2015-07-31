@@ -78,7 +78,7 @@ dependencies {
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 
 	compile 'javax.servlet:jstl:1.2'
-	compile "org.codehaus.groovy:groovy-all"
+	compile "org.codehaus.groovy:groovy-all:2.4.1"
 	compile 'org.hudsonci.plugins:dry:2.28'
 	///////////////////
     //compile "com.nagase.lib:baseline-aar:1.1"
@@ -92,7 +92,10 @@ dependencies {
    // compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("junit:junit")
-    testCompile "org.spockframework:spock-core"
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.0-groovy-2.4'
+    
+    
 	
 }
 
