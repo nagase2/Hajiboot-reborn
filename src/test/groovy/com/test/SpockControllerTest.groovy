@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.hasXPath;
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
@@ -33,7 +34,8 @@ import com.example.web.CustomerController;
 
 @ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = App2.class)
 @WebAppConfiguration
-@IntegrationTest
+//ここでシステムの起動引数を渡すことができる。設定ファイルとここの両方に設定があった場合、こちらが優先される。（追加したい場合は配列に追加）
+@IntegrationTest(["server.port:0","spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL"])
 class SpockControllerTest extends Specification {
   @Autowired
   CustomerController customerController
@@ -45,6 +47,11 @@ class SpockControllerTest extends Specification {
    MockMvc mockMvc;
    @Autowired
    private WebApplicationContext context;
+   
+   @Value("\${local.server.port}") //現在起動しているサーバのポート番号を取得
+   int port;
+   
+   String endPointURL;
 //   @Autowired
 //   CustomerService customerService;
 //   
@@ -57,26 +64,57 @@ class SpockControllerTest extends Specification {
        // contentController.contentService = contentService
         mockMvc = MockMvcBuilders.webAppContextSetup(context)
         .apply(SecurityMockMvcConfigurers.springSecurity()).build();
+        endPointURL = "http://localhost:"+port
+        println "■■■起動したURLは→"+endPointURL
         
-        }
+    }
 
     def "Content一覧取得"() {
       String url ="http://localhost:7776";
       
         when:
-        ResultActions response = mockMvc.perform(get("http://localhost:7776/content/list").with(user("user2").password("pass")))
+        //テスト対象のURL（/content/list)にuser2でアクセスする。
+        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("pass")))
 
         then:
+        //レスポンスがOKかどうかを確認
         response.andExpect(status().isOk())
+        
+        //レスポンスを文字で出力(うまく動作していない）
         println "LLLLL"+response.andReturn().response.contentAsString
+    }
+    def "Pagableテスト"(){
+      
+      //ページを1,2,3に指定
+      
+      //戻り値があっていることを確認
+      
+      
     }
     
     def "デタラメURL"() {
       
         when:
-        def response = mockMvc.perform(get("http://localhost:7776/content/xxxxxxx").with(user("user2").password("pass")))
+        def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
 
         then:
+        //HTTPステータスコードがNotFound(404)であることを確認
         response.andExpect(status().isNotFound())
+    }
+    
+    def "Content更新"() {
+      
+        when:
+        def response = mockMvc.perform(get(endPointURL+"/content/update").with(user("user2").password("pass")))
+
+        then:
+        //HTTPステータスコードがNotFound(404)であることを確認
+        response.andExpect(status().isNotFound())
+        
+        //処理の引数の内容が正しいことを確認
+        
+        
+        //遷移先が正しいことを確認
+        
     }
 }

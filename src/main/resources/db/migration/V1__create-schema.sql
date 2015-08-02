@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 create table customers (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-=======
-create table customers (id int NOT NULL /*AUTO_INCREMENT PRIMARY KEY*/, 
->>>>>>> master
 first_name varchar(30), 
 last_name varchar(30));
 
@@ -18,9 +14,6 @@ CREATE TABLE supplier (
  first_name VARCHAR(100),
  last_name VARCHAR(100)
 );
-<<<<<<< HEAD
-=======
-
 
 CREATE TABLE item_mst (
  item_id INT NOT NULL PRIMARY KEY,
@@ -39,14 +32,3 @@ CREATE TABLE item_type (
 );
 
 
-CREATE TABLE content (
- content_id INT NOT NULL PRIMARY KEY,
- basket_id INT,
- item_type_id INT,
- item_id INT,
- comment VARCHAR(500),
- content_count FLOAT(20),
- version INT,
- delete_flag BIT(1)
-);
->>>>>>> master
