@@ -7,6 +7,7 @@ buildscript {
 		maven {
 			url "https://plugins.gradle.org/m2/"
 		  }
+
     }
     dependencies {
       
@@ -19,6 +20,7 @@ buildscript {
 	}
 }
 
+apply plugin: "maven" //for maven deployer
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -64,6 +66,9 @@ repositories {
 //	maven { 
 //		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
 //	 }
+          maven{
+            url "http://172.19.6.90/repo" //社内のローカルレポジトリ（テスト）
+            }
 
 }
 springBoot {
@@ -125,7 +130,9 @@ dependencies {
     
     testCompile("junit:junit")
     testCompile "org.spockframework:spock-core"
+    testCompile "org.spockframework:spock-spring"
 	
+    compile "myorgB:MavenRepoTest:1.2"
 }
 
 task wrapper(type: Wrapper) {
@@ -205,4 +212,15 @@ checkstyle {
     }
   }
   
-  
+uploadArchives {
+    repositories.mavenDeployer {
+ 
+   //    repository(url: "scp://172.19.6.90/home/appuser01") {
+   //         authentication(userName: "appuser01", password: "appuser01")
+    //    }
+         repository(url: "file://C:/repos")
+      //  pom.version = '1.0Maven'
+       // pom.artifactId = 'myMavenName'
+         
+    }
+}
