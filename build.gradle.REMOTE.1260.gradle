@@ -3,19 +3,14 @@
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
 		maven {
 			url "https://plugins.gradle.org/m2/"
 		  }
     }
     dependencies {
-      
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
-		classpath 'org.springframework:springloaded:1.2.3.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+		//classpath 'org.springframework:springloaded:1.2.0.RELEASE'
 		classpath "com.moowork.gradle:gradle-grunt-plugin:0.9"
-    
-        classpath "com.bmuschko:gradle-cargo-plugin:2.1.1"
-        
 	}
 }
 
@@ -32,17 +27,9 @@ apply plugin: "sonar-runner"
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
-checkstyle.toolVersion = '6.7'
 apply plugin: 'pmd'
 apply plugin: "sonar-runner"
-apply plugin: "com.bmuschko.cargo"
 
-idea {
-	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main/")
-	}
-}
 
 jar {
     baseName = 'gs-actuator-service'
@@ -50,8 +37,8 @@ jar {
 }
 idea {
 	module {
-		//inheritOutputDirs = false
-		//outputDir = file("$buildDir/classes/main/")
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
 	}
 }
 
@@ -61,54 +48,38 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
 	jcenter() //sonar
-//	maven { 
-//		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
-//	 }
+	maven { 
+		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
+	 }
 
 }
 springBoot {
-	mainClass = "com.example.App2"
-}
-bootRepackage {
-	mainClass = 'com.example.App2'
+	mainClass = "com.example.App"
 }
 
-bootRun {
-  addResources = false
-}
+
+  
  
   
 dependencies {
-  def cargoVersion = '1.4.10'
-  cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
-        "org.codehaus.cargo:cargo-ant:$cargoVersion"
-  cargo "org.wildfly:wildfly-controller-client:8.2.0.Final"
-  compile("org.springframework.boot:spring-boot-starter-actuator")
-  
+	
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.projectlombok:maven-lombok-plugin:0.9.3.1'
 	compile "org.projectlombok:lombok:1.16.2"
-	compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
 	compile 'com.h2database:h2'
+	compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
 	compile 'org.lazyluke:log4jdbc-remix:0.2.7'
-	compile 'org.springframework.boot:spring-boot-maven-plugin:1.2.3.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//compile 'org.springframework.boot:spring-boot-maven-plugin:1.2.3.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.webjars:bootstrap:3.2.0'
 	compile 'org.flywaydb:flyway-core'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
-  
 
 	compile 'javax.servlet:jstl:1.2'
-	compile "org.codehaus.groovy:groovy-all:2.3.11"
+	compile "org.codehaus.groovy:groovy-all:2.4.1"
 	compile 'org.hudsonci.plugins:dry:2.28'
-  
-    compile 'org.thymeleaf:thymeleaf-spring4'
-    compile 'com.fasterxml.jackson.core:jackson-databind'
-    //compile 'javax.servlet:javax.servlet-api'
-	
-	//compile 'com.puppycrawl.tools:checkstyle:6.5'
 	///////////////////
     //compile "com.nagase.lib:baseline-aar:1.1"
 	
@@ -120,12 +91,9 @@ dependencies {
 	
    // compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    compile 'org.springframework.security:spring-security-test:4.0.1.RELEASE'
-    compile 'org.springframework:spring-test:4.1.7.RELEASE'
-    
     testCompile("junit:junit")
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
-    testCompile 'org.spockframework:spock-spring:1.0-groovy-2.3'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.0-groovy-2.4'
     
     
 	
@@ -155,17 +123,8 @@ task jacocoReport(type: JacocoReport) {
 sonarRunner {
 	sonarProperties {
 		//property "sonar.host.url", "http://localhost:9000"
-	    property "sonar.host.url", "http://172.19.6.90:9000"
-        //property "sonar.jdbc.url","jdbc:h2:tcp://localhost:9090/sonar"
-        
-        
-        property "sonar.jdbc.url","jdbc:postgresql://172.19.6.89:5432/sonar"
-        property "sonar.jdbc.username", "sonar"
-        property "sonar.jdbc.password", "sonar"
-        
+		property "sonar.host.url", "http://172.19.6.90:9000"
 		property "sonar.projectName","Hajiboot"
-        property "sonar.projectKey","Hajiboot"
-        property "sonar.projectVersion","0.0.3"
 		property "sonar.host.username", "admin"
 		property "sonar.host.password", "admin"
 		property "sonar.sourceEncoding", "UTF-8"
@@ -179,8 +138,7 @@ sonarRunner {
 }
 
 checkstyle {
-	//configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle-rules.xml")
-    configFile = file("$rootProject.projectDir/config/checkstyle/google-checks.xml")
+	configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle-rules.xml")
 	ignoreFailures = true
   }
   findbugs {
@@ -194,18 +152,6 @@ checkstyle {
 	ignoreFailures = true
 	// TODO: ルールセットの記述方法が変わった?
 	// ruleSetFiles  = files( "$rootProject.projectDir/config/pmd/codesize.xml" )
-  }
-  
-  
-  cargo {
-    containerId = 'wildfly82'
-  
-    remote {
-     // hostname = '172.19.6.88'
-      hostname = 'localhost'
-      username = 'wildfly'
-      password = 'wildfly'
-    }
   }
   
   

@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,8 +33,10 @@ public class Customer {
   private String firstName;
   @Column(nullable = false)
   private String lastName;
-  @ManyToOne(fetch = FetchType.EAGER)
-  //@ManyToOne(fetch = FetchType.LAZY) //これをOnにするとRESTでコケる
+  
+  //@ManyToOne(fetch = FetchType.EAGER)
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY) //これをOnにするとRESTでコケる
   // UserとCustomerを多対一の関係にする。
   @JoinColumn(nullable = true, name = "username")
   // Joincolumnで外部キーのカラム名を指定

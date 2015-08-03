@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import de.zeigermann.xml.simpleImporter.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +41,7 @@ public class Content implements java.io.Serializable {
   private String updatedFunction;
 
   private Boolean deleteFlag;
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   // UserとCustomerを多対一の関係にする。
   @JoinColumn(nullable = true, name = "item_id")

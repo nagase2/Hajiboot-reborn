@@ -1,4 +1,4 @@
-import hello.world.jpa.Calc;
+import hello.world.jpa.Calc
 import spock.lang.Specification
 
 import com.example.domain.Supplier

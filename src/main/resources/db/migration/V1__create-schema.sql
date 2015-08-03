@@ -14,3 +14,21 @@ CREATE TABLE supplier (
  first_name VARCHAR(100),
  last_name VARCHAR(100)
 );
+
+CREATE TABLE item_mst (
+ item_id INT NOT NULL PRIMARY KEY,
+ item_name CHAR(100),
+ item_expire_date CHAR(10),
+ price FLOAT(20),
+ version INT,
+ delete_flag BIT(1)
+);
+
+
+CREATE TABLE item_type (
+ item_type_id INT NOT NULL PRIMARY KEY,
+ delete_flag BIT(1),
+ material_type_name CHAR(100)
+);
+
+
