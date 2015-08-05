@@ -42,7 +42,7 @@ public class JSPTestController {
     // 受け取り
     if (result.hasErrors()) {
       log.info("errorがあります!!!!");
-      return "jsptest";
+      return "/jsptest";
     }
 
     log.info("JSP test が呼ばれました。!!x!!! Food=" + food.toString());
@@ -51,7 +51,7 @@ public class JSPTestController {
     model.addAttribute("food", new Food(5, "aaa", "bbb"));
     model.addAttribute("result", result.hasErrors());
 
-    return "jsptest";
+    return "/jsptest";
   }
 
   @RequestMapping("/jsptest2")

@@ -46,7 +46,7 @@ public class CustomerController {
 
     log.info("list画面2211133");
     // classpath:templates/+ビュー名＋.htmlが画面のPathとなる。この場合、classpath:templates/customers/list.html
-    return "customers/list.html"; // なんでここだけRedirectではないのか
+    return "/customers/list.html"; // なんでここだけRedirectではないのか
     /*
      * 仮説：Redirectではない時は、直接このURLにアクセスすることになる。そこには、ファイルが存在している必要がある。
      */
