@@ -42,7 +42,7 @@ public class JSPTestController {
     // 受け取り
     if (result.hasErrors()) {
       log.info("errorがあります!!!!");
-      return "/jsptest";
+      return "/jsptest.jsp";
     }
 
     log.info("JSP test が呼ばれました。!!x!!! Food=" + food.toString());
