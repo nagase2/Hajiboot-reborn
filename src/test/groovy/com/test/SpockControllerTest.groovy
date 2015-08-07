@@ -78,7 +78,6 @@ class SpockControllerTest extends Specification {
     }
 
     def "Content一覧取得"() {
-      String url ="http://localhost:7776";
       
         when:
         //テスト対象のURL（/content/list)にuser2でアクセスする。
@@ -91,12 +90,32 @@ class SpockControllerTest extends Specification {
         //レスポンスを文字で出力(うまく動作していない）
         println "LLLLL"+response.andReturn().response.contentAsString
     }
-    def "Pagableテスト"(){
+    def "Customersテスト"(){
       
-      //ページを1,2,3に指定
+      when:
+        //テスト対象のURL（/content/list)にuser2でアクセスする。
+        def response = mockMvc.perform(get(endPointURL+"/customers").with(user("user2").password("pass")))
+
+        then:
+        //レスポンスがOKかどうかを確認
+        response.andExpect(status().isOk())
+        
+        //レスポンスを文字で出力(うまく動作していない）
+       println "LLLLL"+response.andReturn().response.contentAsString
       
-      //戻り値があっていることを確認
+    }
+    def "Jspテスト"(){
       
+      when:
+        //テスト対象のURL（/content/list)にuser2でアクセスする。
+        def response = mockMvc.perform(get(endPointURL+"/jsptest1").with(user("user2").password("pass")))
+
+        then:
+        //レスポンスがOKかどうかを確認
+        response.andExpect(status().isOk())
+        
+        //レスポンスを文字で出力(うまく動作していない）
+       println "LLLLL"+response.andReturn().response.contentAsString
       
     }
     

@@ -50,7 +50,7 @@ public class ContentController {
     model.addAttribute("testvalue","xxxxxxxxxSuccess!xxxxxxxxxx");
 
     model.addAttribute("contents", contents);
-    return "content/contentList";
+    return "/content/contentList.jsp";
   }
 
   /**
