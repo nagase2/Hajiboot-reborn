@@ -1,5 +1,6 @@
 package com.test
 
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
@@ -67,6 +68,13 @@ class SpockControllerTest extends Specification {
         endPointURL = "http://localhost:"+port
         println "■■■起動したURLは→"+endPointURL
         
+		//		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//		viewResolver.setPrefix("/WEB-INF/jsp/view/");
+//		viewResolver.setSuffix(".jsp");
+// 
+//		mockMvc = MockMvcBuilders.standaloneSetup(new HelpController())
+//								 .setViewResolvers(viewResolver)
+//								 .build();
     }
 
     def "Content一覧取得"() {
@@ -74,7 +82,7 @@ class SpockControllerTest extends Specification {
       
         when:
         //テスト対象のURL（/content/list)にuser2でアクセスする。
-        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("pass")))
+        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("passxxxxxx")))
 
         then:
         //レスポンスがOKかどうかを確認
@@ -93,7 +101,6 @@ class SpockControllerTest extends Specification {
     }
     
     def "デタラメURL"() {
-      
         when:
         def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
 
@@ -104,17 +111,17 @@ class SpockControllerTest extends Specification {
     
     def "Content更新"() {
       
-        when:
-        def response = mockMvc.perform(get(endPointURL+"/content/update").with(user("user2").password("pass")))
-
-        then:
-        //HTTPステータスコードがNotFound(404)であることを確認
-        response.andExpect(status().isNotFound())
-        
-        //処理の引数の内容が正しいことを確認
-        
-        
-        //遷移先が正しいことを確認
+//        when:
+//        def response = mockMvc.perform(get(endPointURL+"/content/update").with(user("user2").password("pass")))
+//
+//        then:
+//        //HTTPステータスコードがNotFound(404)であることを確認
+//        response.andExpect(status().isNotFound())
+//        
+//        //処理の引数の内容が正しいことを確認
+//        
+//        
+//        //遷移先が正しいことを確認
         
     }
 }

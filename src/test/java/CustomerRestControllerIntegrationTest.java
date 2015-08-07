@@ -48,6 +48,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.standard.expression.AndExpression;
 
 import sun.print.resources.serviceui;
@@ -57,6 +58,7 @@ import com.example.domain.Customer;
 import com.example.domain.User;
 import com.example.repository.CustomerRepository;
 import com.example.service.CustomerService;
+import com.example.web.CustomerController;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -70,7 +72,7 @@ public class CustomerRestControllerIntegrationTest {
   @Autowired
   private WebApplicationContext context;
   private MockMvc mvc;
-  
+  private MockMvc mvc2;
   @Autowired
   CustomerService customerService;
   
@@ -94,10 +96,24 @@ public class CustomerRestControllerIntegrationTest {
   public void setUp(){
     /** すべて２００が返ってくることを確認したい場合は下記のように記述する*/
     //mvc = MockMvcBuilders.webAppContextSetup(context).alwaysExpect(status().isOk())
-    
+	  
+
+	
     mvc = MockMvcBuilders.webAppContextSetup(context)
           .apply(SecurityMockMvcConfigurers.springSecurity()).build();
     
+    
+    //コントローラだけ使う場合のサンプル
+	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+	viewResolver.setPrefix("/WEB-INF/jsp/view/");
+	viewResolver.setSuffix(".jsp");
+    
+    mvc2 = MockMvcBuilders.standaloneSetup(new CustomerController()).setViewResolvers(viewResolver).build();
+    
+
+//	mockMvc = MockMvcBuilders.standaloneSetup(new HelpController())
+//							 .setViewResolvers(viewResolver)
+//							 .build();
     apiEndpoint ="http://localhost:"+port;
   }
   
