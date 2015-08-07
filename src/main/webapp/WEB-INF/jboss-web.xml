@@ -3,7 +3,7 @@
 <jboss-web>
   <context-root>/sb</context-root>
   <default-encoding>UTF-8</default-encoding>
-  
+  <!--  
   <resource-ref>
     <res-ref-name>jdbc/primary</res-ref-name>
     <jndi-name>java:jboss/datasources/primary</jndi-name>
@@ -22,5 +22,5 @@
     <res-ref-name>spring/profile</res-ref-name>
     <jndi-name>java:global/johndoe/profile</jndi-name>
   </resource-ref>  
-
+-->
 </jboss-web>

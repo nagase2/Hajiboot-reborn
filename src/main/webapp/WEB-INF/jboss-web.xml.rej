@@ -1,0 +1,7 @@
+diff a/src/main/webapp/WEB-INF/jboss-web.xml b/src/main/webapp/WEB-INF/jboss-web.xml	(rejected hunks)
+@@ -22,4 +22,5 @@
+     <res-ref-name>spring/profile</res-ref-name>
+     <jndi-name>java:global/johndoe/profile</jndi-name>
+   </resource-ref>  
++-->
+ </jboss-web>

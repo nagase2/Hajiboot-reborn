@@ -9,22 +9,22 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * CommandLineRunnerはコマンドラインで値を取得する場合に使う。
- * 
+ * aaaxxx
  * @author nagase
  *
  */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class App2  extends SpringBootServletInitializer  {
-	public static void main(String[] args) {
-		SpringApplication.run(App2.class, args);
-	}
+public class App2 extends SpringBootServletInitializer {
+  public static void main(String[] args) {
+    SpringApplication.run(App2.class, args);
+  }
 
-	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(applicationClass);
-    }
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    return application.sources(applicationClass);
+  }
 
-    private static Class<App2> applicationClass = App2.class;
+  private static Class<App2> applicationClass = App2.class;
 }

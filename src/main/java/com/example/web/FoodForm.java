@@ -12,25 +12,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name="customers")//テーブル名（＝クラス名）
+// @Entity
+// @Table(name="customers")//テーブル名（＝クラス名）
 
 @Data
-@NoArgsConstructor //JPAの仕様で、EntityClassには引数のないデフォルトコンストラクタを作る必要がある。
+@NoArgsConstructor
+// JPAの仕様で、EntityClassには引数のないデフォルトコンストラクタを作る必要がある。
 @AllArgsConstructor
 public class FoodForm {
-//	@Id
-//	@GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
-//	private Integer id;
+  // @Id
+  // @GeneratedValue //主キーがDBで自動裁判されることをこのアノテーションで示す
+  // private Integer id;
 
-	@NotNull //Annotation for Input check
-	@Size(min=1, max=5)
-	@Column(nullable = false) //このカラムの制約事項を指定
-	private String name;
-	
-	@NotNull //Annotation for Input check
-	@Size(min=1, max=10)
-	@Column(nullable =false)
-	private String color;
-	
+  @NotNull
+  // Annotation for Input check
+  @Size(min = 1, max = 5)
+  @Column(nullable = false)
+  // このカラムの制約事項を指定
+  private String name;
+
+  @NotNull
+  // Annotation for Input check
+  @Size(min = 1, max = 10)
+  @Column(nullable = false)
+  private String color;
+
 }

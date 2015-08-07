@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Slf4j
 public class LoginController {
-	@RequestMapping("loginForm")
-	String loginForm() {
-		log.info("LoginFormが呼ばれました。!!!!!!llllooooo");
-		return "loginForm.html";
-	}
+  @RequestMapping("/")
+  String startpage() {
+    log.info("start");
+    return "loginForm.html";
+  }
+
+  @RequestMapping("loginForm")
+  String loginForm() {
+    log.info("LoginFormが呼ばれました。!!!!!!llllooooo");
+    return "loginForm.html";
+  }
 }
-
-

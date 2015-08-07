@@ -14,7 +14,7 @@
     <form th:action="@{/customers/create}" th:object="${customerForm}" class="form-horizontal" method="post">
         <fieldset>
             <legend>顧客情報作成()</legend>   Testはこちら→<a href="jsptest1">こちら</a><br/>
-            <span sec:authentication="principal.user.username">duke</span>さんログイン中<br/>
+            <!--  <span sec:authentication="principal.user.username">duke</span>さんログイン中<br/>-->
             <a th:href="@{logout}" class="btn btn-default btn-xs">ログアウト</a>
             
             <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback'">

@@ -10,20 +10,20 @@ import com.example.domain.User;
 import com.example.repository.UserRepository;
 
 @Service
-public class LoginUserDetailService implements UserDetailsService{
+public class LoginUserDetailService implements UserDetailsService {
 
-	@Autowired
-	UserRepository userRepository;
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findOne(username);
-		if(user ==null){
-			throw new UsernameNotFoundException("the requeste user is not found");
-		}
-		//対象ユーザが見つかった場合
-		return new LoginUserDetails(user);
-	}
+  @Autowired
+  UserRepository userRepository;
 
-	
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userRepository.findOne(username);
+    if (user == null) {
+      throw new UsernameNotFoundException("the requeste user is not found");
+    }
+    // 対象ユーザが見つかった場合
+    return new LoginUserDetails(user);
+  }
+
+
 }

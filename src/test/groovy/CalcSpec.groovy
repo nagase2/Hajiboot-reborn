@@ -1,9 +1,8 @@
 
 
+import hello.world.jpa.Calc;
+import hello.world.jpa.MySampleLayout;
 import spock.lang.*;
-
-import com.example.log.demo.Calc
-import com.example.log.demo.MySampleLayout;
 
 
 class CalcSpec extends Specification{

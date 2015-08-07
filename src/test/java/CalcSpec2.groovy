@@ -1,7 +1,8 @@
+import hello.world.jpa.Calc;
 import spock.lang.*
 
-import com.example.log.demo.Calc
 import com.hoge.spocktest.*
+
 
 
 class CalcSpec2 extends Specification{
@@ -11,6 +12,7 @@ class CalcSpec2 extends Specification{
     def setup() {
         instance = new Calc()
     }
+    
 
     def "２つの値の合計チェック"() {
         expect:
