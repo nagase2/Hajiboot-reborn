@@ -234,9 +234,17 @@ checkstyle {
     }
   }
   
-  project.group{
-    groupId = 'aaaaaa'
+  project{
+    group.groupId = 'aaaaaa'
+    artifactId ='xxxxx'
+    version = '1.1.1'
+    
   }
+  
+//  roupId    project.group
+//  artifactId  uploadTask.repositories.mavenDeployer.pom.artifactId (if set) or archiveTask.baseName.
+//  version project.version
+//  packaging   archiveTask.extension
   
   
   
