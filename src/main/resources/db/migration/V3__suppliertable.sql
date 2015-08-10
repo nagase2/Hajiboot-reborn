@@ -3,7 +3,7 @@
 CREATE TABLE mst_item_type(
  item_type_id INT NOT NULL PRIMARY KEY,
  item_type_name VARCHAR(110),
- delete_flag BIT(1)
+ delete_flag boolean
 );
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (1,'本',false);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (2,'衣類',false);
@@ -22,7 +22,7 @@ CREATE TABLE mst_item (
  item_expire_date TIMESTAMP(10),
  price FLOAT(20),
  version INT,
- delete_flag BIT(1)
+ delete_flag boolean
 );
 
 INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'日本の歴史１',1,'2015-08-21', 300,1,false);
@@ -38,7 +38,7 @@ CREATE TABLE content (
  version bigint,
  updated_function VARCHAR(100),
  created_function VARCHAR(100),
- delete_flag BIT(1)
+ delete_flag boolean
 );
 
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
@@ -68,7 +68,7 @@ CREATE TABLE shopping_basket (
  content_id INT,
  comment VARCHAR(500),
  version INT,
- delete_flag BIT(1),
+ delete_flag boolean,
  purchased_date DATE
 );
 
