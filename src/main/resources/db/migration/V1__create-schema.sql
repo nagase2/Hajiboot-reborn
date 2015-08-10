@@ -1,4 +1,4 @@
-create table customers (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+create table customers (id int NOT NULL /*AUTO_INCREMENT*/ PRIMARY KEY, 
 first_name varchar(30), 
 last_name varchar(30));
 
@@ -21,13 +21,13 @@ CREATE TABLE item_mst (
  item_expire_date CHAR(10),
  price FLOAT(20),
  version INT,
- delete_flag BIT(1)
+ delete_flag boolean
 );
 
 
 CREATE TABLE item_type (
  item_type_id INT NOT NULL PRIMARY KEY,
- delete_flag BIT(1),
+ delete_flag boolean,
  material_type_name CHAR(100)
 );
 
