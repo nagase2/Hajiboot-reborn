@@ -82,7 +82,7 @@ class SpockControllerTest extends Specification {
       
         when:
         //テスト対象のURL（/content/list)にuser2でアクセスする。
-        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("passxxxxxx")))
+        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("pass")))
 
         then:
         //レスポンスがOKかどうかを確認
@@ -100,14 +100,14 @@ class SpockControllerTest extends Specification {
       
     }
     
-    def "デタラメURL"() {
-        when:
-        def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
-
-        then:
-        //HTTPステータスコードがNotFound(404)であることを確認
-        response.andExpect(status().isNotFound())
-    }
+//    def "デタラメURL"() {
+//        when:
+//        def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
+//
+//        then:
+//        //HTTPステータスコードがNotFound(404)であることを確認
+//        response.andExpect(status().isNotFound())
+//    }
     
     def "Content更新"() {
       

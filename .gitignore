@@ -2,11 +2,11 @@
 /build
 /bin
 /c:*
-/.gradle
 /.settings
 /.project
 /.classpath
 /target
 node_modules
 tmp/
-/gradle.properties
+.gradle/**
+
