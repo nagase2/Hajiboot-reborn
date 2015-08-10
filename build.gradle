@@ -228,10 +228,14 @@ checkstyle {
   uploadArchives {
     repositories.mavenDeployer {
         configuration = configurations.deployerJars
-        repository(url: "scp://192.168.121.158/tmp") {
+        repository(url: "scp://192.168.121.158/nagase") {
             authentication(userName: "root", password: "nagase2")
         }
     }
+  }
+  
+  project.group{
+    groupId = 'aaaaaa'
   }
   
   
