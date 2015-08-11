@@ -2,7 +2,8 @@ package com.example.service;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import com.example.repository.ContentRepository;
 @Service
 // サービスクラスであることを示す。Componentと意味は変わらない
 @Transactional
+@Slf4j
 public class ContentService {
   @Autowired
   ContentRepository contentRepository;
@@ -77,10 +79,12 @@ public class ContentService {
  public Content update(Content content){
    //更新をするために一度登録されているデータを取得する。
    //Content updatedContent = contentRepository.getOne(content.getContentId());
-   Content content_ = content;
+   //Content content_ = content;
    //まとめてコピー
    //BeanUtils.copyProperties(content, updatedContent);
-  //content.setMstItem(new MstItem(2));
+	log.info("");
+	//設定されているデータを再度取得（なぜかこうしないとデータが更新されない…）
+    content.setMstItem(new MstItem(content.getMstItem().getItemId()));
    //updatedContent.setContentN ame(content.getContentName());
   // updatedContent.setCount(content.getCount());
   // updatedContent.setComment(content.getComment());

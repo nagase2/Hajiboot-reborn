@@ -16,8 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
+
+
+
 import com.example.domain.Content;
+import com.example.domain.MstItem;
 import com.example.service.ContentService;
+import com.example.service.MstItemService;
 
 @Controller
 @RequestMapping("content")
@@ -26,7 +32,8 @@ public class ContentController {
 
   @Autowired
   private ContentService contentService;
-
+  @Autowired
+  private MstItemService mstItemService;
 
   /**
    * 一行表示
@@ -95,12 +102,12 @@ public class ContentController {
 
   @RequestMapping(value = "/update", method = RequestMethod.GET)
   String updateAndCreateContent(Model model, ContentForm contentForm) {
+	  log.info("更新Form表示機能が呼ばれました。");
 
     Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
     // List<Content> contents = contentService.findByContentName("aaa");// これはOK
     // List<Content> contents = contentService.findAll();// これは... OK
 
-//    log.info("データ取得前");
 //    Page<Content> contentList =
 //        contentService.findByContentNameOrderByContentId(contentForm.getContentName(), pageable);
 //    log.info("データ取得しました。ID= "+contentForm.getContentId());
@@ -108,26 +115,41 @@ public class ContentController {
     //Idからオブジェクト取得
    Content content = contentService.findByContentId(contentForm.getContentId());
     
+   //Itemマスタを渡す
+    List<MstItem> mstItems = mstItemService.findAll();
+    log.info("Listの件数"+mstItems.size());
+    model.addAttribute("mstItems",mstItems);
+    
 //    //MEMO:取得したオブジェクトを渡す
 //   BeanUtils.copyProperties(contentForm, content);
 //   
 //   log.info("データをコピー= "+content.getContentName());
    
 //    model.addAttribute("contents", contentList);
+   
     model.addAttribute("contentForm", content);
     return "content/updateForm";
+    
   }
 
-  
+  /**
+   * 
+   * @param model
+   * @param contentForm
+   * @return
+   */
   @RequestMapping(value = "/update", method = RequestMethod.POST)
-  String updateAndCreateContent2(Model model, ContentForm contentForm) {
+  String updateAndCreateContent2(Model model, ContentForm contentForm,MstItem mstItem) {
 
     
     log.info("データ更新処理をここで行います。"+contentForm.getContentId()+contentForm.getContentName());
-    
+   log.info("mstitem="+mstItem.getItemId());
+   //log.info("FormのItem"+cmstItem)
     Content content = new Content();
+    //FormからEntityにコピー
     BeanUtils.copyProperties(contentForm, content);
     log.info("xxxxxxxxxxxxxx"+content.getContentId()+content.getContentName());
+    
     contentService.update(content);
     
     // @Query("SELECT a FROM Customer a ORDER BY a.firstName, a.lastName")

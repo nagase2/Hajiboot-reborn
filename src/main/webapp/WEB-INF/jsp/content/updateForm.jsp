@@ -112,23 +112,32 @@
 		</div>
 		<hr/>
 		<div class="form-group">
+		<div class="col-xs-4">
+				アイテム名称 					
+<select id="dropdown" class="form-control" name="mstItem.itemId">
+    <c:forEach var="item" items="${mstItems}">
+        <option value="<c:out value='${item.itemId}' />"
+            <c:if test="${item.itemId == contentForm.mstItem.itemId}"> selected </c:if>  >
+            <c:out value="${item.itemName}" />
+        </option>
+    </c:forEach>
+</select>
+
+			</div>
 			<div class="col-xs-4">
 				価格 <input type="text" class="form-control" placeholder=".col-xs-3"
-					value="${contentForm.mstItem.price}">
+					value="${contentForm.mstItem.price}" readonly>
 			</div>
-			<div class="col-xs-4">
-				アイテム名称 <input type="text" class="form-control"
-					placeholder=".col-xs-3" value="${contentForm.mstItem.itemName}">
-			</div>
+			
 			<div class="col-xs-4">
 				カテゴリ <input type="text" class="form-control" placeholder=".col-xs-3"
 					name="category"
-					value="${contentForm.mstItem.mstItemType.itemTypeName}">
+					value="${contentForm.mstItem.mstItemType.itemTypeName}" readonly>
 			</div>
 			<div class="col-xs-4">
 				Item ID <input type="text" class="form-control" placeholder=".col-xs-3"
-					name="mstItem.itemId"
-					value="${contentForm.mstItem.itemId}">
+					
+					value="${contentForm.mstItem.itemId}" readonly>
 			</div>
 		</div>
 
