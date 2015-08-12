@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class AppConfig2 {
   @Autowired
   DataSourceProperties dataSourceProperties;
@@ -31,4 +33,6 @@ public class AppConfig2 {
   // DataSource dataSource(){
   // return new Log4jdbcProxyDataSource(this.dataSource);
   // }
+  
+  
 }

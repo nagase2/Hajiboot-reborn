@@ -27,6 +27,9 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
   Page<Content> findAllOrderByContentId(Pageable pageable);
 
   List<Content> findAll();
+  
+  @Query("select c from Content c ORDER BY c.contentName")
+  List<Content> findAllByNone();
 
   Page<Content> findAll(Pageable pageable);
   

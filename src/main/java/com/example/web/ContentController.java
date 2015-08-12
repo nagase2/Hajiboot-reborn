@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
 import com.example.domain.Content;
 import com.example.domain.MstItem;
 import com.example.service.ContentService;
@@ -71,8 +72,6 @@ public class ContentController {
   String searchContentsByContentsName(Model model, ContentForm contentForm) {
 
     Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
-    // List<Content> contents = contentService.findByContentName("aaa");// これはOK
-    // List<Content> contents = contentService.findAll();// これは... OK
 
     log.info("データ取得前");
     Page<Content> contentList =
@@ -157,5 +156,31 @@ public class ContentController {
     // Page<Customer> findAllOrderByName2(Pageable pageable);
     return "redirect:list";
   }
+  
+  /**
+   * トランザクションメソッドのテスト用
+   * @param model
+   * @param contentForm
+   * @param mstItem
+   * @return
+ * @throws Throwable 
+   */
+  @RequestMapping(value = "/trantest", method = RequestMethod.GET)
+  String tranTest(Model model, ContentForm contentForm) throws Throwable {
+	  //ここでトランザクションテスト
+	  contentService.update5Data();
+	  
+	  
+	  Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
+
+	    log.info("データ取得前");
+	    Page<Content> contentList =
+	        contentService.findByContentNameOrderByContentId(contentForm.getContentName(), pageable);
+	    log.info("データ取得しました。");
+	    model.addAttribute("contents", contentList);
+	    model.addAttribute("form", contentForm);
+	    return "content/contentList";
+  }
+  
 
 }

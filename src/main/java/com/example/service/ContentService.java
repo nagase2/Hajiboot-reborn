@@ -18,7 +18,7 @@ import com.example.repository.ContentRepository;
  * カスタマのサービスクラス
  * 
  * @author nagase
- *
+ *　TODO:Entityグラフを追加してみる。
  */
 @Service
 // サービスクラスであることを示す。Componentと意味は変わらない
@@ -32,8 +32,18 @@ public class ContentService {
    * すべてを返す
    */
   public List<Content> findAll() {
+	  
     return contentRepository.findAll();
   }
+  
+  /**
+   * １秒以内に処理が返ってこなかったらタイムアウト
+   */
+  @Transactional(timeout=1)
+  public List<Content> findAllTransactional(){
+	  return contentRepository.findAll();
+  }
+  
   public Page<Content> findAll(Pageable pageable) {
     return contentRepository.findAll(pageable);
   }
@@ -53,7 +63,7 @@ public class ContentService {
   public Content findByContentId(Long contentId){
     return contentRepository.findByContentId(contentId);
   }
-
+  
   public Page<Content> findByContentNameOrderByContentId(String contentName,Pageable pageable){
   //  return contentRepository.findByContentNameOrderByContentIdAsc(contentName,pageable);
     return contentRepository.findContents(contentName,pageable);
@@ -61,38 +71,52 @@ public class ContentService {
  public Content save(Content content){
     return contentRepository.save(content);
  }
-// public Content update(Content content){
-//   //更新をするために一度登録されているデータを取得する。
-//   Content updatedContent = contentRepository.getOne(content.getContentId());
-//   
-//   //まとめてコピー
-//   //BeanUtils.copyProperties(content, updatedContent);
-//
-//   updatedContent.setContentName(content.getContentName());
-//   updatedContent.setCount(content.getCount());
-//   updatedContent.setComment(content.getComment());
-//   //TODO:まとめてコピーしたら動かないか？
-//   //TODO:楽観的ロックのチェックは自分でやるのか？今のままだと、楽観的ロックが意図したとおりに動かない。
-//   
-//   return contentRepository.save(updatedContent);
-//}
+
  public Content update(Content content){
-   //更新をするために一度登録されているデータを取得する。
-   //Content updatedContent = contentRepository.getOne(content.getContentId());
-   //Content content_ = content;
-   //まとめてコピー
-   //BeanUtils.copyProperties(content, updatedContent);
-	log.info("");
-	//設定されているデータを再度取得（なぜかこうしないとデータが更新されない…）
-    content.setMstItem(new MstItem(content.getMstItem().getItemId()));
-   //updatedContent.setContentN ame(content.getContentName());
-  // updatedContent.setCount(content.getCount());
-  // updatedContent.setComment(content.getComment());
-   //TODO:まとめてコピーしたら動かないか？
+	 log.info("ContentServiceが呼ばれました。");
    //TODO:楽観的ロックのチェックは自分でやるのか？今のままだと、楽観的ロックが意図したとおりに動かない。
    //->Version情報を渡すことで解決した。？
    
    return contentRepository.save(content);
 }
+ /**
+  * トランザクションのテストを行うメソッド。ステップは下記の通り。
+  * データを５件更新する
+  * ①	サービス内でコンテンツを５つ更新する処理を作る。
+  * ②	更新を行い、３番目でエラーを発生。
+  * ③	DBが更新されたかどうかを確認する。（更新されていなければTransaction成功）
+  * ->今のところ、３件更新されてしまっているが、、、
+ * @throws Throwable 
+  */
+ @javax.transaction.Transactional
+ public int update5Data() throws Throwable{
+	 log.info("リポジトリからデータを取得（特殊ならべかえを実施）");
+	 //５回繰り返す
+	  //データを更新
+	  //３回めだったら
+	 	//Exceptionを発生
+	 
+	 List<Content> contents = contentRepository.findAllByNone();
+	 
+	 for(int i =0; i<5; i++){
+		log.info(i+"回目です");
+		Content con = contents.get(i);
+		con.setContentName("D_Updated"+i);
+		contentRepository.save(con);
+		
+		if(i==3){
+			throw new Throwable();
+		}
+	 }
+	 return 0;
+ }
+ /**
+  * 全条件での検索サービス
+  * 検索フォームに入力された値のみを検索し、結果を返す。入力値が空白だった場合は検索条件から除外する。
+  * 検索は全条件入力可能（可変）
+  * @param contentName
+  * @param pageable
+  * @return 検索結果
+  */
 
 }

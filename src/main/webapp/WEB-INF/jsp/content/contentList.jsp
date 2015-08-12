@@ -55,7 +55,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更新処理 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">更新処理（１件）</a></li>
-            <li><a href="#">更新処理（５件）</a></li>
+            <li><a href="trantest">更新処理（５件）のテスト</a></li>
       
           </ul>
         </li>
