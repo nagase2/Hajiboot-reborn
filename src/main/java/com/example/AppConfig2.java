@@ -7,6 +7,7 @@ import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -18,7 +19,7 @@ public class AppConfig2 {
 
   DataSource dataSource;
 
-  // @Bean(name="a")
+  @Bean
   DataSource realDataSource() {
     DataSourceBuilder factory =
         DataSourceBuilder.create(this.dataSourceProperties.getClassLoader())
@@ -29,10 +30,10 @@ public class AppConfig2 {
     return new Log4jdbcProxyDataSource(this.dataSource);
   }
 
-  // @Bean(name="b")
-  // DataSource dataSource(){
-  // return new Log4jdbcProxyDataSource(this.dataSource);
-  // }
+//   @Bean(name="b")
+//   DataSource dataSource(){
+//   return new Log4jdbcProxyDataSource(this.dataSource);
+//   }
   
   
 }

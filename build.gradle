@@ -99,6 +99,7 @@ dependencies {
 	compile 'org.flywaydb:flyway-core'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
+	compile 'org.bgee.log4jdbc-log4j2;log4jdbc-log4j2-jdbc4.1:1.16'
   
 
 	compile 'javax.servlet:jstl:1.2'
