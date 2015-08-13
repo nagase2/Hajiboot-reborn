@@ -37,7 +37,7 @@ public class ContentController {
   private MstItemService mstItemService;
 
   /**
-   * 一行表示
+   * Contentの一覧画面を表示する。
    * 
    * @param model
    * @param contentForm
@@ -49,13 +49,24 @@ public class ContentController {
 
     Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
     log.info("データ取得前");
-    Page<Content> contents = contentService.findAllOrderByContentId(pageable);
-    log.info("データ取得しました。■");
-    if(contents!=null){
-       log.info("★サイズは="+contents.getSize());
-    }
     
-    model.addAttribute("testvalue","xxxxxxxxxSuccess!xxxxxxxxxx");
+    Page<Content> contents;
+    
+    if(contentForm.getContentName()==null){
+       contents = contentService.findAllOrderByContentId(pageable);
+    }else{
+      contents = contentService.findAllWithEntityGraph(
+        contentForm.getContentName(),contentForm.getCount(),contentForm.getComment(),0, pageable);
+    }
+    log.info("データ取得しました。■");
+//    if(contents!=null){
+//       log.info("★サイズは="+contents.getSize());
+//    }
+    
+  //Itemマスタを渡す
+    List<MstItem> mstItems = mstItemService.findAll();
+    log.info("Listの件数"+mstItems.size());
+    model.addAttribute("mstItems",mstItems);
 
     model.addAttribute("contents", contents);
     return "content/contentList";
@@ -119,13 +130,6 @@ public class ContentController {
     log.info("Listの件数"+mstItems.size());
     model.addAttribute("mstItems",mstItems);
     
-//    //MEMO:取得したオブジェクトを渡す
-//   BeanUtils.copyProperties(contentForm, content);
-//   
-//   log.info("データをコピー= "+content.getContentName());
-   
-//    model.addAttribute("contents", contentList);
-   
     model.addAttribute("contentForm", content);
     return "content/updateForm";
     

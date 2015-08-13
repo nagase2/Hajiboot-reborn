@@ -9,11 +9,9 @@ spring:
   profiles: dev
   datasource:
     driverClassName: org.h2.Driver
-   # driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     #メモリDB
     #url: jdbc:h2:file:/tmp/customer2;AUTO_SERVER=true
     #ファイルDB
-    #url: jdbc:log4jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     username: sa
     password: 

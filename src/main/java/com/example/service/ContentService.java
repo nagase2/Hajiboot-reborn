@@ -44,6 +44,10 @@ public class ContentService {
 	  return contentRepository.findAll();
   }
   
+  public Page<Content> findAllWithEntityGraph(String contentName, int count, String comment, int itemId, Pageable pageable){
+    return contentRepository.findAllWithEntityGraph(contentName, count, comment, /*itemId,*/ pageable);
+  }
+  
   public Page<Content> findAll(Pageable pageable) {
     return contentRepository.findAll(pageable);
   }
