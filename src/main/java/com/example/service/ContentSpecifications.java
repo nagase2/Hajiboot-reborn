@@ -42,7 +42,7 @@ public class ContentSpecifications {
       return cb.equal(root.get("mstItem.itemId"),  mstItem.getItemId() );
     };
   }
-  
+      
   
   
 //  public static Specification<Content> countContains(int count) {

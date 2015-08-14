@@ -1,8 +1,7 @@
 spring:
     profiles:
-
-      active: dev
-    # active: test
+     # active: dev
+       active: test
 
 ---
 spring:
@@ -21,16 +20,15 @@ spring:
 ---
 spring:
     profiles: test
-spring.jpa.datadatabase: PostgreSQL
-spring.datasource:
-    url: jdbc:postgresql://localhost:5432/shopping
-    driverClassName: org.postgresql.Driver
-    username: johndoe
-    password: johndoe
-    xa:
+    datasource:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/shopping
+      username: johndoe
+      password: johndoe
+      xa:
         dataSourceClassName: org.postgresql.xa.PGXADataSource
 
-    hibernate.ddl-auto: create-drop #毎回リフレッシュ
+    #hibernate.ddl-auto: create-drop #毎回リフレッシュ
 
 ---
 

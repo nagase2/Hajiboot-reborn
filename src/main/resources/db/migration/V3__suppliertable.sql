@@ -1,29 +1,7 @@
 
-
-CREATE TABLE mst_item_type(
- item_type_id INT NOT NULL PRIMARY KEY,
- item_type_name VARCHAR(110),
- delete_flag boolean
-);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (1,'本',false);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (2,'衣類',false);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (3,'靴',false);
-
-CREATE TABLE purchase_history (
- purchase_history_id INT NOT NULL PRIMARY KEY,
- purchase_date DATE
-);
-
-
-CREATE TABLE mst_item (
- item_id INT NOT NULL PRIMARY KEY,
- item_name VARCHAR(100),
- item_type_id INT,
- item_expire_date TIMESTAMP(10),
- price FLOAT(20),
- version INT,
- delete_flag boolean
-);
 
 INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'日本の歴史１',1,'2015-08-21', 300,1,false);
 INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'日本の歴史２',1,'2015-08-21', 980,1,false);
@@ -31,15 +9,17 @@ INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,ver
 INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'レザージャケット',2,'2015-08-21', 20000,1,false);
 
 
-CREATE TABLE content (
- content_id bigint NOT NULL PRIMARY KEY,
- item_id INT,
- content_name VARCHAR(100),count INT,comment VARCHAR(500),
- version bigint,
- updated_function VARCHAR(100),
- created_function VARCHAR(100),
- delete_flag boolean
-);
+
+Insert into customers(id,first_name,last_name) values(1,'5nobita','nobi');
+Insert into customers(id,first_name,last_name) values(2,'nnnnn','nobi');
+Insert into customers(id,first_name,last_name) values(3,'llllllll','nobi');
+Insert into customers(id,first_name,last_name) values(4,'V_4 data','Newdata');
+Insert into customers(id,first_name,last_name) values(5,'V_3 data','Newdata');
+Insert into customers(id,first_name,last_name) values(6,'V_3 data','Newdata');
+Insert into customers(id,first_name,last_name) values(7,'V_3 data','Newdata');
+Insert into customers(id,first_name,last_name) values(8,'V_3 data','Newdata');
+Insert into customers(id,first_name,last_name) values(9,'V_3 data','Newdata');
+
 
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
 VALUES (1,2,999,'aaa','this is comment',3,'com.controller.abc', 'com.controller.bcd',false);
@@ -61,16 +41,8 @@ INSERT INTO content (content_id, item_id,count,content_name,comment,version,upda
 VALUES (9,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
 VALUES (10,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
-INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
-VALUES (2,4,123,'★消されたデータ','this is comment',1,'com.controller.abc', 'com.controller.bcd',true);
-
-CREATE TABLE shopping_basket (
- basket_id INT NOT NULL PRIMARY KEY,
- content_id INT,
- comment VARCHAR(500),
- version INT,
- delete_flag boolean,
- purchased_date DATE
-);
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) VALUES (2,4,123,'★消されたデータ','this is comment',1,'com.controller.abc', 'com.controller.bcd',true);
 
 
+INSERT INTO users (username, encoded_password) VALUES ('user1', '$2a$10$1gJJgBlL75OIjkSgkYPXI.mV7ihEPjxIiCkXKBEc7/r9xUIjZyc9i' /*demo*/);
+INSERT INTO users (username, encoded_password) VALUES ('user2', '$2a$10$1gJJgBlL75OIjkSgkYPXI.mV7ihEPjxIiCkXKBEc7/r9xUIjZyc9i' /*demo*/);
