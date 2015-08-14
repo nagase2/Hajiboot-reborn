@@ -44,7 +44,7 @@ CREATE TABLE content (
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
 VALUES (1,2,999,'aaa','this is comment',3,'com.controller.abc', 'com.controller.bcd',false);
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
-VALUES (2,2,777,'this is name','this is comment',2,'com.controller.abc', 'com.controller.bcd',false);
+VALUES (12,2,777,'this is name','this is comment',2,'com.controller.abc', 'com.controller.bcd',false);
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
 VALUES (3,3,888,'this is name','this is comment',4,'com.controller.abc', 'com.controller.bcd',false);
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
@@ -61,7 +61,8 @@ INSERT INTO content (content_id, item_id,count,content_name,comment,version,upda
 VALUES (9,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
 INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
 VALUES (10,1,888,'aaa','this is comment',1,'com.controller.abc', 'com.controller.bcd',false);
-
+INSERT INTO content (content_id, item_id,count,content_name,comment,version,updated_function,created_function,delete_flag) 
+VALUES (2,4,123,'★消されたデータ','this is comment',1,'com.controller.abc', 'com.controller.bcd',true);
 
 CREATE TABLE shopping_basket (
  basket_id INT NOT NULL PRIMARY KEY,

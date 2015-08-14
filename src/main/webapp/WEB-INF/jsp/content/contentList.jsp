@@ -109,15 +109,15 @@
 			</div>
 			カテゴリ
 			<div class="form-group">
-				<select id="dropdown" class="form-control" name="mstItem.itemId">
-					<option/>
+				<select id="dropdown" class="form-control" path="mstItem.itemId" name="mstItem.itemId">
+					<option value="0" label="-"/>
 					<c:forEach var="item" items="${mstItems}">
 						<option value="<c:out value='${item.itemId}' />"
 							>
 							<c:out value="${item.itemName}" />
 						</option>
 					</c:forEach>
-				</select>
+				<select>
 			</div>
 
 

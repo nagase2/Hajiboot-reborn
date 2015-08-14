@@ -21,7 +21,7 @@ import lombok.Data;
 // @Table(name="mst_item")//テーブル名（＝クラス名）
 public class MstItem {
   @Id
-  private int itemId;
+  private Integer itemId;
   private Integer version;
   private String itemName;
   private Date itemExpireDate;
@@ -36,11 +36,11 @@ public class MstItem {
 
   public MstItem() {}
 
-  public MstItem(int itemId) {
+  public MstItem(Integer itemId) {
     this.itemId = itemId;
   }
 
-  public MstItem(int itemId, String itemName, Date itemExpireDate,
+  public MstItem(Integer itemId, String itemName, Date itemExpireDate,
       Double price, Boolean deleteFlag) {
     this.itemId = itemId;
     this.itemName = itemName;
@@ -49,7 +49,7 @@ public class MstItem {
     this.deleteFlag = deleteFlag;
   }
 
-  public int getItemId() {
+  public Integer getItemId() {
     return this.itemId;
   }
 

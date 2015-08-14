@@ -145,6 +145,7 @@
 
 		<div class="col-sm-12">version:${contentForm.version}
 		<input type="hidden" name ="version" value="${contentForm.version}">
+		<input type="hidden" name ="deleteFlag" value="${contentForm.deleteFlag}">
 		</div>
 
 		<div class="col-sm-12">

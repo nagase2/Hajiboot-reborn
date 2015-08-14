@@ -1,5 +1,7 @@
 package com.example.service;
 
+import static com.example.service.ContentSpecifications.*;
+
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,12 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Content;
-import com.example.domain.MstItem;
 import com.example.repository.ContentRepository;
+import com.example.web.ContentForm;
 
 /**
  * カスタマのサービスクラス
@@ -114,6 +117,26 @@ public class ContentService {
 	 }
 	 return 0;
  }
+ 
+ /**
+  * EntityGraphを使って検索
+  * @param pageable
+  * @return
+  */
+ public Page<Content> simpleFindAllWithEntityGraph(ContentForm contentForm,Pageable pageable) {
+   log.info("ここで動的検索のテスト");
+   //return contentRepository.simpleFindAllWithEntityGraph(pageable);
+   
+   return contentRepository.findAll(Specifications.where(
+       //TODO:ここで固定条件（deleteflag=false)を渡したい
+       contentNamecontains(contentForm.getContentName()))
+       .and(commentContains(contentForm.getComment()))
+       .and(countContains(contentForm.getCount()))
+       //これで検索するとエラーとなる。
+       .and(mstItemContain(contentForm.getMstItem()))
+           
+        , pageable);
+ }
  /**
   * 全条件での検索サービス
   * 検索フォームに入力された値のみを検索し、結果を返す。入力値が空白だった場合は検索条件から除外する。
@@ -122,5 +145,7 @@ public class ContentService {
   * @param pageable
   * @return 検索結果
   */
+
+
 
 }

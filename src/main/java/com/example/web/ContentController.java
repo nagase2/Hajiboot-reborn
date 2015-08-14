@@ -29,7 +29,7 @@ import com.example.service.MstItemService;
 @Controller
 @RequestMapping("content")
 @Slf4j
-public class ContentController {
+public class ContentController  {
 
   @Autowired
   private ContentService contentService;
@@ -38,7 +38,7 @@ public class ContentController {
 
   /**
    * Contentの一覧画面を表示する。
-   * 
+   * EntityGraphを使って全部所得（EAGERなので遅い）
    * @param model
    * @param contentForm
    * @return
@@ -53,15 +53,41 @@ public class ContentController {
     Page<Content> contents;
     
     if(contentForm.getContentName()==null){
-       contents = contentService.findAllOrderByContentId(pageable);
+      // contents = contentService.findAllOrderByContentId(pageable);
+      contents=contentService.simpleFindAllWithEntityGraph(contentForm,pageable);
     }else{
-      contents = contentService.findAllWithEntityGraph(
-        contentForm.getContentName(),contentForm.getCount(),contentForm.getComment(),0, pageable);
+//      contents = contentService.findAllWithEntityGraph(
+//        contentForm.getContentName(),contentForm.getCount(),contentForm.getComment(),0, pageable);
+      contents=contentService.simpleFindAllWithEntityGraph(contentForm,pageable);
     }
     log.info("データ取得しました。■");
-//    if(contents!=null){
-//       log.info("★サイズは="+contents.getSize());
-//    }
+    
+  //Itemマスタを渡す
+    List<MstItem> mstItems = mstItemService.findAll();
+    log.info("Listの件数"+mstItems.size());
+    model.addAttribute("mstItems",mstItems);
+
+    model.addAttribute("contents", contents);
+    return "content/contentList";
+  }
+  
+  /**
+   * こっちはEntityGraphなしで全件取得(LAZYなのではやい）
+   * @param model
+   * @param contentForm
+   * @return
+   */
+  @RequestMapping("/list2")
+  String showContentList2(Model model, ContentForm contentForm) {
+    log.info("ここでContent Llistを取得!");
+
+    Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
+    log.info("データ取得前");
+    
+    Page<Content> contents;
+    
+      contents = contentService.findAll(pageable);
+    log.info("データ取得しました。■");
     
   //Itemマスタを渡す
     List<MstItem> mstItems = mstItemService.findAll();
@@ -87,6 +113,7 @@ public class ContentController {
     log.info("データ取得前");
     Page<Content> contentList =
         contentService.findByContentNameOrderByContentId(contentForm.getContentName(), pageable);
+    
     log.info("データ取得しました。");
     model.addAttribute("contents", contentList);
     model.addAttribute("form", contentForm);
