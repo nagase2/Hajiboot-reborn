@@ -2,11 +2,14 @@
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (1,'本',false);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (2,'衣類',false);
 INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (3,'靴',false);
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (4,'家電',false);
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (5,'PC',false);
+INSERT INTO mst_item_type (item_type_id, item_type_name, delete_flag) VALUES (6,'映画',false);
 
 INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (1,'日本の歴史１',1,'2015-08-21', 300,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'日本の歴史２',1,'2015-08-21', 980,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (3,'日本の歴史３',1,'2015-08-21', 980,1,false);
-INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'レザージャケット',2,'2015-08-21', 20000,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (2,'日本の歴史２',3,'2015-08-21', 980,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (3,'日本の歴史３',4,'2015-08-21', 980,1,false);
+INSERT INTO mst_item (item_id, item_name,item_type_id,item_expire_date,price,version, delete_flag) VALUES (4,'レザージャケット',6,'2015-08-21', 20000,1,false);
 
 
 

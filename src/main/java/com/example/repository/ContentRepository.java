@@ -47,6 +47,7 @@ public interface ContentRepository extends JpaRepository<Content, Long>,JpaSpeci
   /**
    * 検索を行って結果をPagableで返す(動作確認中）
    * データはEntityグラフを使って取得。検索条件はSQLで指定
+   * ???ほかテーブルも検索条件に入れたい場合はどうする？
    * @return
    */
   @EntityGraph(value = "content.search", type = EntityGraphType.LOAD)

@@ -33,11 +33,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Content")
 @NamedQueries({@NamedQuery(name = "Content.findAll2", query = "select m from Content m")})
 @NamedEntityGraphs({@NamedEntityGraph(name = "content.search",
-    attributeNodes = {@NamedAttributeNode("mstItem")
+     includeAllAttributes=true,//Subgraphのために追加
+    attributeNodes = {
+        @NamedAttributeNode("mstItem")
+    // ,@NamedAttributeNode(value="itemTypeGraphxx",subgraph="itemTypeGraph") //Subgraphのために追加
     // ,@NamedAttributeNode("comments")
     }, subgraphs = {@NamedSubgraph(name = "itemTypeGraph",
         attributeNodes = {@NamedAttributeNode("mstItemType")
-        })}
+        ,@NamedAttributeNode("mstItemName")
+    }
+        )
+      }
     )})
 public class Content implements java.io.Serializable {
   /**
