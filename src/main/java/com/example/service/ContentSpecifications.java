@@ -39,7 +39,7 @@ public class ContentSpecifications {
    */
   public static Specification<Content> mstItemContain(MstItem mstItem) {
     return StringUtils.isEmpty(mstItem)||mstItem.getItemId()==0 ? null : (root, query, cb) -> {
-      return cb.equal(root.get("mstItem.itemId"),  mstItem.getItemId() );
+      return cb.equal(root.get("mstItem"),  mstItem );
     };
   }
       

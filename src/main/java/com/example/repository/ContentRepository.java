@@ -32,7 +32,7 @@ public interface ContentRepository extends JpaRepository<Content, Long>,JpaSpeci
   /**
    * 動的検索とEntityGrapth
    */
-  @EntityGraph(value = "content.search", type = EntityGraphType.FETCH)
+  @EntityGraph(value = "content.search", type = EntityGraphType.LOAD)
   Page<Content> findAll(Specification<Content> spec, Pageable pageable);
   
   /**
