@@ -30,7 +30,12 @@ CREATE TABLE content (
  version bigint,
  updated_function VARCHAR(100),
  created_function VARCHAR(100),
- delete_flag boolean
+ delete_flag boolean,
+ 
+ created_date datetime,
+ updated_date datetime,
+ created_by VARCHAR(100),
+ updated_by VARCHAR(100)
 );
 
 

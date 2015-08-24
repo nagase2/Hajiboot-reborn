@@ -1,5 +1,8 @@
 package com.example.domain;
 
+import java.sql.Date;
+import java.time.ZonedDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -7,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedSubgraph;
@@ -17,6 +19,13 @@ import javax.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.apache.catalina.Manager;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,19 +41,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "Content")
 @NamedQueries({@NamedQuery(name = "Content.findAll2", query = "select m from Content m")})
-@NamedEntityGraphs({@NamedEntityGraph(name = "content.search",
+@NamedEntityGraph(name = "content.search",
      includeAllAttributes=true,//Subgraphのために追加
     attributeNodes = {
         @NamedAttributeNode("mstItem")
-    // ,@NamedAttributeNode(value="itemTypeGraphxx",subgraph="itemTypeGraph") //Subgraphのために追加
+     //,@NamedAttributeNode(value="MstItemType",subgraph="MstItemType222") //Subgraphのために追加
     // ,@NamedAttributeNode("comments")
-    }, subgraphs = {@NamedSubgraph(name = "itemTypeGraph",
-        attributeNodes = {@NamedAttributeNode("mstItemType")
-        ,@NamedAttributeNode("mstItemName")
+    }, subgraphs = {@NamedSubgraph(name = "MstItemType222",
+        attributeNodes = {
+        @NamedAttributeNode("mstItemType"),
+        @NamedAttributeNode("itemTypeId")
     }
-        )
-      }
-    )})
+        )}, subclassSubgraphs = {
+            @NamedSubgraph(
+                name = "notused",
+                type = MstItemType.class,
+                attributeNodes = {
+                    @NamedAttributeNode(value = "itemTypeId"),
+                }
+            )
+        }
+    )
 public class Content implements java.io.Serializable {
   /**
    * 
@@ -60,6 +77,14 @@ public class Content implements java.io.Serializable {
   private Long version;
   private String createdFunction;
   private String updatedFunction;
+  @CreatedDate
+  private ZonedDateTime createdDate;
+  @LastModifiedDate
+  private ZonedDateTime updatedDate;
+  @CreatedBy
+  private User createdBy;
+  @LastModifiedBy
+  private User updatedBy;
 
   private Boolean deleteFlag;
   @JsonIgnore

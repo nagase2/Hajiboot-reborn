@@ -9,10 +9,13 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaAuditing
 public class AppConfig2 {
   @Autowired
   DataSourceProperties dataSourceProperties;
@@ -30,10 +33,10 @@ public class AppConfig2 {
     return new Log4jdbcProxyDataSource(this.dataSource);
   }
 
-//   @Bean(name="b")
-//   DataSource dataSource(){
-//   return new Log4jdbcProxyDataSource(this.dataSource);
-//   }
+  @Bean
+  public AuditorAware<AuditableUser> auditorProvider() {
+    return new AuditorAwareImpl();
+  }
   
   
 }
