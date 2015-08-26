@@ -34,7 +34,7 @@ public class AppConfig2 {
   }
 
   @Bean
-  public AuditorAware<AuditableUser> auditorProvider() {
+  public AuditorAwareImpl auditorProvider() {
     return new AuditorAwareImpl();
   }
   

@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 import javax.persistence.Entity;
@@ -26,6 +27,8 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -77,14 +80,17 @@ public class Content implements java.io.Serializable {
   private Long version;
   private String createdFunction;
   private String updatedFunction;
+  
   @CreatedDate
-  private ZonedDateTime createdDate;
+  @DateTimeFormat(iso = ISO.DATE)
+  private java.sql.Timestamp  createdDate;
   @LastModifiedDate
-  private ZonedDateTime updatedDate;
+  @DateTimeFormat(iso = ISO.DATE)
+  private java.sql.Timestamp  updatedDate;
   @CreatedBy
-  private User createdBy;
+  private String createdBy;
   @LastModifiedBy
-  private User updatedBy;
+  private String updatedBy;
 
   private Boolean deleteFlag;
   @JsonIgnore
