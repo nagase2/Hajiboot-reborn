@@ -83,10 +83,10 @@ public class Content implements java.io.Serializable {
   
   @CreatedDate
   @DateTimeFormat(iso = ISO.DATE)
-  private java.sql.Timestamp  createdDate;
+  private java.sql.Timestamp createdDate;
   @LastModifiedDate
   @DateTimeFormat(iso = ISO.DATE)
-  private java.sql.Timestamp  updatedDate;
+  private java.sql.Timestamp updatedDate;
   @CreatedBy
   private String createdBy;
   @LastModifiedBy
