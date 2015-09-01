@@ -1,30 +1,62 @@
-CREATE TABLE mst_item_type (
- item_type_id INT NOT NULL PRIMARY KEY,
- material_type_name VARCHAR(110),
- delete_flag BIT(1)
+CREATE TABLE Role (
+ roleId CHAR(10) NOT NULL PRIMARY KEY,
+ roleName CHAR(10),
+ deleteflag BIT(1),
+ updatedDate DATE,
+ createdDate DATE,
+ createdUser bigint,
+ updatedUser bigint
 );
 
 
-CREATE TABLE mst_item (
- item_id INT NOT NULL PRIMARY KEY,
- item_name VARCHAR(100),
- item_type_id INT,
- item_expire_date TIMESTAMP(10),
- price FLOAT(20),
- version INT,
- delete_flag BIT(1)
+CREATE TABLE RoleGroup (
+ roleGroupId CHAR(10) NOT NULL PRIMARY KEY,
+ roleGroupName CHAR(10),
+ deleteflag BIT(1),
+ updatedDate DATE,
+ createdDate DATE,
+ createdUser bigint,
+ updatedUser bigint
 );
 
 
-CREATE TABLE content (
- content_id INT NOT NULL PRIMARY KEY,
- item_id INT,
- count INT,
- comment VARCHAR(500),
- version INT,
- updated_function VARCHAR(100),
- created_function VARCHAR(100),
- delete_flag BIT(1)
+CREATE TABLE RoleGroupRole (
+ roleGroupRoleId CHAR(10) NOT NULL PRIMARY KEY,
+ roleGroupId CHAR(10),
+ roleId CHAR(10),
+ deleteflag BIT(1),
+ updatedDate DATE,
+ createdDate DATE,
+ createdUser bigint,
+ updatedUser bigint
+);
+
+
+CREATE TABLE User (
+ id bigint NOT NULL PRIMARY KEY,
+ loginId VARCHAR(100),
+ password VARCHAR(100),
+ address VARCHAR(500),
+ age INT,
+ sirName CHAR(10),
+ familyName CHAR(10),
+ deleteFlag BIT(1),
+ updatedDate DATE,
+ createdDate DATE,
+ createdUser bigint,
+ updatedUser bigint
+);
+
+
+CREATE TABLE UserRoleGroup (
+ userRoleGroupId CHAR(10) NOT NULL PRIMARY KEY,
+ userId CHAR(10),
+ roleGroupId CHAR(10),
+ deleteflag BIT(1),
+ updatedDate DATE,
+ createdDate DATE,
+ createdUser bigint,
+ updatedUser bigint
 );
 
 
