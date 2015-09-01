@@ -40,5 +40,6 @@ class CalcSpec2 extends Specification{
 	}
     def "ただのPrintテスト"(){
       println "これはテストのテストです。"
+      println "これはテストのテストです。"
     }
 }
