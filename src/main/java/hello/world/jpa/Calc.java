@@ -8,7 +8,6 @@ public class Calc {
     num++;
     num++;
 
-
     return lhs + rhs;
   }
 }

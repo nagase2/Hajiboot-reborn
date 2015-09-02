@@ -3,7 +3,7 @@
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
 	<logger name="jdbc" level="OFF" /> 
-	<logger name="jdbc.sqltiming" level="OFF" />
+	<logger name="jdbc.sqltiming" level="DEBUG" />
 	<logger name="jdbc.sqlonly" level="debug" />
 
 	<property name="ACCESS_LOG_PATTERN" value="%d{yyyy-MM-dd HH.mm.ss},%p,,%C,%M,%caller{1}" 

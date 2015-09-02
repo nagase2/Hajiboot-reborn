@@ -7,6 +7,7 @@ buildscript {
 		maven {
 			url "https://plugins.gradle.org/m2/"
 		  }
+        maven { url 'http://repo1.maven.org/maven2/' }
     }
     dependencies {
       
@@ -19,6 +20,7 @@ buildscript {
 	}
 }
 
+apply plugin: 'maven'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -61,6 +63,7 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
 	jcenter() //sonar
+    maven { url 'http://repo1.maven.org/maven2/' }
 //	maven { 
 //		url 'http://172.19.6.90:10080/QIG/Document_Management/tree/master/maven-repo'
 //	 }
@@ -98,6 +101,7 @@ dependencies {
 	compile 'org.flywaydb:flyway-core'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
+	//compile 'org.bgee.log4jdbc-log4j2;log4jdbc-log4j2-jdbc4.1:1.16'
   
 
 	compile 'javax.servlet:jstl:1.2'
@@ -207,5 +211,46 @@ checkstyle {
       password = 'wildfly'
     }
   }
+
+  
+  
+  /////////////////////////////////////////////////////
+  configurations {
+    deployerJars
+  }
+  
+  repositories {
+    mavenCentral()
+  }
+  
+  dependencies {
+    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
+    deployerJars "org.apache.maven.wagon:wagon-ssh-external:2.2"
+  }
+  
+  uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: "sftp://172.19.6.90/home/appuser01") {
+            authentication(userName: "appuser01", password: "appuser01")
+        }
+    }
+  }
+  
+//  project{
+//    groupId = 'aaaaaa'
+//    artifactId ='xxxxx'
+//    version = '1.1.1'
+//    
+//  }
+  
+//  roupId    project.group
+//  artifactId  uploadTask.repositories.mavenDeployer.pom.artifactId (if set) or archiveTask.baseName.
+//  version project.version
+//  packaging   archiveTask.extension
+  
+  
+  
+  
   
   

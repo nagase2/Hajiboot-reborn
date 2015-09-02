@@ -36,87 +36,87 @@ import com.example.web.CustomerController;
 @WebAppConfiguration
 @IntegrationTest(["server.port:0","spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL"])
 class CopyOfSpockControllerTest extends Specification {
-  @Autowired
-  CustomerController customerController
+    @Autowired
+    CustomerController customerController
 
-  MockMvc mockMvc;
-  @Autowired
-  private WebApplicationContext context;
+    MockMvc mockMvc;
+    @Autowired
+    private WebApplicationContext context;
 
-  @Value("\${local.server.port}")
-  int port;
+    @Value("\${local.server.port}")
+    int port;
 
-  String endPointURL;
+    String endPointURL;
 
-  def setup() {
+    def setup() {
 
-    mockMvc = MockMvcBuilders.webAppContextSetup(context)
-        .apply(SecurityMockMvcConfigurers.springSecurity()).build();
-    endPointURL = "http://localhost:"+port
-    println "URL is "+endPointURL
-  }
-  def "Customers Controller Test(Thymeleaf)"(){
+        mockMvc = MockMvcBuilders.webAppContextSetup(context)
+                .apply(SecurityMockMvcConfigurers.springSecurity()).build();
+        endPointURL = "http://localhost:"+port
+        println "URL is "+endPointURL
+    }
+    def "Customers Controller Test(Thymeleaf)"(){
 
-    when:
-    def response = mockMvc.perform(get(endPointURL+"/customers").with(user("user2").password("pass")))
+        when:
+        def response = mockMvc.perform(get(endPointURL+"/customers").with(user("user2").password("pass")))
 
-    then:
-    response.andExpect(status().isOk())
+        then:
+        response.andExpect(status().isOk())
 
-    println response.andReturn().response.contentAsString
-  }
+        println response.andReturn().response.contentAsString
+    }
 
-  def "Content Controller test(JSP)"() {
+    def "Content Controller test(JSP)"() {
 
-    when:
-    def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("pass")))
+        when:
+        def response = mockMvc.perform(get(endPointURL+"/content/list").with(user("user2").password("pass")))
 
-    then:
-    response.andExpect(status().isOk())
+        then:
+        response.andExpect(status().isOk())
 
-    println response.andReturn().response.contentAsString
-  }
-
-
-
-  def "Jspテスト"(){
-
-    when:
-    //テスト対象のURL（/content/list)にuser2でアクセスする。
-    def response = mockMvc.perform(get(endPointURL+"/jsptest1").with(user("user2").password("pass")))
-
-    then:
-    //レスポンスがOKかどうかを確認
-    response.andExpect(status().isOk())
-
-    //レスポンスを文字で出力(うまく動作していない）
-    println "LLLLL"+response.andReturn().response.contentAsString
-
-  }
-
-  def "デタラメURL"() {
-
-    when:
-    def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
-
-    then:
-    //HTTPステータスコードがNotFound(404)であることを確認
-    response.andExpect(status().isNotFound())
-  }
-
-  def "Content更新"() {
-
-    when:
-    def response = mockMvc.perform(get(endPointURL+"/content/update").with(user("user2").password("pass")))
-
-    then:
-    //HTTPステータスコードがNotFound(404)であることを確認
-    response.andExpect(status().isNotFound())
-
-    //処理の引数の内容が正しいことを確認
+        println response.andReturn().response.contentAsString
+    }
 
 
-    //遷移先が正しいことを確認
 
-  }
+    def "Jspテスト"(){
+
+        when:
+        //テスト対象のURL（/content/list)にuser2でアクセスする。
+        def response = mockMvc.perform(get(endPointURL+"/jsptest1").with(user("user2").password("pass")))
+
+        then:
+        //レスポンスがOKかどうかを確認
+        response.andExpect(status().isOk())
+
+        //レスポンスを文字で出力(うまく動作していない）
+        println "LLLLL"+response.andReturn().response.contentAsString
+
+    }
+
+    def "デタラメURL"() {
+
+        when:
+        def response = mockMvc.perform(get(endPointURL+"/content/xxxxxxx").with(user("user2").password("pass")))
+
+        then:
+        //HTTPステータスコードがNotFound(404)であることを確認
+        response.andExpect(status().isNotFound())
+    }
+
+//    def "Content更新"() {
+//
+//        when:
+//        def response = mockMvc.perform(get(endPointURL+"/content/update").with(user("user2").password("pass")))
+//
+//        then:
+//        //HTTPステータスコードがNotFound(404)であることを確認
+//        response.andExpect(status().isNotFound())
+//
+//        //処理の引数の内容が正しいことを確認
+//
+//
+//        //遷移先が正しいことを確認
+//
+//    }
 }

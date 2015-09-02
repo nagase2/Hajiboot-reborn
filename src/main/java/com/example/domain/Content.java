@@ -1,18 +1,36 @@
 package com.example.domain;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedSubgraph;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import de.zeigermann.xml.simpleImporter.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.apache.catalina.Manager;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // Generated 2015/07/07 12:06:42 by Hibernate Tools 4.3.1
 
@@ -24,6 +42,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Content")
+@NamedQueries({@NamedQuery(name = "Content.findAll2", query = "select m from Content m")})
+@NamedEntityGraph(name = "content.search",
+     includeAllAttributes=true,//Subgraphのために追加
+    attributeNodes = {
+        @NamedAttributeNode("mstItem")
+     //,@NamedAttributeNode(value="MstItemType",subgraph="MstItemType222") //Subgraphのために追加
+    // ,@NamedAttributeNode("comments")
+    }, subgraphs = {@NamedSubgraph(name = "MstItemType222",
+        attributeNodes = {
+        @NamedAttributeNode("mstItemType"),
+        @NamedAttributeNode("itemTypeId")
+    }
+        )}, subclassSubgraphs = {
+            @NamedSubgraph(
+                name = "notused",
+                type = MstItemType.class,
+                attributeNodes = {
+                    @NamedAttributeNode(value = "itemTypeId"),
+                }
+            )
+        }
+    )
 public class Content implements java.io.Serializable {
   /**
    * 
@@ -32,13 +73,24 @@ public class Content implements java.io.Serializable {
   @Id
   private Long contentId;
   private String contentName;
- // private Integer itemId;
+  // private Integer itemId;
   private Integer count;
   private String comment;
   @Version
   private Long version;
   private String createdFunction;
   private String updatedFunction;
+  
+  @CreatedDate
+  @DateTimeFormat(iso = ISO.DATE)
+  private java.sql.Timestamp createdDate;
+  @LastModifiedDate
+  @DateTimeFormat(iso = ISO.DATE)
+  private java.sql.Timestamp updatedDate;
+  @CreatedBy
+  private String createdBy;
+  @LastModifiedBy
+  private String updatedBy;
 
   private Boolean deleteFlag;
   @JsonIgnore
@@ -48,20 +100,23 @@ public class Content implements java.io.Serializable {
   // Joincolumnで外部キーのカラム名を指定
   private MstItem mstItem;
 
-//  public Content(int contentId) {
-//    this.contentId = contentId;
-//  }
+  // OneToManyのデータも追加してみる
+  // UserCommentとか？
 
-//  public Content(int contentId, Integer basketId, Integer itemTypeId,
-//      Integer itemId, String comment, Float contentCount,
-//      Boolean deleteFlag) {
-//    this.contentId = contentId;
-//    this.basketId = basketId;
-//    this.itemTypeId = itemTypeId;
-//    this.itemId = itemId;
-//    this.comment = comment;
-//    this.contentCount = contentCount;
-//    this.deleteFlag = deleteFlag;
-//  }
+  // public Content(int contentId) {
+  // this.contentId = contentId;
+  // }
+
+  // public Content(int contentId, Integer basketId, Integer itemTypeId,
+  // Integer itemId, String comment, Float contentCount,
+  // Boolean deleteFlag) {
+  // this.contentId = contentId;
+  // this.basketId = basketId;
+  // this.itemTypeId = itemTypeId;
+  // this.itemId = itemId;
+  // this.comment = comment;
+  // this.contentCount = contentCount;
+  // this.deleteFlag = deleteFlag;
+  // }
 
 }

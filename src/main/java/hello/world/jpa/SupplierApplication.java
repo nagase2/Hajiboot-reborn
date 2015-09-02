@@ -18,8 +18,8 @@ public class SupplierApplication implements CommandLineRunner {
   @Override
   public void run(String... strings) throws Exception {
     // save a couple of customers
-    repository.save(new Supplier(1, "Jack", "Bauer"));
-    repository.save(new Supplier(2, "Chloe", "O'Brian"));
+//    repository.save(new Supplier(1, "Jack", "Bauer"));
+//    repository.save(new Supplier(2, "Chloe", "O'Brian"));
     repository.save(new Supplier("Kim", "Bauer"));
     repository.save(new Supplier("Nagase", "Yoshimasa"));
     repository.save(new Supplier("Michelle", "Dessler"));

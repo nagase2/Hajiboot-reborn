@@ -1,8 +1,7 @@
 spring:
     profiles:
-
       active: dev
-     # active: test
+     #active: test
 
 ---
 spring:
@@ -12,33 +11,31 @@ spring:
     #メモリDB
     #url: jdbc:h2:file:/tmp/customer2;AUTO_SERVER=true
     #ファイルDB
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=postgreSQL
-    #url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     username: sa
-    password:
+    password: 
   jpa:
     hibernate.ddl-auto: validate #変更を保管
     #hibernate.ddl-auto: create-drop #毎回リフレッシュ
 ---
 spring:
     profiles: test
-spring.jpa.datadatabase: PostgreSQL
-spring.datasource:
-    url: jdbc:postgresql://localhost:5432/shopping
-    driverClassName: org.postgresql.Driver
-    username: johndoe
-    password: johndoe
-    xa:
+    datasource:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/shopping
+      username: johndoe
+      password: johndoe
+      xa:
         dataSourceClassName: org.postgresql.xa.PGXADataSource
 
-    hibernate.ddl-auto: create-drop #毎回リフレッシュ
+    #hibernate.ddl-auto: create-drop #毎回リフレッシュ
 
 ---
 
-spring.view.prefix: /WEB-INF/jsp/
-spring.view.suffix: #.jsp
 
 spring.thymeleaf.cache: false
+spring.view.prefix: /WEB-INF/jsp/
+spring.view.suffix: .jsp
 spring.thymeleaf.prefix: classpath:/thymeleaf/
 spring.thymeleaf.suffix:
 spring.thymeleaf.viewNames: '*.html,*.xhtml'

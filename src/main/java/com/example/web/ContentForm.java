@@ -20,7 +20,7 @@ public class ContentForm {
   private Integer page=0;
   // Annotation for Input check
   @Size(min = 0, max = 127)
-  private Integer size=5;
+  private Integer size=10;
   
   private Long contentId;
   private String contentName;
@@ -31,5 +31,11 @@ public class ContentForm {
   private String createdFunction;
   private String updatedFunction;
   private MstItem mstItem;
+  private boolean deleteFlag;
+  //作成日時
+  //作成者
+  //更新日時
+  //更新者
+  
 
 }
