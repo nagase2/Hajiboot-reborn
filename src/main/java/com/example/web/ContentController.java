@@ -48,7 +48,7 @@ public class ContentController  {
     log.info("ここでContent Llistを取得!");
 
     Pageable pageable = new PageRequest(contentForm.getPage(), contentForm.getSize());
-    log.info("データ取得前");
+    log.info("データ取得前!!!");
     
     Page<Content> contents;
     
@@ -60,7 +60,7 @@ public class ContentController  {
 //        contentForm.getContentName(),contentForm.getCount(),contentForm.getComment(),0, pageable);
       contents=contentService.simpleFindAllWithEntityGraph(contentForm,pageable);
     }
-    log.info("データ取得しました。■");
+    log.info("データ取得しました。■1234567");
     
   //Itemマスタを渡す
     List<MstItem> mstItems = mstItemService.findAll();

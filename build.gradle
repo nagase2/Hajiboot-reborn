@@ -78,8 +78,10 @@ dependencies {
     cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
             "org.codehaus.cargo:cargo-ant:$cargoVersion"
     cargo "org.wildfly:wildfly-controller-client:8.2.0.Final"
+    //11/17追加
+    compile("org.springframework.boot:spring-boot-devtools")
+    
     compile("org.springframework.boot:spring-boot-starter-actuator")
-
     compile("org.springframework.boot:spring-boot-starter-web")
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'

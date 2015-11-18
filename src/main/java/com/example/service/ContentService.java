@@ -124,7 +124,7 @@ public class ContentService {
   * @return
   */
  public Page<Content> simpleFindAllWithEntityGraph(ContentForm contentForm,Pageable pageable) {
-   log.info("ここで動的検索のテスト");
+   log.info("ここで動的検索のテスト12345");
    //return contentRepository.simpleFindAllWithEntityGraph(pageable);
    
    return contentRepository.findAll(Specifications.where(
@@ -134,8 +134,7 @@ public class ContentService {
        .and(countContains(contentForm.getCount()))
        //これで検索するとエラーとなる。
        .and(mstItemContain(contentForm.getMstItem()))
-           
-        , pageable);
+       , pageable);
  }
  /**
   * 全条件での検索サービス
