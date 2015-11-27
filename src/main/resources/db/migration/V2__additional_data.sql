@@ -31,7 +31,22 @@ CREATE TABLE content (
  updated_function VARCHAR(100),
  created_function VARCHAR(100),
  delete_flag boolean,
+ created_date datetime,
+ updated_date datetime,
+ created_by VARCHAR(100),
+ updated_by VARCHAR(100)
+);
+
+CREATE TABLE content_detail (
+ detail_id bigint NOT NULL PRIMARY KEY,
+ content_id bigint, 
+ detail_name VARCHAR(100),
+ price INT,
  
+ version bigint,
+ updated_function VARCHAR(100),
+ created_function VARCHAR(100),
+ delete_flag boolean,
  created_date datetime,
  updated_date datetime,
  created_by VARCHAR(100),

@@ -1,8 +1,6 @@
 package com.example.domain;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,15 +12,14 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedSubgraph;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.apache.catalina.Manager;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -40,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Entity
 @Table(name = "Content")
 @NamedQueries({@NamedQuery(name = "Content.findAll2", query = "select m from Content m")})
@@ -72,12 +69,22 @@ public class Content implements java.io.Serializable {
   private static final long serialVersionUID = 1L;
   @Id
   private Long contentId;
+ 
+  
+  @OneToMany(mappedBy = "content")
+  private List<ContentDetail> contentDetails;
+  
+  @Formula(value = "select sum(t.price) from content_detail t where t.contentId = id")
+  private Long total;
+  
   private String contentName;
   // private Integer itemId;
   private Integer count;
+  
   private String comment;
   @Version
   private Long version;
+  
   private String createdFunction;
   private String updatedFunction;
   
