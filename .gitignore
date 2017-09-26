@@ -1,12 +1,12 @@
-/logs
-/build
-/bin
+logs
+build
+bin
 /c:*
-/.settings
-/.project
-/.classpath
-/target
+.settings
+.project
+.classpath
+target
 node_modules
-tmp/
-.gradle/**
+tmp
+.gradle
 

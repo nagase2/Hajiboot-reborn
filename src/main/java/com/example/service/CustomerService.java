@@ -5,6 +5,8 @@ import groovy.util.logging.Slf4j;
 import java.util.List;
 
 import org.jfree.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,73 +32,73 @@ import com.example.repository.CustomerRepository;
 @lombok.extern.slf4j.Slf4j
 @Transactional
 public class CustomerService {
-  @Autowired
-  CustomerRepository customerRepository;
+	private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
 
-  /*
-   * すべてを返す
-   */
-  public List<Customer> findAll() {
-    return customerRepository.findAll();
-  }
-  
-  /*
-   * すべてを返す(限定版）
-   */
-  @Secured("authenticated")
-  public List<Customer> findAllSecured() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    log.info("★"+authentication);
-    
-    return customerRepository.findAll();
-  }
+	@Autowired
+	CustomerRepository customerRepository;
 
-  public Page<Customer> findAll(Pageable pageable) {
-    return customerRepository.findAllOrderByName2(pageable);
-  }
+	/*
+	 * すべてを返す
+	 */
+	public List<Customer> findAll() {
+		return customerRepository.findAll();
+	}
 
-  public Customer findOne(Integer id) {
-    return customerRepository.findOne(id);
-  }
+	/*
+	 * すべてを返す(限定版）
+	 */
+	//@Secured("authenticated")
+	public List<Customer> findAllSecured() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		log.info("★" + authentication);
 
-  /**
-   * ログインありの場合
-   * 
-   * @param customer
-   * @param user
-   * @return
-   */
-  public Customer create(Customer customer, User user) {
-    System.out.println("ccc5555cc");
-    customer.setUser(user);
-    return customerRepository.save(customer);
-  }
+		return customerRepository.findAll();
+	}
 
-  /**
-   * ログイン無しの場合
-   * 
-   * @param customer
-   * @param user
-   * @return
-   */
-  public Customer create(Customer customer) {
-    System.out.println("ログインなし");
-    return customerRepository.save(customer);
-  }
+	public Page<Customer> findAll(Pageable pageable) {
+		return customerRepository.findAllOrderByName2(pageable);
+	}
 
-  public Customer save(Customer customer) {
-    return customerRepository.save(customer);
-  }
+	public Customer findOne(Integer id) {
+		return customerRepository.findOne(id);
+	}
 
-  public void delete(Integer id) {
-    customerRepository.delete(id);
-  }
+	/**
+	 * ログインありの場合
+	 * 
+	 * @param customer
+	 * @param user
+	 * @return
+	 */
+	public Customer create(Customer customer, User user) {
+		System.out.println("ccc5555cc");
+		//customer.setUser(user);
+		return customerRepository.save(customer);
+	}
 
-  public Customer update(Customer customer, User user) {
-    customer.setUser(user);
-    return customerRepository.save(customer);
-  }
+	/**
+	 * ログイン無しの場合
+	 * 
+	 * @param customer
+	 * @param user
+	 * @return
+	 */
+	public Customer create(Customer customer) {
+		System.out.println("ログインなし");
+		return customerRepository.save(customer);
+	}
 
+	public Customer save(Customer customer) {
+		return customerRepository.save(customer);
+	}
 
+	public void delete(Integer id) {
+		customerRepository.delete(id);
+	}
+
+	public Customer update(Customer customer, User user) {
+		//customer.setUser(user);
+		return customerRepository.save(customer);
+	}
 
 }

@@ -60,7 +60,7 @@ public class ContentController  {
 //        contentForm.getContentName(),contentForm.getCount(),contentForm.getComment(),0, pageable);
       contents=contentService.simpleFindAllWithEntityGraph(contentForm,pageable);
     }
-    log.info("データ取得しました。■1234567");
+    log.info("データ取得しました。■1xx22nnaaaaaaaanew");
     
   //Itemマスタを渡す
     List<MstItem> mstItems = mstItemService.findAll();
