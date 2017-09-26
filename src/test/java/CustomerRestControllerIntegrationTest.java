@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.hasXPath;
+import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,8 +51,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.standard.expression.AndExpression;
-
-import sun.print.resources.serviceui;
 
 import com.example.App2;
 import com.example.domain.Customer;
